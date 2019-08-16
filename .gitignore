@@ -1,0 +1,11 @@
+.DS_Store
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+npm-debug.log
+.idea
+.vscode
+src/styles/element-ui-theme/lib/
+src/styles/element-ui-theme/element-variables-default.css
