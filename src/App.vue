@@ -2,11 +2,8 @@
     <router-view></router-view>
 </template>
 <script>
-    export default {
-        name: "app",
-    };
+export default {
+    name: 'app'
+};
 </script>
-<style lang="css">
-
-</style>
-
+<style lang="css"></style>

@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import {Store, install} from 'vuex'
+import Vue from 'vue';
+import { Store, install } from 'vuex';
 
-install(Vue)
+install(Vue);
 
 const store = new Store({
     /**
@@ -11,6 +11,6 @@ const store = new Store({
      * 所以为了避免不必要的性能损耗，请在生产环境中关闭严格模式。
      */
     strict: process.env.NODE_ENV !== 'production'
-})
+});
 
-export default store
+export default store;

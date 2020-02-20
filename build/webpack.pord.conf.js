@@ -110,7 +110,7 @@ const prodConf = merge(common, {
             }
         }),
         new HtmlWebpackPlugin({
-            title: '路径',
+            title: 'vue-ops-static',
             filename: 'index.html',
             template: './src/index.template.html',
             inject: true,

@@ -1,4 +1,5 @@
 const path = require('path')
+const WebpackBar = require('webpackbar');
 const { VueLoaderPlugin } = require('vue-loader')
 
 function resolve(dir) {
@@ -38,7 +39,6 @@ module.exports = {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: {
-                    // ...
                     postcss: [require('postcss-cssnext')()]
                 }
             },
@@ -48,17 +48,12 @@ module.exports = {
                 include: [resolve('src'), resolve('test')],
                 exclude: file => (
                     /node_modules/.test(file) &&
-                    !/\.vue\.js/.test(file) &&
-                    !/node_modules\/element-ui\/src/.test(file) &&
-                    !/node_modules\/element-ui\/packages/.test(file)
+                    !/\.vue\.js/.test(file)
                 ),
                 options: {
                     "babelrc": false,// 不采用.babelrc的配置
-                    "plugins": [
-                        "dynamic-import-webpack"
-                    ]
+                    "plugins": ["@babel/plugin-syntax-dynamic-import"]
                 }
-
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -76,12 +71,21 @@ module.exports = {
                 }
             },
             {
-                test: /\.(css|scss|less)$/,
-                use: ['style-loader', 'css-loader', 'sass-loader', 'less-loader']
+                test:/\.css$/,
+                use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+                include: [
+                    /src/,
+                    '/node_modules/iview/dist/styles/iview.css'
+                ]
             },
         ]
     },
     plugins: [
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new WebpackBar({
+            name: '📦 Vue ops static',
+            color: 'green',
+            profile: true
+        })
     ]
 };
