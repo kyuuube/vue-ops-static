@@ -1,116 +1,115 @@
 <template>
-    <!-- App.vue -->
+    <div class="layout">
+        <Sider
+            :style="{
+                position: 'fixed',
+                height: '100vh',
+                left: 0,
+                overflow: 'auto'
+            }"
+        >
+            <Menu
+                active-name="1-2"
+                theme="dark"
+                width="auto"
+                :open-names="['1']"
+            >
+                <Submenu name="1">
+                    <template slot="title">
+                        <Icon type="ios-navigate"></Icon>
+                        Item 1
+                    </template>
+                    <MenuItem name="1-1">Option 1</MenuItem>
+                    <MenuItem name="1-2">Option 2</MenuItem>
+                    <MenuItem name="1-3">Option 3</MenuItem>
+                </Submenu>
+                <Submenu name="2">
+                    <template slot="title">
+                        <Icon type="ios-keypad"></Icon>
+                        Item 2
+                    </template>
+                    <MenuItem name="2-1">Option 1</MenuItem>
+                    <MenuItem name="2-2">Option 2</MenuItem>
+                </Submenu>
+                <Submenu name="3">
+                    <template slot="title">
+                        <Icon type="ios-analytics"></Icon>
+                        Item 3
+                    </template>
+                    <MenuItem name="3-1">Option 1</MenuItem>
+                    <MenuItem name="3-2">Option 2</MenuItem>
+                </Submenu>
+            </Menu>
+        </Sider>
+        <Layout :style="{ marginLeft: '200px' }">
+            <Header class="layout-header-bar">
+                <Row justify="space-between">
+                    <Col span="12">
+                        <Icon
+                            @click.native="collapsedSider"
+                            :class="rotateIcon"
+                            :style="{ margin: '0 20px' }"
+                            type="md-menu"
+                            size="24"
+                        ></Icon>
 
-    <v-app>
-        <v-navigation-drawer color='primary' app>
-            <!-- -->
-            <v-treeview
-                :items="items"
-                activatable
-                hoverable
-                open-on-click
-            ></v-treeview>
-        </v-navigation-drawer>
+                    </Col>
+                    <Col span="12" style="text-align: right">
+                        <Icon type="md-help" :style="{ margin: '0 10px' }" size="24" />
+                        <Icon
+                            type="md-notifications-outline"
+                            :style="{ margin: '0 10px' }"
+                            size="24"
+                        />
+                        <Icon
+                            type="md-search"
+                            :style="{ margin: '0 10px' }"
+                            size="24"
+                        />
+                        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" style="width: 24px; height: 24px" />
+                    </Col>
+                </Row>
 
-        <v-app-bar app>
-            <!-- -->
-            <v-btn small color="primary">Primary</v-btn>
-        </v-app-bar>
-
-        <!-- Sizes your content based upon application components -->
-        <v-content>
-            <!-- Provides the application the proper gutter -->
-            <v-container fluid>
-                <!-- If using vue-router -->
-                <router-view></router-view>
-            </v-container>
-        </v-content>
-
-        <v-footer app>
-            <!-- -->
-        </v-footer>
-    </v-app>
+            </Header>
+            <Content :style="{ padding: '0 16px 16px' }">
+                <!--                <router-view></router-view>-->
+                <Breadcrumb :style="{ margin: '16px 0' }">
+                    <BreadcrumbItem>Home</BreadcrumbItem>
+                    <BreadcrumbItem>Components</BreadcrumbItem>
+                    <BreadcrumbItem>Layout</BreadcrumbItem>
+                </Breadcrumb>
+                <Card>
+                    <template>
+                        <div style="height: 900px">
+                            <BackTop></BackTop>
+                        </div>
+                    </template>
+                </Card>
+            </Content>
+        </Layout>
+    </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            items: [
-                {
-                    id: 1,
-                    name: 'Applications :',
-                    children: [
-                        { id: 2, name: 'Calendar : app' },
-                        { id: 3, name: 'Chrome : app' },
-                        { id: 4, name: 'Webstorm : app' }
-                    ]
-                },
-                {
-                    id: 5,
-                    name: 'Documents :',
-                    children: [
-                        {
-                            id: 6,
-                            name: 'vuetify :',
-                            children: [
-                                {
-                                    id: 7,
-                                    name: 'src :',
-                                    children: [
-                                        { id: 8, name: 'index : ts' },
-                                        { id: 9, name: 'bootstrap : ts' }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            id: 10,
-                            name: 'material2 :',
-                            children: [
-                                {
-                                    id: 11,
-                                    name: 'src :',
-                                    children: [
-                                        { id: 12, name: 'v-btn : ts' },
-                                        { id: 13, name: 'v-card : ts' },
-                                        { id: 14, name: 'v-window : ts' }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 15,
-                    name: 'Downloads :',
-                    children: [
-                        { id: 16, name: 'October : pdf' },
-                        { id: 17, name: 'November : pdf' },
-                        { id: 18, name: 'Tutorial : html' }
-                    ]
-                },
-                {
-                    id: 19,
-                    name: 'Videos :',
-                    children: [
-                        {
-                            id: 20,
-                            name: 'Tutorials :',
-                            children: [
-                                { id: 21, name: 'Basic layouts : mp4' },
-                                { id: 22, name: 'Advanced techniques : mp4' },
-                                { id: 23, name: 'All about app : dir' }
-                            ]
-                        },
-                        { id: 24, name: 'Intro : mov' },
-                        { id: 25, name: 'Conference introduction : avi' }
-                    ]
-                }
-            ]
-        };
+    name: 'home',
+    methods: {
+        collapsedSider() {
+            this.$refs.side1.toggleCollapse();
+        }
     }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.layout {
+    background: #f5f7f9;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.layout-header-bar {
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+</style>
