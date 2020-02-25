@@ -1,8 +1,13 @@
 const routes = [
     {
-        path: '/',
-        component: () => import('../views/home.vue'),
+        path: '/login',
+        component: () => import('../views/login.vue'),
         meta: { notLogin: true }
+    },
+    {
+        path: '/',
+        component: () => import('../views/view.vue'),
+        meta: { requireAuth: true }
     }
 ];
 
