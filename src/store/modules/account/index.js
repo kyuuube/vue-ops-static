@@ -1,8 +1,7 @@
 // utils
-import $msg from "src/js/msg";
 import persistedState from "src/common/persistedState";
-import * as doorControlApi from "../../../apis/doorControlApi";
-import * as userApi from "../../../apis/userApi";
+// import * as doorControlApi from "../../../apis/doorControlApi";
+// import * as userApi from "../../../apis/userApi";
 import {
     namespace,
     getters as $getters,
@@ -60,20 +59,20 @@ const mutations = {
 };
 
 const actions = {
-    [$actions.getCompanyList]: async ({ commit }) => {
-        const { data } = await doorControlApi.getCompanyListById().catch(e => e);
-        commit($mutations.companyList, data);
-    },
-    [$actions.getCurrentUserInfo]: async ({ commit }) => {
-        const { data, code, msg } = await userApi.getCurrentUserInfo().catch(e => e);
-            if (code !== 0) {
-                $msg.err(msg)
-            }
-        sessionStorage.setItem("companyId", data.companyId);
-        window.localStorage.setItem("permissions", data.permissions);
-        window.localStorage.setItem("user", JSON.stringify(data));
-        commit($mutations.user, data);
-    },
+    // [$actions.getCompanyList]: async ({ commit }) => {
+    //     const { data } = await doorControlApi.getCompanyListById().catch(e => e);
+    //     commit($mutations.companyList, data);
+    // },
+    // [$actions.getCurrentUserInfo]: async ({ commit }) => {
+    //     const { data, code, msg } = await userApi.getCurrentUserInfo().catch(e => e);
+    //         if (code !== 0) {
+    //             $msg.err(msg)
+    //         }
+    //     sessionStorage.setItem("companyId", data.companyId);
+    //     window.localStorage.setItem("permissions", data.permissions);
+    //     window.localStorage.setItem("user", JSON.stringify(data));
+    //     commit($mutations.user, data);
+    // },
     [$actions.setToken]: ({ commit }, token) => {
         commit($mutations.token, token);
     },
