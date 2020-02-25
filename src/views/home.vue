@@ -1,6 +1,7 @@
 <template>
     <div class="layout">
         <Sider
+            ref="side1"
             :style="{
                 position: 'fixed',
                 height: '100vh',
