@@ -9,6 +9,7 @@
                 overflow: 'auto'
             }"
         >
+            <div class="layout-logo"></div>
             <Menu
                 active-name="1-2"
                 theme="dark"
@@ -53,24 +54,30 @@
                             type="md-menu"
                             size="24"
                         ></Icon>
-
                     </Col>
-                    <Col span="12" style="text-align: right">
-                        <Icon type="md-help" :style="{ margin: '0 10px' }" size="24" />
+                    <Col span="12" style="text-align: right; line-height: 64px">
+                        <Icon
+                            type="md-help"
+                            :style="{ margin: '0 10px' }"
+                            size="18"
+                        />
                         <Icon
                             type="md-notifications-outline"
                             :style="{ margin: '0 10px' }"
-                            size="24"
+                            size="18"
                         />
                         <Icon
                             type="md-search"
                             :style="{ margin: '0 10px' }"
-                            size="24"
+                            size="20"
                         />
-                        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" style="width: 24px; height: 24px" />
+                        <Avatar
+                            src="https://i.loli.net/2017/08/21/599a521472424.jpg"
+                            style="width: 24px; height: 24px"
+                        />
+                        <span>evangeline</span>
                     </Col>
                 </Row>
-
             </Header>
             <Content :style="{ padding: '0 16px 16px' }">
                 <!--                <router-view></router-view>-->
@@ -112,5 +119,18 @@ export default {
 .layout-header-bar {
     background: #fff;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.layout-logo {
+    width: 180px;
+    height: 60px;
+    background: #5b6270;
+    border-radius: 3px;
+    margin: 10px;
+}
+
+.layout-nav {
+    width: 420px;
+    margin: 0 auto;
+    margin-right: 20px;
 }
 </style>
