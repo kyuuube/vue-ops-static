@@ -6,4 +6,5 @@ export default {
     name: 'app'
 };
 </script>
-<style lang="css"></style>
+<style>
+</style>
