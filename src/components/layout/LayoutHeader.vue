@@ -21,11 +21,20 @@
                     :style="{ margin: '0 10px' }"
                     size="20"
                 />
-                <Avatar
-                    src="https://i.loli.net/2017/08/21/599a521472424.jpg"
-                    style="width: 24px; height: 24px"
-                />
-                <span>evangeline</span>
+
+                <Dropdown trigger="click">
+                    <div class="user-info">
+                        <Avatar
+                            src="https://i.loli.net/2017/08/21/599a521472424.jpg"
+                            style="width: 24px; height: 24px"
+                        />
+                        <span>evangeline</span>
+                    </div>
+                    <DropdownMenu slot="list">
+                        <DropdownItem>用户数据</DropdownItem>
+                        <DropdownItem>退出登录</DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
             </Col>
         </Row>
     </Header>
@@ -40,10 +49,10 @@ export default {
     computed: {
         rotateIcon() {
             return ['menu-icon', this.isCollapsed ? 'rotate-icon' : ''];
-        },
+        }
     },
     methods: {
-        collapsedSider () {
+        collapsedSider() {
             this.$emit('collapsed');
         }
     }
@@ -55,14 +64,21 @@ export default {
     background: #fff;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
-.menu-icon{
+.menu-icon {
     cursor: pointer;
-    transition: all .3s;
+    transition: all 0.3s;
 }
-.rotate-icon{
+.rotate-icon {
     transform: rotate(-90deg);
 }
-.ivu-layout-header{
+.ivu-layout-header {
     padding: 0 30px;
+}
+.ivu-icon {
+    cursor: pointer;
+}
+.user-info {
+    cursor: pointer;
+    margin-right: 30px;
 }
 </style>

@@ -1,24 +1,34 @@
 <template>
-    <div>
-        <Breadcrumb :style="{ margin: '16px 0' }">
-            <BreadcrumbItem>Home</BreadcrumbItem>
-            <BreadcrumbItem>Components</BreadcrumbItem>
-            <BreadcrumbItem>Layout</BreadcrumbItem>
-        </Breadcrumb>
-        <Card>
-            <template>
-                <div style="height: 900px">
-                    <BackTop></BackTop>
-                </div>
-            </template>
-        </Card>
+    <div class="dashboard">
+        <Row :gutter="36">
+            <Col span="6">
+                <page-view-chart></page-view-chart>
+            </Col>
+            <Col span="6">
+                <page-view-chart></page-view-chart>
+            </Col>
+            <Col span="6">
+                <page-view-chart></page-view-chart>
+            </Col>
+            <Col span="6">
+                <page-view-chart></page-view-chart>
+            </Col>
+        </Row>
     </div>
 </template>
 
 <script>
+    // components
+    import PageViewChart from './components/PageViewChart'
 export default {
     name: "dashboard",
+    components: {
+        PageViewChart
+    }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+    .dashboard {
+    }
+</style>

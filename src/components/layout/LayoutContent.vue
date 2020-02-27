@@ -13,6 +13,6 @@
 
 <style scoped>
 .layout-content {
-    padding: 0 16px 16px 16px;
+    padding: 16px 16px 16px 16px;
 }
 </style>
