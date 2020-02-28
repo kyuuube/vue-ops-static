@@ -2,33 +2,143 @@
     <div class="dashboard">
         <Row :gutter="36">
             <Col span="6">
-                <page-view-chart></page-view-chart>
+                <count-sales></count-sales>
             </Col>
             <Col span="6">
                 <page-view-chart></page-view-chart>
             </Col>
             <Col span="6">
                 <page-view-chart></page-view-chart>
+
+<!--                <page-view-line-chart></page-view-line-chart>-->
             </Col>
             <Col span="6">
                 <page-view-chart></page-view-chart>
             </Col>
         </Row>
+        <div class="dashboard-page-view-line">
+            <div class="date-range">
+                <DatePicker
+                    :value="range"
+                    type="daterange"
+                    confirm
+                    placement="bottom-end"
+                    placeholder="Select date"
+                    style="width: 200px"
+                ></DatePicker>
+            </div>
+            <Tabs value="name1">
+                <TabPane label="销售额" name="name1">
+                    <Row type="flex">
+                        <Col span="18">
+                            <div class="page-view-line-chart-warp">
+                                <h4>销售趋势</h4>
+                                <page-view-line-chart></page-view-line-chart>
+                            </div>
+                        </Col>
+                        <Col span="6">
+                            <div class="ranking-list-warp">
+                                <h4>门店销售额排名</h4>
+                                <ul class="dashboard-ranking-List">
+                                    <li :key="i" v-for="i in 7">
+                                        <span class="ranking-item-order">{{i}}</span
+                                        ><span class="ranking-item-title"
+                                            >工专路 {{i}} 号店</span
+                                        ><span>323,234</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </Col>
+                    </Row>
+                </TabPane>
+                <TabPane label="访问量" name="name2"> </TabPane>
+            </Tabs>
+        </div>
     </div>
 </template>
 
 <script>
-    // components
-    import PageViewChart from './components/PageViewChart'
+// components
+import PageViewChart from './components/PageViewChart';
+import PageViewLineChart from './components/PageViewLineChart';
+import CountSales from './components/CountSales';
+import PageViewLineChartSmall from './components/PageViewLineChartSmall';
 export default {
-    name: "dashboard",
+    name: 'dashboard',
     components: {
-        PageViewChart
+        PageViewChart,
+        PageViewLineChart,
+        CountSales,
+        PageViewLineChartSmall
+    },
+    data() {
+        return {
+            range: ''
+        };
     }
 };
 </script>
 
-<style scoped>
-    .dashboard {
+<style lang="less">
+.dashboard {
+    .dashboard-page-view-line {
+        position: relative;
+        margin-top: 26px;
+        background-color: #ffffff;
+        padding: 0 10px;
+        .ivu-tabs-tab {
+            padding: 16px;
+        }
+        .date-range {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            z-index: 2000;
+        }
+        .page-view-line-chart-warp {
+            h4 {
+                margin-left: 20px;
+            }
+        }
+        .ranking-list-warp {
+            padding: 0 32px 32px 52px;
+        }
+        .dashboard-ranking-List {
+            margin: 25px 0 0;
+            padding: 0;
+            list-style: none;
+            li {
+                display: flex;
+                align-items: center;
+                margin-top: 16px;
+                zoom: 1;
+                span {
+                    color: rgba(0, 0, 0, 0.65);
+                    font-size: 14px;
+                    line-height: 22px;
+                }
+                .ranking-item-title {
+                    flex: 1 1;
+                    margin-right: 8px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+                .ranking-item-order {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    margin-top: 1.5px;
+                    margin-right: 16px;
+                    font-weight: 600;
+                    font-size: 12px;
+                    line-height: 20px;
+                    text-align: center;
+                    background-color: #fafafa;
+                    border-radius: 20px;
+                }
+            }
+        }
     }
+}
 </style>

@@ -1,0 +1,9 @@
+{
+    "rules": {
+        "semi": ["error", "always"],
+        "quotes": ["error", "double"],
+        "vue/no-parsing-error": [2, {"x-invalid-end-tag":  false}],
+        "vue/html-self-closing": "off"
+    },
+    "extends": "eslint:recommended"
+}

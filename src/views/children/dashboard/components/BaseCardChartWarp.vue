@@ -11,7 +11,9 @@
             </Row>
         </div>
         <div class="number">{{number}}</div>
-        <slot></slot>
+        <div style="min-height: 46px">
+            <slot></slot>
+        </div>
         <Divider />
         <span>日访问量 {{total}}</span>
     </div>
@@ -23,7 +25,7 @@
         props: {
             name: String,
             tooltip: String,
-            number: Number,
+            number: Number | String,
             total: Number
         }
 

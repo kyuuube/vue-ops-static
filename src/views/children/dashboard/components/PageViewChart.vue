@@ -59,11 +59,11 @@
                 });
                 chart.area()
                     .position('year*value')
-                    .color('type')
+                    .color('type',['#975fe4'])
                     .shape('smooth');
                 chart.line()
                     .position('year*value')
-                    .color('type')
+                    .color('type' ,['#975fe4'])
                     .size(2)
                     .shape('smooth');
                 chart.render();

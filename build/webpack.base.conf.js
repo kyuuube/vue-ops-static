@@ -68,39 +68,13 @@ module.exports = {
             {
                 test:/\.css$/,
                 use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
-                // include: [
-                //     /src/,
-                //     '/node_modules/iview/dist/styles/iview.css'
-                // ]
             },
             {
-                test: /\.s(c|a)ss$/,
+                test: /\.less$/,
                 use: [
                     'vue-style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true
-                        }
-                    },
-                    // 'css-loader',
-                    {
-                        loader: 'sass-loader',
-                        // Requires sass-loader@^7.0.0
-                        options: {
-                            implementation: require('sass'),
-                            fiber: require('fibers'),
-                            indentedSyntax: true // optional
-                        },
-                        // Requires sass-loader@^8.0.0
-                        options: {
-                            implementation: require('sass'),
-                            sassOptions: {
-                                fiber: require('fibers'),
-                                indentedSyntax: true // optional
-                            }
-                        }
-                    }
+                    'css-loader',
+                    'less-loader'
                 ]
             }
         ]
