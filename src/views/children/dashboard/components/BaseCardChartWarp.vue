@@ -34,6 +34,7 @@
 
 <style scoped>
     .info-card {
+        cursor: pointer;
         background-color: #ffffff;
         padding: 20px 24px 8px;
     }

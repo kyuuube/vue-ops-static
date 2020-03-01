@@ -1,6 +1,6 @@
 <template>
     <div class="dashboard">
-        <Row :gutter="36">
+        <Row :gutter="25">
             <Col span="6">
                 <count-sales></count-sales>
             </Col>
@@ -8,12 +8,10 @@
                 <page-view-chart></page-view-chart>
             </Col>
             <Col span="6">
-                <page-view-chart></page-view-chart>
-
-<!--                <page-view-line-chart></page-view-line-chart>-->
+                <page-view-line-chart-small></page-view-line-chart-small>
             </Col>
             <Col span="6">
-                <page-view-chart></page-view-chart>
+                <mini-progress></mini-progress>
             </Col>
         </Row>
         <div class="dashboard-page-view-line">
@@ -54,6 +52,34 @@
                 <TabPane label="访问量" name="name2"> </TabPane>
             </Tabs>
         </div>
+        <Row type="flex" class="row-warp" :gutter="25">
+            <Col span="12">
+                <Card :bordered="false" :dis-hover="true">
+                    <p slot="title">线上热门搜索</p>
+                    <div slot="extra">
+                        <Dropdown placement="bottom-start">
+                                <Icon type="ios-more" />
+                            <DropdownMenu slot="list">
+                                <DropdownItem>操作一</DropdownItem>
+                                <DropdownItem>操作一</DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </div>
+                    <p>Content of card</p>
+                    <p>Content of card</p>
+                    <p>Content of card</p>
+                </Card>
+            </Col>
+            <Col span="12">
+                <Card :bordered="false" :dis-hover="true">
+                    <p slot="title">销售额类别占比</p>
+                    <div slot="extra"></div>
+                    <p>Content of card</p>
+                    <p>Content of card</p>
+                    <p>Content of card</p>
+                </Card>
+            </Col>
+        </Row>
     </div>
 </template>
 
@@ -63,13 +89,15 @@ import PageViewChart from './components/PageViewChart';
 import PageViewLineChart from './components/PageViewLineChart';
 import CountSales from './components/CountSales';
 import PageViewLineChartSmall from './components/PageViewLineChartSmall';
+import MiniProgress from './components/MiniProgress';
 export default {
     name: 'dashboard',
     components: {
         PageViewChart,
         PageViewLineChart,
         CountSales,
-        PageViewLineChartSmall
+        PageViewLineChartSmall,
+        MiniProgress
     },
     data() {
         return {
@@ -83,7 +111,7 @@ export default {
 .dashboard {
     .dashboard-page-view-line {
         position: relative;
-        margin-top: 26px;
+        margin-top: 25px;
         background-color: #ffffff;
         padding: 0 10px;
         .ivu-tabs-tab {
@@ -139,6 +167,9 @@ export default {
                 }
             }
         }
+    }
+    .row-warp {
+        margin-top: 25px;
     }
 }
 </style>
