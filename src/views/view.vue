@@ -6,6 +6,7 @@
             <layout-content>
                 <router-view></router-view>
             </layout-content>
+            <BackTop :height="100" :bottom="100"></BackTop>
         </Layout>
     </div>
 </template>
@@ -39,7 +40,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .home {
     background: #f5f7f9;
     position: relative;
@@ -48,10 +49,10 @@ export default {
 
 }
 .layout {
-    margin-left: 200px;
+    margin-left: 256px;
     transition: all .3s;
-}
 
+}
 .rotate-flat{
     margin-left: 0;
 }

@@ -1,16 +1,19 @@
 <template>
     <Sider
         ref="side"
+        width="256"
         hide-trigger collapsible :collapsed-width="0" v-model="isCollapsed"
         :style="{
                 position: 'fixed',
                 height: '100vh',
                 left: 0,
-                overflow: 'auto'
+                overflow: 'auto',
+                background: '#001529'
             }"
     >
         <div class="layout-logo"></div>
         <Menu
+            class="menus"
             :class="menuitemClasses"
             active-name="1-2"
             theme="dark"
@@ -72,12 +75,25 @@
     };
 </script>
 
-<style scoped>
+<style>
     .layout-logo {
-        width: 180px;
+        width: 230px;
         height: 60px;
         background: #5b6270;
         border-radius: 3px;
         margin: 10px;
+    }
+    .menus {
+        background-color: #001529;
+    }
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened {
+        background: #000c17;
+    }
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item:hover, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title:hover {
+        color: #fff;
+        background: #000c17 !important;
+    }
+    .ivu-menu-dark.ivu-menu-vertical .ivu-menu-child-item-active>.ivu-menu-submenu-title {
+        background: #000c17 !important;
     }
 </style>

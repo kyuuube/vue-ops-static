@@ -1,7 +1,6 @@
 <template>
     <Content class="layout-content">
         <slot></slot>
-        <BackTop></BackTop>
     </Content>
 </template>
 

@@ -39,9 +39,11 @@
                                 <h4>门店销售额排名</h4>
                                 <ul class="dashboard-ranking-List">
                                     <li :key="i" v-for="i in 7">
-                                        <span class="ranking-item-order">{{i}}</span
+                                        <span class="ranking-item-order">{{
+                                            i
+                                        }}</span
                                         ><span class="ranking-item-title"
-                                            >工专路 {{i}} 号店</span
+                                            >工专路 {{ i }} 号店</span
                                         ><span>323,234</span>
                                     </li>
                                 </ul>
@@ -54,30 +56,21 @@
         </div>
         <Row type="flex" class="row-warp" :gutter="25">
             <Col span="12">
-                <Card :bordered="false" :dis-hover="true">
-                    <p slot="title">线上热门搜索</p>
-                    <div slot="extra">
-                        <Dropdown placement="bottom-start">
-                                <Icon type="ios-more" />
-                            <DropdownMenu slot="list">
-                                <DropdownItem>操作一</DropdownItem>
-                                <DropdownItem>操作一</DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
-                    </div>
-                    <p>Content of card</p>
-                    <p>Content of card</p>
-                    <p>Content of card</p>
-                </Card>
+                <base-dashboard-card title="线上热门搜索">
+                    <Dropdown slot="extra" placement="bottom-start">
+                        <Icon type="ios-more" />
+                        <DropdownMenu slot="list">
+                            <DropdownItem>操作一</DropdownItem>
+                            <DropdownItem>操作一</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
+                    <table-list></table-list>
+                </base-dashboard-card>
             </Col>
             <Col span="12">
-                <Card :bordered="false" :dis-hover="true">
-                    <p slot="title">销售额类别占比</p>
-                    <div slot="extra"></div>
-                    <p>Content of card</p>
-                    <p>Content of card</p>
-                    <p>Content of card</p>
-                </Card>
+                <base-dashboard-card title="销售额类别占比">
+                    <pic-chart></pic-chart>
+                </base-dashboard-card>
             </Col>
         </Row>
     </div>
@@ -89,7 +82,10 @@ import PageViewChart from './components/PageViewChart';
 import PageViewLineChart from './components/PageViewLineChart';
 import CountSales from './components/CountSales';
 import PageViewLineChartSmall from './components/PageViewLineChartSmall';
+import BaseDashboardCard from './components/BaseDashboardCard';
 import MiniProgress from './components/MiniProgress';
+import PicChart from './components/PicChart';
+import TableList from './components/TableList';
 export default {
     name: 'dashboard',
     components: {
@@ -97,7 +93,10 @@ export default {
         PageViewLineChart,
         CountSales,
         PageViewLineChartSmall,
-        MiniProgress
+        MiniProgress,
+        BaseDashboardCard,
+        PicChart,
+        TableList
     },
     data() {
         return {
