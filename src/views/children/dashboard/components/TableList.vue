@@ -1,18 +1,5 @@
 <template>
-    <Table :columns="columns1" :data="data1">
-        <template slot-scope="{ row }" slot="range">
-            <span class="blue">{{ row.range + 1 }}</span>
-        </template>
-        <template slot-scope="{ row }" slot="keyword">
-            <span class="blue">{{ row.keyword + 1 }}</span>
-        </template>
-        <template slot-scope="{ row }" slot="number">
-            <span class="blue">{{ row.number + 1 }}</span>
-        </template>
-        <template slot-scope="{ row }" slot="increase">
-            <span class="blue">{{ row.increase + 1 }}</span>
-        </template>
-    </Table>
+    <Table :columns="columns" :data="data"></Table>
 </template>
 
 <script>
@@ -20,14 +7,19 @@ export default {
     name: 'table-list',
     data() {
         return {
-            columns1: [
+            columns: [
                 {
                     title: '排名',
                     key: 'range'
                 },
                 {
                     title: '搜索关键词',
-                    key: 'keyword'
+                    key: 'keyword',
+                    render: (h, params) => {
+                        return h('div', [
+                            h('span', { style: {color: '#1890ff'}}, params.row.keyword)
+                        ]);
+                    }
                 },
                 {
                     title: '用户数',
@@ -40,7 +32,7 @@ export default {
                     sortable: true
                 }
             ],
-            data1: [
+            data: [
                 {
                     keyword: 'John Brown',
                     range: 18,
