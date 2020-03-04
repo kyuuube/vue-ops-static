@@ -1,5 +1,21 @@
 <template>
-    <Table :columns="columns" :data="data"></Table>
+    <Table :columns="columns" :data="data">
+        <template slot-scope="{ row }" slot="range">
+            <span>{{ row.range }}</span>
+        </template>
+
+        <template slot-scope="{ row }" slot="keyword">
+            <span class="blue">{{ row.keyword }}</span>
+        </template>
+
+        <template slot-scope="{ row }" slot="number">
+            <span>{{ row.number }}</span>
+        </template>
+
+        <template slot-scope="{ row }" slot="increase">
+            <span>{{ row.increase }}</span>
+        </template>
+    </Table>
 </template>
 
 <script>
@@ -10,25 +26,20 @@ export default {
             columns: [
                 {
                     title: '排名',
-                    key: 'range'
+                    slot: 'range'
                 },
                 {
                     title: '搜索关键词',
-                    key: 'keyword',
-                    render: (h, params) => {
-                        return h('div', [
-                            h('span', { style: {color: '#1890ff'}}, params.row.keyword)
-                        ]);
-                    }
+                    slot: 'keyword'
                 },
                 {
                     title: '用户数',
-                    key: 'number',
+                    slot: 'number',
                     sortable: true
                 },
                 {
                     title: '周涨幅',
-                    key: 'increase',
+                    slot: 'increase',
                     sortable: true
                 }
             ],
