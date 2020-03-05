@@ -64,6 +64,12 @@
                             <DropdownItem>操作一</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
+                    <Row>
+                        <Col :span="12">
+                            <sample-mini-chart-box></sample-mini-chart-box>
+                        </Col>
+                        <Col :span="12"></Col>
+                    </Row>
                     <table-list></table-list>
                 </base-dashboard-card>
             </Col>
@@ -86,6 +92,7 @@ import BaseDashboardCard from './components/BaseDashboardCard';
 import MiniProgress from './components/MiniProgress';
 import PicChart from './components/PicChart';
 import TableList from './components/TableList';
+import SampleMiniChartBox from './components/SampleMiniChartBox';
 export default {
     name: 'dashboard',
     components: {
@@ -96,7 +103,8 @@ export default {
         MiniProgress,
         BaseDashboardCard,
         PicChart,
-        TableList
+        TableList,
+        SampleMiniChartBox
     },
     data() {
         return {

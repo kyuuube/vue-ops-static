@@ -1,21 +1,26 @@
 <template>
-    <Table :columns="columns" :data="data">
-        <template slot-scope="{ row }" slot="range">
-            <span>{{ row.range }}</span>
-        </template>
+    <div class="table-list">
+        <Table :columns="columns" :data="data">
+            <template slot-scope="{ row }" slot="range">
+                <span>{{ row.range }}</span>
+            </template>
 
-        <template slot-scope="{ row }" slot="keyword">
-            <span class="blue">{{ row.keyword }}</span>
-        </template>
+            <template slot-scope="{ row }" slot="keyword">
+                <span class="blue">{{ row.keyword }}</span>
+            </template>
 
-        <template slot-scope="{ row }" slot="number">
-            <span>{{ row.number }}</span>
-        </template>
+            <template slot-scope="{ row }" slot="number">
+                <span>{{ row.number }}</span>
+            </template>
 
-        <template slot-scope="{ row }" slot="increase">
-            <span>{{ row.increase }}</span>
-        </template>
-    </Table>
+            <template slot-scope="{ row }" slot="increase">
+                <span>{{ row.increase }} %</span>
+            </template>
+        </Table>
+        <div class="table-list-page">
+            <Page :total="40" />
+        </div>
+    </div>
 </template>
 
 <script>
@@ -74,7 +79,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
+    .table-list {
+        .table-list-page {
+            margin-top: 10px;
+            text-align: right;
+        }
+    }
     .blue {
         color: #1890ff;
     }
