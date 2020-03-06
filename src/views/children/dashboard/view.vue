@@ -241,7 +241,7 @@ export default {
         /*right: 0px;*/
         min-width: 200px;
         /*transform: translateY(-50%);*/
-        margin: 24px 20px;
+        margin: 24px 0;
         padding: 0px;
         list-style: none;
         li {

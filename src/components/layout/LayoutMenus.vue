@@ -50,7 +50,7 @@ export default {
                 } else {
                     return (
                         <MenuItem name={item.menuId} key={index}>
-                            <span slot="title">{item.name}</span>
+                            <span>{item.name}</span>
                         </MenuItem>
                     );
                 }
@@ -77,8 +77,13 @@ export default {
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened {
     background: #000c17;
 }
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item:hover,
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title:hover {
+
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):hover{
+    color: #fff;
+    background-color: #2d8cf0;
+}
+
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item:not(.ivu-menu-item-active):hover {
     color: #fff;
     background: #000c17 !important;
 }
@@ -87,4 +92,17 @@ export default {
     > .ivu-menu-submenu-title {
     background: #000c17 !important;
 }
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-title {
+    color: #fff;
+    background: #000c17 !important;
+}
+
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu){
+    color: #fff;
+    background-color: #2d8cf0;
+}
+/*.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected{*/
+/*    color: #fff;*/
+/*    background-color: #2d8cf0!important;*/
+/*}*/
 </style>
