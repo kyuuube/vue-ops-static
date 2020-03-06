@@ -7,6 +7,9 @@
                 <router-view></router-view>
             </layout-content>
             <BackTop :height="100" :bottom="100"></BackTop>
+            <div class="footer">
+                <small>&copy; Copyright {{$moment().format('YYYY')}}, benchiu@yandex.com</small>
+            </div>
         </Layout>
     </div>
 </template>
@@ -40,20 +43,23 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
 .home {
     background: #f5f7f9;
     position: relative;
     border-radius: 4px;
     overflow: hidden;
+    .layout {
+        margin-left: 256px;
+        transition: all .3s;
+    }
+    .rotate-flat{
+        margin-left: 0;
+    }
+    .footer {
+        padding: 40px;
+        text-align: center;
+    }
+}
 
-}
-.layout {
-    margin-left: 256px;
-    transition: all .3s;
-
-}
-.rotate-flat{
-    margin-left: 0;
-}
 </style>

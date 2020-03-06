@@ -28,13 +28,13 @@
             <Tabs value="name1">
                 <TabPane label="销售额" name="name1">
                     <Row type="flex">
-                        <Col span="18">
+                        <Col span="17">
                             <div class="page-view-line-chart-warp">
                                 <h4>销售趋势</h4>
                                 <page-view-line-chart></page-view-line-chart>
                             </div>
                         </Col>
-                        <Col span="6">
+                        <Col span="7">
                             <div class="ranking-list-warp">
                                 <h4>门店销售额排名</h4>
                                 <ul class="dashboard-ranking-List">
@@ -68,17 +68,57 @@
                         <Col :span="12">
                             <sample-mini-chart-box></sample-mini-chart-box>
                         </Col>
-                        <Col :span="12"></Col>
+                        <Col :span="12">
+                            <sample-mini-chart-box2></sample-mini-chart-box2>
+                        </Col>
                     </Row>
                     <table-list></table-list>
                 </base-dashboard-card>
             </Col>
             <Col span="12">
                 <base-dashboard-card title="销售额类别占比">
-                    <pic-chart></pic-chart>
+                    <Row class="dashboard-card-header"><h4>销售额</h4></Row>
+                    <Row :gutter="15">
+                        <Col span="16"><pic-chart></pic-chart></Col>
+                        <Col span="8">
+                            <ul class="dashboard-pie-chart-ul">
+                                <li>
+                                    <span class="pie-chart-list-dot" style="background-color: rgb(240, 72, 100);"></span>
+                                    <span>家用电器</span>
+                                    <span>28.56%</span>
+                                    <span>¥ 4,544</span>
+                                </li>
+                                <li>
+                                    <span class="pie-chart-list-dot" style="background-color: rgb(24, 144, 255);"></span>
+                                    <span>家用电器</span>
+                                    <span>28.56%</span>
+                                    <span>¥ 4,544</span>
+                                </li>
+                                <li>
+                                    <span class="pie-chart-list-dot" style="background-color: rgb(19, 194, 194);"></span>
+                                    <span>家用电器</span>
+                                    <span>28.56%</span>
+                                    <span>¥ 4,544</span>
+                                </li>
+                                <li>
+                                    <span class="pie-chart-list-dot" style="background-color: rgb(47, 194, 91);"></span>
+                                    <span>家用电器</span>
+                                    <span>28.56%</span>
+                                    <span>¥ 4,544</span>
+                                </li>
+                                <li>
+                                    <span class="pie-chart-list-dot" style="background-color: rgb(250, 204, 20);"></span>
+                                    <span>家用电器</span>
+                                    <span>28.56%</span>
+                                    <span>¥ 4,544</span>
+                                </li>
+                            </ul>
+                        </Col>
+                    </Row>
                 </base-dashboard-card>
             </Col>
         </Row>
+        <bottom-line-chart></bottom-line-chart>
     </div>
 </template>
 
@@ -93,6 +133,8 @@ import MiniProgress from './components/MiniProgress';
 import PicChart from './components/PicChart';
 import TableList from './components/TableList';
 import SampleMiniChartBox from './components/SampleMiniChartBox';
+import SampleMiniChartBox2 from './components/SampleMiniChartBox2';
+import BottomLineChart from './components/BottomLineChart';
 export default {
     name: 'dashboard',
     components: {
@@ -104,7 +146,9 @@ export default {
         BaseDashboardCard,
         PicChart,
         TableList,
-        SampleMiniChartBox
+        SampleMiniChartBox,
+        SampleMiniChartBox2,
+        BottomLineChart
     },
     data() {
         return {
@@ -177,6 +221,35 @@ export default {
     }
     .row-warp {
         margin-top: 25px;
+    }
+    .pie-chart-list-dot {
+        position: relative;
+        top: -1px;
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        margin-right: 8px;
+        border-radius: 8px;
+    }
+    .dashboard-card-header {
+        margin-top: 8px;
+        margin-bottom: 60px;
+    }
+    .dashboard-pie-chart-ul {
+        /*position: absolute;*/
+        /*top: 50%;*/
+        /*right: 0px;*/
+        min-width: 200px;
+        /*transform: translateY(-50%);*/
+        margin: 24px 20px;
+        padding: 0px;
+        list-style: none;
+        li {
+            height: 22px;
+            margin-bottom: 16px;
+            line-height: 22px;
+            cursor: pointer;
+        }
     }
 }
 </style>

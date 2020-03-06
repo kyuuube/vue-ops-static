@@ -73,11 +73,11 @@ export default {
             });
             chart.area()
                 .position('year*value')
-                .color('type',['#975fe4'])
+                .color('type',['#5aace4'])
                 .shape('smooth');
             chart.line()
                 .position('year*value')
-                .color('type' ,['#975fe4'])
+                .color('type' ,['#2378e4'])
                 .size(2)
                 .shape('smooth');
             chart.render();

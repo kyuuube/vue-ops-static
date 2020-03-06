@@ -4,8 +4,10 @@ import router from './router';
 import store from './store';
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
-
+import moment from 'moment'
 Vue.use(ViewUI);
+
+Vue.prototype.$moment = moment
 
 router.beforeEach((to, from, next) => {
     ViewUI.LoadingBar.start();

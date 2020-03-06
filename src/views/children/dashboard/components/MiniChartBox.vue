@@ -8,7 +8,7 @@
         </Row>
         <Row>
             <span class="count">{{ count }}</span>
-            <span class="increase">{{ increase }} <Icon color="red" type="md-arrow-dropup" size="16" /> </span>
+            <span class="increase">{{ increase }} <Icon color="red" type="md-arrow-dropup" size="20" /> </span>
         </Row>
         <div class="chart">
             <slot></slot>

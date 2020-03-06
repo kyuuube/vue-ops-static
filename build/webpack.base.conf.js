@@ -47,8 +47,8 @@ module.exports = {
                     /node_modules/.test(file) && !/\.vue\.js/.test(file),
                 options: {
                     babelrc: false, // 不采用.babelrc的配置
-                    plugins: ['@babel/plugin-syntax-dynamic-import']
-                }
+                    plugins: ['@babel/plugin-syntax-dynamic-import', 'transform-vue-jsx'],
+                },
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

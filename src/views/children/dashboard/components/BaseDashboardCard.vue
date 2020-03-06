@@ -1,17 +1,12 @@
 <template>
-    <Card :bordered="false" :dis-hover="true">
+    <Card class="base-dashboard-card" :bordered="false" :dis-hover="true">
         <p slot="title">{{title}}</p>
         <div slot="extra">
             <slot name="extra"></slot>
-<!--            <Dropdown placement="bottom-start">-->
-<!--                <Icon type="ios-more" />-->
-<!--                <DropdownMenu slot="list">-->
-<!--                    <DropdownItem>操作一</DropdownItem>-->
-<!--                    <DropdownItem>操作一</DropdownItem>-->
-<!--                </DropdownMenu>-->
-<!--            </Dropdown>-->
         </div>
-        <slot></slot>
+        <div class="card-warp">
+            <slot></slot>
+        </div>
     </Card>
 </template>
 
@@ -24,6 +19,10 @@
     };
 </script>
 
-<style scoped>
-
+<style lang="less">
+.base-dashboard-card {
+    .card-warp {
+        min-height: 487px;
+    }
+}
 </style>

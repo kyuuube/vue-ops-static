@@ -72,6 +72,18 @@ export default {
                     range: 26,
                     number: 12,
                     increase: '4'
+                },
+                {
+                    keyword: 'Jon Snow',
+                    range: 26,
+                    number: 12,
+                    increase: '4'
+                },
+                {
+                    keyword: 'Joe Black',
+                    range: 30,
+                    number: 12,
+                    increase: '20'
                 }
             ]
         };
