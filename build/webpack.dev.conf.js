@@ -1,8 +1,8 @@
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const config = require("../config")
-const merge = require('webpack-merge')
-const common = require('./webpack.base.conf.js')
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const config = require('../config');
+const merge = require('webpack-merge');
+const common = require('./webpack.base.conf.js');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const devConf = merge(common, {
@@ -23,9 +23,9 @@ const devConf = merge(common, {
         proxy: {
             '/api': {
                 target: 'http://192.168.100.117:8080',
-                pathRewrite: {'^/api' : ''}
+                pathRewrite: { '^/api': '' }
             }
-        },
+        }
     },
     plugins: [
         new webpack.BannerPlugin('start'),
@@ -39,16 +39,16 @@ const devConf = merge(common, {
             inject: true,
             chunksSortMode: 'none'
         }),
-        new FriendlyErrorsWebpackPlugin(
-            {
-                compilationSuccessInfo: {
-                    messages: [`You application is running here http://${config.dev.host}:${config.dev.port}`]
-                    // notes: ["Some additionnal notes to be displayed unpon successful compilation"]
-                },
-                onErrors: undefined,
-                clearConsole: true
-            }
-        )
+        new FriendlyErrorsWebpackPlugin({
+            compilationSuccessInfo: {
+                messages: [
+                    `You application is running here http://${config.dev.host}:${config.dev.port}`
+                ]
+                // notes: ["Some additionnal notes to be displayed unpon successful compilation"]
+            },
+            onErrors: undefined,
+            clearConsole: true
+        })
     ]
 });
 module.exports = devConf;

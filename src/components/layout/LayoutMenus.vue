@@ -11,18 +11,25 @@ export default {
                 {
                     menuId: 1,
                     name: "工作台",
+                    path: "/dashboard",
+                    icon: "icon-dashboard"
                 },
                 {
                     menuId: 2,
                     name: "系统管理",
+                    icon: "icon-system",
                     children: [
                         {
                             menuId: 3,
                             name: "用户管理",
+                            path: "/system/user",
+                            icon: "icon-user"
                         },
                         {
                             menuId: 4,
                             name: "角色管理",
+                            path: "/role",
+                            icon: "icon-role"
                         },
                     ]
                 }
@@ -36,12 +43,12 @@ export default {
     },
     render() {
         const renderItem = (itemList) => {
-            console.info(itemList)
             return itemList.map((item, index) => {
                 if (item.children && item.children.length > 0) {
                     return (
                         <Submenu name={item.menuId} key={index}>
                             <template slot="title">
+                                <Icon custom={`iconfont ${item.icon}`} />
                                 <span>{item.name}</span>
                             </template>
                             {renderItem(item.children)}
@@ -49,7 +56,8 @@ export default {
                     );
                 } else {
                     return (
-                        <MenuItem name={item.menuId} key={index}>
+                        <MenuItem name={item.menuId} key={index} to={item.path}>
+                            <Icon custom={`iconfont ${item.icon}`} />
                             <span>{item.name}</span>
                         </MenuItem>
                     );
@@ -59,10 +67,9 @@ export default {
         return (
             <Menu
                 class={['menus', this.menuitemClasses]}
-                active-name="1-2"
+                active-name={1}
                 theme="dark"
-                width="auto"
-                open-names={['1']}>
+                width="auto">
                 {renderItem(this.list)}
             </Menu>
         )
@@ -72,6 +79,7 @@ export default {
 
 <style lang="less">
 .menus {
+    margin-top: 40px;
     background-color: #001529;
 }
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened {

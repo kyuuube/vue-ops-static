@@ -6,5 +6,6 @@ export default {
     name: 'app'
 };
 </script>
-<style>
+<style lang="less">
+    @import "../src/style/index.less";
 </style>

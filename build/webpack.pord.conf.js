@@ -1,30 +1,39 @@
-const merge = require('webpack-merge')
-const common = require('./webpack.base.conf.js')
-const path = require('path')
-const config = require("../config");
+const merge = require('webpack-merge');
+const common = require('./webpack.base.conf.js');
+const path = require('path');
+const config = require('../config');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const {CleanWebpackPlugin} = require('clean-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const CompressionPlugin = require('compression-webpack-plugin')
-const { VueLoaderPlugin } = require('vue-loader')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+    .BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 const prodConf = merge(common, {
     mode: 'production',
     // 入口文件
     entry: {
         app: './src/main.js',
-        vendor:['vue', 'axios', 'vue-router', 'moment', 'vuex', 'element-ui', 'lodash'],
+        vendor: [
+            'vue',
+            'axios',
+            'vue-router',
+            'moment',
+            'vuex',
+            'element-ui',
+            'lodash'
+        ]
     },
     devtool: config.build.devtoolType,
-    resolve : {
+    resolve: {
         alias: {
-            'vue$': 'vue/dist/vue.esm.js',
-        },
+            vue$: 'vue/dist/vue.esm.js'
+        }
     },
     // 输出配置
     output: {
@@ -49,7 +58,7 @@ const prodConf = merge(common, {
                 default: {
                     minChunks: 1,
                     priority: -20,
-                    reuseExistingChunk: true,
+                    reuseExistingChunk: true
                 },
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
@@ -74,28 +83,28 @@ const prodConf = merge(common, {
                 uglifyOptions: {
                     output: {
                         comments: false,
-                        beautify: false,
+                        beautify: false
                     },
                     compress: {
                         warnings: false,
                         drop_console: true,
                         pure_funcs: ['console.log']
-                    },
-                },
+                    }
+                }
             }),
             new OptimizeCSSPlugin({
                 cssProcessorOptions: {
                     safe: true
                 }
-            }),
-        ],
+            })
+        ]
     },
     plugins: [
         // new BundleAnalyzerPlugin(),
         new CleanWebpackPlugin({
-            root:  path.resolve(__dirname, '..'),
-            exclude:  [],
-            verbose:  true,
+            root: path.resolve(__dirname, '..'),
+            exclude: [],
+            verbose: true,
             dry: false
         }),
         new MiniCssExtractPlugin(['dist'], {
@@ -115,7 +124,7 @@ const prodConf = merge(common, {
             template: './src/index.template.html',
             inject: true,
             chunksSortMode: 'none',
-            favicon: path.resolve(__dirname, "../src/assets/favicon.ico"),
+            favicon: path.resolve(__dirname, '../src/assets/favicon.ico'),
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
@@ -138,7 +147,7 @@ const prodConf = merge(common, {
                 to: './static', // 打包后静态文件放置位置
                 ignore: ['.*'] // 忽略规则。（这种写法表示将该文件夹下的所有文件都复制）
             }
-        ]),
+        ])
     ]
 });
 module.exports = prodConf;
