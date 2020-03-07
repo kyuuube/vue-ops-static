@@ -12,6 +12,6 @@
 
 <style scoped>
 .layout-content {
-    padding: 16px 16px 16px 16px;
+    background: #f5f7f9;
 }
 </style>

@@ -19,6 +19,14 @@ const routes = [
                 path: '/system/user',
                 component: () => import('../views/children/system/user/view'),
                 meta: { requireAuth: true },
+                children: [
+                    { path: "", redirect: "list" },
+                    {
+                        path: "list",
+                        component: () => import('../views/children/system/user/children/list'),
+                        meta: { requireAuth: true },
+                    }
+                ]
             },
             {
                 path: '/role',

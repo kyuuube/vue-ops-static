@@ -62,7 +62,8 @@ export default {
 <style scoped>
 .layout-header-bar {
     background: #fff;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    box-shadow: 0 1px 4px rgba(0,21,41,.08);
 }
 .menu-icon {
     cursor: pointer;

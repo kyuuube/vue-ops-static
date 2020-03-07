@@ -160,6 +160,7 @@ export default {
 
 <style lang="less">
 .dashboard {
+    padding: 16px;
     .dashboard-page-view-line {
         position: relative;
         margin-top: 25px;
