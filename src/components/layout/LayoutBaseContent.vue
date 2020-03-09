@@ -17,6 +17,12 @@
 
 <style lang="less">
     .layout-base-content {
-        background-color: #ffffff;
+        background-color: #f5f7f9;
+        .ivu-form-item {
+            margin-bottom: 0;
+        }
+        .ivu-page {
+            margin-top: 15px;
+        }
     }
 </style>
