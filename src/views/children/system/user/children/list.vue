@@ -56,7 +56,7 @@ export default {
     name: 'user-list',
     data() {
         return {
-            loading: true,
+            loading: false,
             keywords: '',
             columns: [
                 {

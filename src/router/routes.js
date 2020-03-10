@@ -25,7 +25,22 @@ const routes = [
                         path: "list",
                         component: () => import('../views/children/system/user/children/list'),
                         meta: { requireAuth: true },
-                    }
+                    },
+                    {
+                        path: "detail/:id",
+                        component: () => import('../views/children/system/user/children/detail'),
+                        meta: { requireAuth: true },
+                    },
+                    {
+                        path: "add",
+                        component: () => import('../views/children/system/user/children/modify'),
+                        meta: { requireAuth: true },
+                    },
+                    {
+                        path: "edit/:id",
+                        component: () => import('../views/children/system/user/children/modify'),
+                        meta: { requireAuth: true },
+                    },
                 ]
             },
             {

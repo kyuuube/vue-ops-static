@@ -24,5 +24,11 @@
         .ivu-page {
             margin-top: 15px;
         }
+        .ivu-table-wrapper>.ivu-spin-fix {
+            border: none;
+        }
+        .ivu-page {
+            text-align: right;
+        }
     }
 </style>
