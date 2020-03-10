@@ -1,18 +1,19 @@
 <template>
-    <base-content class="user-list">
-        <div class="content-header">
+    <base-content search class="user-list">
+        <div slot="header">
             <Breadcrumb>
-                <BreadcrumbItem>System</BreadcrumbItem>
-                <BreadcrumbItem>User</BreadcrumbItem>
-                <BreadcrumbItem>List</BreadcrumbItem>
+                <BreadcrumbItem>系统管理</BreadcrumbItem>
+                <BreadcrumbItem>用户管理</BreadcrumbItem>
+                <BreadcrumbItem>新建列表</BreadcrumbItem>
             </Breadcrumb>
             <h2>用户管理列表</h2>
         </div>
 
-        <div class="search">
+        <div slot="search">
             <Form ref="formInline" inline>
                 <FormItem prop="user">
                     <Input
+                        clearable
                         type="text"
                         v-model="keywords"
                         placeholder="输入关键字"
@@ -24,7 +25,15 @@
             </Form>
         </div>
 
-        <div class="content">
+        <div>
+            <div class="table-toolbar">
+                <Row type="flex" justify="space-between">
+                    <div>查询表格</div>
+                    <div>
+                        <Button @click="$router.push('/system/user/add')" type="primary" icon="md-add">新 建</Button>
+                    </div>
+                </Row>
+            </div>
             <Table :columns="columns" :data="data" :loading="loading">
                 <template slot-scope="{ row, index }" slot="name">
                     {{ row.name }}
@@ -43,7 +52,8 @@
                 </template>
 
                 <template slot-scope="{ row, index }" slot="action">
-                    <Button type="error">删 除</Button>
+                    <Button type="text">修 改</Button>
+                    <Button type="text">删 除</Button>
                 </template>
             </Table>
             <Page :total="100" show-sizer />
@@ -118,29 +128,6 @@ export default {
 
 <style lang="less">
 .user-list {
-    .content-header {
-        padding: 8px 18px;
-        background-color: #ffffff;
-        h2 {
-            display: block;
-            margin-bottom: 0;
-            padding-right: 12px;
-            color: rgba(0, 0, 0, 0.85);
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 36px;
-        }
-    }
-    .search {
-        background-color: #ffffff;
-        margin: 20px 18px;
-        padding: 10px;
-    }
-    .content {
-        /*position: relative;*/
-        background-color: #ffffff;
-        margin: 20px 18px;
-        padding: 15px;
-    }
+
 }
 </style>
