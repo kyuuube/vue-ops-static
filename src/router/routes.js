@@ -1,3 +1,6 @@
+import user from './modules/user'
+import role from './modules/role'
+import menu from './modules/menu'
 const routes = [
     {
         path: '/login',
@@ -15,39 +18,9 @@ const routes = [
                 component: () => import('../views/children/dashboard/view'),
                 meta: { requireAuth: true },
             },
-            {
-                path: '/system/user',
-                component: () => import('../views/children/system/user/view'),
-                meta: { requireAuth: true },
-                children: [
-                    { path: "", redirect: "list" },
-                    {
-                        path: "list",
-                        component: () => import('../views/children/system/user/children/list'),
-                        meta: { requireAuth: true },
-                    },
-                    {
-                        path: "detail/:id",
-                        component: () => import('../views/children/system/user/children/detail'),
-                        meta: { requireAuth: true },
-                    },
-                    {
-                        path: "add",
-                        component: () => import('../views/children/system/user/children/modify'),
-                        meta: { requireAuth: true },
-                    },
-                    {
-                        path: "edit/:id",
-                        component: () => import('../views/children/system/user/children/modify'),
-                        meta: { requireAuth: true },
-                    },
-                ]
-            },
-            {
-                path: '/role',
-                component: () => import('../views/children/system/role/view'),
-                meta: { requireAuth: true },
-            }
+            ...user,
+            ...role,
+            ...menu
         ]
     }
 ];

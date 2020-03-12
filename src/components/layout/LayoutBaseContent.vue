@@ -63,7 +63,7 @@ export default {
         }
     }
     .ivu-form-item {
-        margin-bottom: 0;
+        margin-bottom: 10px;
     }
     .ivu-page {
         margin-top: 15px;

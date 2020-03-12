@@ -4,7 +4,7 @@
             <Breadcrumb>
                 <BreadcrumbItem>系统管理</BreadcrumbItem>
                 <BreadcrumbItem>用户管理</BreadcrumbItem>
-                <BreadcrumbItem>新建列表</BreadcrumbItem>
+                <BreadcrumbItem>用户列表</BreadcrumbItem>
             </Breadcrumb>
             <h2>用户管理列表</h2>
         </div>
@@ -43,12 +43,12 @@
                     {{ row.age }}
                 </template>
 
-                <template slot-scope="{ row, index }" slot="birthday">
-                    {{ getBirthday(row.birthday) }}
+                <template slot-scope="{ row, index }" slot="gender">
+                    {{ row.gender }}
                 </template>
 
-                <template slot-scope="{ row, index }" slot="address">
-                    {{ row.address }}
+                <template slot-scope="{ row, index }" slot="avatar">
+                    {{ row.avatar }}
                 </template>
 
                 <template slot-scope="{ row, index }" slot="action">
@@ -78,12 +78,12 @@ export default {
                     slot: 'age'
                 },
                 {
-                    title: '出生日期',
-                    slot: 'birthday'
+                    title: '性别',
+                    slot: 'gender'
                 },
                 {
-                    title: '地址',
-                    slot: 'address'
+                    title: '头像',
+                    slot: 'avatar'
                 },
                 {
                     title: '操作',

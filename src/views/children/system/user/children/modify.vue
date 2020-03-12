@@ -1,64 +1,50 @@
 <template>
-    <base-content>
+    <base-content class="user-modify">
         <div slot="header">
             <Breadcrumb>
                 <BreadcrumbItem>系统管理</BreadcrumbItem>
-                <BreadcrumbItem>用户管理</BreadcrumbItem>
+                <BreadcrumbItem to="/system/user/list">用户管理</BreadcrumbItem>
                 <BreadcrumbItem>新建用户</BreadcrumbItem>
             </Breadcrumb>
             <h2>新建用户 </h2>
         </div>
-            <Form :model="formItem" :label-width="80">
-                <FormItem label="Input">
-                    <Input v-model="formItem.input" placeholder="Enter something..."></Input>
+            <Form :model="user" :label-width="120">
+                <FormItem required label="邮箱:">
+                    <Input v-model="user.email" placeholder="请输入邮箱"></Input>
                 </FormItem>
-                <FormItem label="Select">
-                    <Select v-model="formItem.select">
-                        <Option value="beijing">New York</Option>
-                        <Option value="shanghai">London</Option>
-                        <Option value="shenzhen">Sydney</Option>
-                    </Select>
+                <FormItem required label="用户名:">
+                    <Input v-model="user.name" placeholder="请输入用户名"></Input>
                 </FormItem>
-                <FormItem label="DatePicker">
-                    <Row>
-                        <Col span="11">
-                            <DatePicker type="date" placeholder="Select date" v-model="formItem.date"></DatePicker>
-                        </Col>
-                        <Col span="2" style="text-align: center">-</Col>
-                        <Col span="11">
-                            <TimePicker type="time" placeholder="Select time" v-model="formItem.time"></TimePicker>
-                        </Col>
-                    </Row>
-                </FormItem>
-                <FormItem label="Radio">
-                    <RadioGroup v-model="formItem.radio">
-                        <Radio label="male">Male</Radio>
-                        <Radio label="female">Female</Radio>
+                <FormItem label="性别:">
+                    <RadioGroup v-model="user.gender">
+                        <Radio :label="0">男</Radio>
+                        <Radio :label="1">女</Radio>
                     </RadioGroup>
                 </FormItem>
-                <FormItem label="Checkbox">
-                    <CheckboxGroup v-model="formItem.checkbox">
-                        <Checkbox label="Eat"></Checkbox>
-                        <Checkbox label="Sleep"></Checkbox>
-                        <Checkbox label="Run"></Checkbox>
-                        <Checkbox label="Movie"></Checkbox>
-                    </CheckboxGroup>
+                <FormItem required label="密码:">
+                    <Input v-model="user.password" placeholder="输入密码"></Input>
                 </FormItem>
-                <FormItem label="Switch">
-                    <i-switch v-model="formItem.switch" size="large">
-                        <span slot="open">On</span>
-                        <span slot="close">Off</span>
-                    </i-switch>
+                <FormItem required label="确认密码:">
+                    <Input v-model="user.rePassword" placeholder="确认秘密"></Input>
                 </FormItem>
-                <FormItem label="Slider">
-                    <Slider v-model="formItem.slider" range></Slider>
-                </FormItem>
-                <FormItem label="Text">
-                    <Input v-model="formItem.textarea" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
+                <FormItem label="头像:">
+                    <Upload
+                        ref="upload"
+                        :show-upload-list="false"
+                        :default-file-list="defaultList"
+                        :format="['jpg','jpeg','png']"
+                        :max-size="2048"
+                        type="drag"
+                        action="//jsonplaceholder.typicode.com/posts/"
+                        style="display: inline-block;width:58px;">
+                        <div style="width: 58px;height:58px;line-height: 58px;">
+                            <Icon type="ios-camera" size="20"></Icon>
+                        </div>
+                    </Upload>
                 </FormItem>
                 <FormItem>
-                    <Button type="primary">Submit</Button>
-                    <Button style="margin-left: 8px">Cancel</Button>
+                    <Button type="primary">保 存</Button>
+                    <Button>取 消</Button>
                 </FormItem>
             </Form>
     </base-content>
@@ -69,22 +55,22 @@
         name: "user-modify",
         data () {
             return {
-                formItem: {
-                    input: '',
-                    select: '',
-                    radio: 'male',
-                    checkbox: [],
-                    switch: true,
-                    date: '',
-                    time: '',
-                    slider: [20, 50],
-                    textarea: ''
-                }
+                user: {
+                    email: '',
+                    name: '',
+                    gender: 0,
+                    password: '',
+                    rePassword: '',
+                    avatar: ''
+                },
+                defaultList: []
             }
         }
     };
 </script>
 
 <style lang="less">
+    .user-modify {
 
+    }
 </style>

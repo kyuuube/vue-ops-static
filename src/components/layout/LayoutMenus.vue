@@ -31,6 +31,12 @@ export default {
                             path: "/role",
                             icon: "icon-role"
                         },
+                        {
+                            menuId: 5,
+                            name: "菜单管理",
+                            path: "/menu",
+                            icon: "icon-menu"
+                        },
                     ]
                 }
             ]
