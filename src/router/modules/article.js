@@ -1,23 +1,23 @@
 export default [
     {
-        path: '/system/menu',
-        component: () => import('../../views/children/system/menu/view'),
+        path: '/article',
+        component: () => import('../../views/children/article/view'),
         meta: { requireAuth: true },
         children: [
             { path: "", redirect: "list" },
             {
                 path: 'list',
-                component: () => import('../../views/children/system/menu/children/list'),
+                component: () => import('../../views/children/article/children/list'),
                 meta: { requireAuth: true },
             },
             {
                 path: 'add',
-                component: () => import('../../views/children/system/menu/children/modify'),
+                component: () => import('../../views/children/article/children/modify'),
                 meta: { requireAuth: true },
             },
             {
                 path: 'edit/:id',
-                component: () => import('../../views/children/system/menu/children/modify'),
+                component: () => import('../../views/children/article/children/modify'),
                 meta: { requireAuth: true },
             }
         ]

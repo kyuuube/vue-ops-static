@@ -6,6 +6,14 @@ import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 import baseContent from 'src/components/layout/LayoutBaseContent'
 import moment from 'moment'
+import VueQuillEditor from 'vue-quill-editor'
+
+// require styles
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
+Vue.use(VueQuillEditor, /* { default global options } */)
 Vue.use(ViewUI);
 Vue.component("baseContent", baseContent);
 

@@ -28,16 +28,22 @@ export default {
                         {
                             menuId: 4,
                             name: "角色管理",
-                            path: "/role",
+                            path: "/system/role",
                             icon: "icon-role"
                         },
                         {
                             menuId: 5,
                             name: "菜单管理",
-                            path: "/menu",
+                            path: "/system/menu",
                             icon: "icon-menu"
                         },
                     ]
+                },
+                {
+                    menuId: 6,
+                    name: '内容管理',
+                    path: '/article',
+                    icon: "icon-essay",
                 }
             ]
         }

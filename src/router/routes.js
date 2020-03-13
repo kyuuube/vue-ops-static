@@ -1,6 +1,7 @@
 import user from './modules/user'
 import role from './modules/role'
 import menu from './modules/menu'
+import article from './modules/article'
 const routes = [
     {
         path: '/login',
@@ -20,7 +21,8 @@ const routes = [
             },
             ...user,
             ...role,
-            ...menu
+            ...menu,
+            ...article
         ]
     }
 ];

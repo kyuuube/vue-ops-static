@@ -1,12 +1,12 @@
 <template>
-    <base-content search class="menu-list">
+    <base-content search class="article-list">
         <div slot="header">
             <Breadcrumb>
                 <BreadcrumbItem>系统管理</BreadcrumbItem>
-                <BreadcrumbItem>菜单管理</BreadcrumbItem>
-                <BreadcrumbItem>菜单列表</BreadcrumbItem>
+                <BreadcrumbItem>内容管理</BreadcrumbItem>
+                <BreadcrumbItem>文章列表</BreadcrumbItem>
             </Breadcrumb>
-            <h2>菜单管理列表</h2>
+            <h2>文章管理列表</h2>
         </div>
 
         <div slot="search">
@@ -31,10 +31,10 @@
                     <div>查询表格</div>
                     <div>
                         <Button
-                            @click="$router.push('/system/user/add')"
+                            @click="$router.push('/article/add')"
                             type="primary"
                             icon="md-add"
-                            >新 建</Button
+                        >新 建</Button
                         >
                     </div>
                 </Row>
@@ -63,46 +63,47 @@
 </template>
 
 <script>
-export default {
-    name: 'menu-list',
-    data() {
-        return {
-            loading: false,
-            keywords: '',
-            columns: [
-                {
-                    title: '角色名称',
-                    slot: 'name'
-                },
-                {
-                    title: '描述',
-                    slot: 'description'
-                },
-                {
-                    title: '状态',
-                    slot: 'status'
-                },
-                {
-                    title: '操作',
-                    slot: 'action'
-                }
-            ],
-            data: [
-                {
-                    name: '超级管理员',
-                    status: 0,
-                    description: '拥有全站权限'
-                }
-            ]
-        };
-    },
-    methods: {
-        submit() {}
-    }
-};
+    export default {
+        name: 'article-list',
+        data() {
+            return {
+                loading: false,
+                keywords: '',
+                columns: [
+                    {
+                        title: '角色名称',
+                        slot: 'name'
+                    },
+                    {
+                        title: '描述',
+                        slot: 'description'
+                    },
+                    {
+                        title: '状态',
+                        slot: 'status'
+                    },
+                    {
+                        title: '操作',
+                        slot: 'action'
+                    }
+                ],
+                data: [
+                    {
+                        name: '超级管理员',
+                        status: 0,
+                        description: '拥有全站权限'
+                    }
+                ]
+            };
+        },
+        methods: {
+            submit() {}
+        }
+    };
 </script>
 
 <style lang="less">
-.menu-list {
+.article-list {
+
 }
 </style>

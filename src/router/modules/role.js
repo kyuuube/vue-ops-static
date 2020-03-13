@@ -1,6 +1,6 @@
 export default [
     {
-        path: '/role',
+        path: '/system/role',
         component: () => import('../../views/children/system/role/view'),
         meta: { requireAuth: true },
         children: [
