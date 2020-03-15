@@ -43,12 +43,19 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 include: [resolve('src'), resolve('test')],
-                exclude: file =>
-                    /node_modules/.test(file) && !/\.vue\.js/.test(file),
+                exclude: file => (
+                    /node_modules/.test(file) &&
+                    !/\.vue\.js/.test(file) &&
+                    !/node_modules\/view-design\/src/.test(file)
+                ),
                 options: {
                     babelrc: false, // 不采用.babelrc的配置
-                    plugins: ['@babel/plugin-syntax-dynamic-import', 'transform-vue-jsx'],
-                },
+                    plugins: [
+                        "@babel/plugin-transform-runtime",
+                        '@babel/plugin-syntax-dynamic-import',
+                        'transform-vue-jsx',
+                    ]
+                }
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -66,16 +73,12 @@ module.exports = {
                 }
             },
             {
-                test:/\.css$/,
-                use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+                test: /\.css$/,
+                use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
             },
             {
                 test: /\.less$/,
-                use: [
-                    'vue-style-loader',
-                    'css-loader',
-                    'less-loader',
-                ]
+                use: ['vue-style-loader', 'css-loader', 'less-loader']
             }
         ]
     },

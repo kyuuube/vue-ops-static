@@ -1,7 +1,16 @@
 <script type="text/jsx">
-import { Menu, Submenu, MenuItem, Icon } from "view-design"
+// store
+import { mapActions, mapGetters } from "vuex";
+import * as $account from 'src/store/modules/account/types'
+import { Menu as menus, Submenu, MenuItem, Icon } from "view-design"
 export default {
     name: "layout-menus",
+    components: {
+        menus,
+        Submenu,
+        MenuItem,
+        Icon
+    },
     props: {
         isCollapsed: Boolean
     },
@@ -51,6 +60,21 @@ export default {
     computed: {
         menuitemClasses() {
             return ['menu-item', this.isCollapsed ? 'collapsed-menu' : ''];
+        },
+        ...mapGetters($account.namespace, {
+            currentMenuId: $account.getters.currentMenuId
+        })
+    },
+    methods: {
+        ...mapActions($account.namespace, {
+            setCurrentMenuId: $account.actions.setCurrentMenuId,
+        }),
+        menuClick(id) {
+            console.log(id)
+            this.setCurrentMenuId(item.menuId)
+        },
+        menuSelect(name) {
+            this.setCurrentMenuId(name)
         }
     },
     render() {
@@ -68,7 +92,7 @@ export default {
                     );
                 } else {
                     return (
-                        <MenuItem name={item.menuId} key={index} to={item.path}>
+                        <MenuItem name={item.menuId} key={index} to={item.path} onClick={() => this.menuClick(item)}>
                             <Icon custom={`iconfont ${item.icon}`} />
                             <span>{item.name}</span>
                         </MenuItem>
@@ -77,13 +101,14 @@ export default {
             });
         };
         return (
-            <Menu
+            <menus
+                onSelect={() => this.menuSelect}
                 class={['menus', this.menuitemClasses]}
-                active-name={1}
+                active-name={this.currentMenuId}
                 theme="dark"
                 width="auto">
                 {renderItem(this.list)}
-            </Menu>
+            </menus>
         )
     }
 };
@@ -98,7 +123,8 @@ export default {
     background: #000c17;
 }
 
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu), .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):hover{
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu),
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):hover {
     color: #fff;
     background-color: #2d8cf0;
 }
@@ -107,9 +133,7 @@ export default {
     color: #fff;
     background: #000c17 !important;
 }
-.ivu-menu-dark.ivu-menu-vertical
-    .ivu-menu-child-item-active
-    > .ivu-menu-submenu-title {
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-child-item-active > .ivu-menu-submenu-title {
     background: #000c17 !important;
 }
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-title {
@@ -117,7 +141,7 @@ export default {
     background: #000c17 !important;
 }
 
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu){
+.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu) {
     color: #fff;
     background-color: #2d8cf0;
 }
