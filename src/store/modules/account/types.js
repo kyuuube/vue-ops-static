@@ -2,20 +2,18 @@ export const namespace = "account";
 
 export const getters = {
     login: "login",
-    iframelogin: "iframelogin",
     logout: "logout",
-    islogin: "islogin",
     user: "user",
     routerList: "routerList",
     companyList: "companyList",
     selectedRouter: "selectedRouter",
-    currentMenuId: "currentMenuId"
+    currentMenuId: "currentMenuId",
+    currentOpenMenuIds: "currentOpenMenuIds"
 };
 
 export const actions = {
     login: "login",
     setToken: "setToken",
-    iframelogin: "iframelogin",
     logout: "logout",
     user: "user",
 
@@ -24,7 +22,8 @@ export const actions = {
     setUserInfo: "setUserInfo",
     setRouterList: "setRouterList",
     setSelectedRouter: "setSelectedRouter",
-    setCurrentMenuId: "setCurrentMenuId"
+    setCurrentMenuId: "setCurrentMenuId",
+    setCurrentOpenMenuIds: "setCurrentOpenMenuIds",
 };
 
 export const mutations = {
@@ -35,5 +34,6 @@ export const mutations = {
     routerList: "routerList",
     companyList: "companyList",
     selectedRouter: "selectedRouter",
-    currentMenuId: "currentMenuId"
+    currentMenuId: "currentMenuId",
+    currentOpenMenuIds: "currentOpenMenuIds"
 };

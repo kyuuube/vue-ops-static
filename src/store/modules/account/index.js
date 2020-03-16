@@ -1,44 +1,45 @@
 // utils
-import persistedState from "src/common/persistedState";
+import persistedState from 'src/common/persistedState';
 // import * as doorControlApi from "../../../apis/doorControlApi";
 // import * as userApi from "../../../apis/userApi";
-import {
-    namespace,
-    getters as $getters,
-    actions as $actions,
-    mutations as $mutations
-} from "./types";
+import { namespace, getters as $getters, actions as $actions, mutations as $mutations } from './types';
 
-const state = persistedState(namespace, {
-    permissions: [],
-    islogin: 1,
-    user: {},
-    token: undefined,
-    routerTab: [],
-    routerList: [],
-    companyList: [],
-    superAdmin: false,
-    currentMenuId: 1
-}, {
-    selectedRouter: []
-    // ...other
-});
+const state = persistedState(
+    namespace,
+    {
+        permissions: [],
+        islogin: 1,
+        user: {},
+        token: undefined,
+        routerTab: [],
+        routerList: [],
+        companyList: [],
+        superAdmin: false,
+        currentMenuId: 1,
+        currentOpenMenuIds: []
+    },
+    {
+        selectedRouter: []
+        // ...other
+    }
+);
 
 const mutations = {
     [$mutations.token]: (state, data) => {
-        window.localStorage.setItem('token', data.token)
+        window.localStorage.setItem('token', data.token);
         state.token = data.token;
     },
-    [$mutations.iframelogin]: (state) => {
+    [$mutations.iframelogin]: state => {
         state.islogin = true;
     },
-    [$mutations.logout]: (state) => {
+    [$mutations.logout]: state => {
         state.islogin = false;
         state.token = null;
-        state.user = null
-        state.selectedRouter = []
-        state.currentMenuId = 1
-        sessionStorage.removeItem('selectedRouter')
+        state.user = null;
+        state.selectedRouter = [];
+        state.currentMenuId = 1;
+        state.currentOpenMenuIds = [];
+        sessionStorage.removeItem('selectedRouter');
     },
     [$mutations.user]: (state, data) => {
         state.user = data;
@@ -55,6 +56,9 @@ const mutations = {
     },
     [$mutations.currentMenuId]: (state, data) => {
         state.currentMenuId = data;
+    },
+    [$mutations.currentOpenMenuIds]: (state, data) => {
+        state.currentOpenMenuIds = data;
     }
 };
 
@@ -94,22 +98,24 @@ const actions = {
     [$actions.setCurrentMenuId]: ({ commit }, list) => {
         commit($mutations.currentMenuId, list);
     },
+    [$actions.setCurrentOpenMenuIds]: ({ commit }, id) => {
+        commit($mutations.currentOpenMenuIds, id);
+    }
 };
 
 const getters = {
-    [$getters.islogin]: (state) => state.islogin,
-    [$getters.token]: (state) => state.token,
-    [$getters.user]: (state) => state.user,
-    [$getters.companyList]: (state) => state.companyList,
-    [$getters.selectedRouter]: (state) => {
-        return  state.selectedRouter > 0 ? state.selectedRouter : JSON.parse(sessionStorage.selectedRouter || '[]')
+    [$getters.islogin]: state => state.islogin,
+    [$getters.token]: state => state.token,
+    [$getters.user]: state => state.user,
+    [$getters.companyList]: state => state.companyList,
+    [$getters.selectedRouter]: state => {
+        return state.selectedRouter > 0 ? state.selectedRouter : JSON.parse(sessionStorage.selectedRouter || '[]');
     },
-    [$getters.currentMenuId]: (state) => state.currentMenuId
+    [$getters.currentMenuId]: state => state.currentMenuId,
+    [$getters.currentOpenMenuIds]: state => state.currentOpenMenuIds
 };
 
-
 export default {
-
     namespaced: true,
 
     state,

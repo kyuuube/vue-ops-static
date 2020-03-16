@@ -21,30 +21,35 @@ export default {
                     menuId: 1,
                     name: "工作台",
                     path: "/dashboard",
-                    icon: "icon-dashboard"
+                    icon: "icon-dashboard",
+                    parentId: 0
                 },
                 {
                     menuId: 2,
                     name: "系统管理",
                     icon: "icon-system",
+                    parentId: 0,
                     children: [
                         {
                             menuId: 3,
                             name: "用户管理",
                             path: "/system/user",
-                            icon: "icon-user"
+                            icon: "icon-user",
+                            parentId: 2,
                         },
                         {
                             menuId: 4,
                             name: "角色管理",
                             path: "/system/role",
-                            icon: "icon-role"
+                            icon: "icon-role",
+                            parentId: 2,
                         },
                         {
                             menuId: 5,
                             name: "菜单管理",
                             path: "/system/menu",
-                            icon: "icon-menu"
+                            icon: "icon-menu",
+                            parentId: 2,
                         },
                     ]
                 },
@@ -53,6 +58,7 @@ export default {
                     name: '内容管理',
                     path: '/article',
                     icon: "icon-essay",
+                    parentId: 0
                 }
             ]
         }
@@ -62,19 +68,20 @@ export default {
             return ['menu-item', this.isCollapsed ? 'collapsed-menu' : ''];
         },
         ...mapGetters($account.namespace, {
-            currentMenuId: $account.getters.currentMenuId
+            currentMenuId: $account.getters.currentMenuId,
+            currentOpenMenuIds: $account.getters.currentOpenMenuIds,
         })
     },
     methods: {
         ...mapActions($account.namespace, {
             setCurrentMenuId: $account.actions.setCurrentMenuId,
+            setCurrentOpenMenuIds: $account.actions.setCurrentOpenMenuIds,
         }),
         menuClick(item) {
-            this.setCurrentMenuId(item.menuId)
+            this.setCurrentMenuId(item.menuId);
+            this.setCurrentOpenMenuIds([item.parentId]);
+            this.$router.push(item.path)
         },
-        menuSelect(name) {
-            this.setCurrentMenuId(name)
-        }
     },
     render() {
         const renderItem = (itemList) => {
@@ -103,6 +110,7 @@ export default {
             <menus
                 class={['menus', this.menuitemClasses]}
                 active-name={this.currentMenuId}
+                open-names={this.currentOpenMenuIds}
                 theme="dark"
                 width="auto">
                 {renderItem(this.list)}
