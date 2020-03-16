@@ -69,8 +69,7 @@ export default {
         ...mapActions($account.namespace, {
             setCurrentMenuId: $account.actions.setCurrentMenuId,
         }),
-        menuClick(id) {
-            console.log(id)
+        menuClick(item) {
             this.setCurrentMenuId(item.menuId)
         },
         menuSelect(name) {
@@ -92,17 +91,16 @@ export default {
                     );
                 } else {
                     return (
-                        <MenuItem name={item.menuId} key={index} to={item.path} onClick={() => this.menuClick(item)}>
+                        <menu-item name={item.menuId} key={index} nativeOnClick={() => this.menuClick(item)}>
                             <Icon custom={`iconfont ${item.icon}`} />
                             <span>{item.name}</span>
-                        </MenuItem>
+                        </menu-item>
                     );
                 }
             });
         };
         return (
             <menus
-                onSelect={() => this.menuSelect}
                 class={['menus', this.menuitemClasses]}
                 active-name={this.currentMenuId}
                 theme="dark"
