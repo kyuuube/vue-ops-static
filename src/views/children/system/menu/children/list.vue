@@ -39,17 +39,13 @@
                     </div>
                 </Row>
             </div>
-            <Table :columns="columns" :data="data" :loading="loading">
-                <template slot-scope="{ row, index }" slot="name">
-                    {{ row.name }}
+            <Table row-key="menuId" :columns="columns" :data="data" :loading="loading">
+                <template slot-scope="{ row, index }" slot="icon">
+                    <Icon :custom="`iconfont ${row.icon}`"/>
                 </template>
 
-                <template slot-scope="{ row, index }" slot="description">
-                    {{ row.description }}
-                </template>
-
-                <template slot-scope="{ row, index }" slot="status">
-                    {{ row.status }}
+                <template slot-scope="{ row, index }" slot="path">
+                    {{ row.path }}
                 </template>
 
                 <template slot-scope="{ row, index }" slot="action">
@@ -57,7 +53,6 @@
                     <Button type="text">删 除</Button>
                 </template>
             </Table>
-            <Page :total="100" show-sizer />
         </div>
     </base-content>
 </template>
@@ -71,16 +66,17 @@ export default {
             keywords: '',
             columns: [
                 {
-                    title: '角色名称',
-                    slot: 'name'
+                    title: '菜单名称',
+                    key: 'name',
+                    tree: true
                 },
                 {
-                    title: '描述',
-                    slot: 'description'
+                    title: '图标',
+                    slot: 'icon'
                 },
                 {
-                    title: '状态',
-                    slot: 'status'
+                    title: 'url',
+                    slot: 'path'
                 },
                 {
                     title: '操作',
@@ -89,9 +85,47 @@ export default {
             ],
             data: [
                 {
-                    name: '超级管理员',
-                    status: 0,
-                    description: '拥有全站权限'
+                    menuId: 1,
+                    name: "工作台",
+                    path: "/dashboard",
+                    icon: "icon-dashboard",
+                    parentId: 0
+                },
+                {
+                    menuId: 2,
+                    name: "系统管理",
+                    icon: "icon-system",
+                    parentId: 0,
+                    children: [
+                        {
+                            menuId: 3,
+                            name: "用户管理",
+                            path: "/system/user",
+                            icon: "icon-user",
+                            parentId: 2,
+                        },
+                        {
+                            menuId: 4,
+                            name: "角色管理",
+                            path: "/system/role",
+                            icon: "icon-role",
+                            parentId: 2,
+                        },
+                        {
+                            menuId: 5,
+                            name: "菜单管理",
+                            path: "/system/menu",
+                            icon: "icon-menu",
+                            parentId: 2,
+                        },
+                    ]
+                },
+                {
+                    menuId: 6,
+                    name: '内容管理',
+                    path: '/article',
+                    icon: "icon-essay",
+                    parentId: 0
                 }
             ]
         };
