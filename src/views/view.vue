@@ -4,7 +4,9 @@
         <Layout :class="layoutClass">
             <layout-header :is-collapsed="isCollapsed" @collapsed="collapsedSider"></layout-header>
             <layout-content>
-                <router-view></router-view>
+                <transition name="fade-transform" mode="out-in">
+                    <router-view></router-view>
+                </transition>
             </layout-content>
             <BackTop :height="100" :bottom="100"></BackTop>
             <div class="footer">
