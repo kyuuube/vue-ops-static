@@ -8,22 +8,12 @@ export default (router) => {
             next();
             return;
         }
-        const token = window.localStorage.getItem("token") || null;
-        if (!token) {
+        let currentUser = store.getters[`${$account.namespace}/${$account.getters.user}`];
+        if (!currentUser) {
             return notLogin(router, to);
         }
-        let currentUser = store.getters[`${$account.namespace}/${$account.getters.user}`];
         if (currentUser) {
             // 已登录
-            next();
-            return;
-        }
-
-        // 获取当前用户
-        // await store.dispatch(`${$account.namespace}/${$account.actions.getCurrentUserInfo}`);
-
-        currentUser = store.getters[`${$account.namespace}/${$account.getters.user}`];
-        if (currentUser) {
             return next();
         }
     });

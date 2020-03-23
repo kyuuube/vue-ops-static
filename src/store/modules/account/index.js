@@ -10,7 +10,7 @@ const state = persistedState(
         permissions: [],
         islogin: 1,
         user: {},
-        token: undefined,
+        token: null,
         routerTab: [],
         routerList: [],
         companyList: [],

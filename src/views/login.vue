@@ -1,7 +1,4 @@
 <template>
-    <!--    <div>-->
-    <!--        <Button @click="login" type="info">login</Button>-->
-    <!--    </div>-->
     <div class="login-warp">
         <div id="clouds">
             <div class="cloud x1"></div>
