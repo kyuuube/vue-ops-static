@@ -26,8 +26,8 @@ const state = persistedState(
 
 const mutations = {
     [$mutations.token]: (state, data) => {
-        window.localStorage.setItem('token', data.token);
-        state.token = data.token;
+        window.localStorage.setItem('token', data);
+        state.token = data;
     },
     [$mutations.iframelogin]: state => {
         state.islogin = true;

@@ -22,7 +22,7 @@ const devConf = merge(common, {
         publicPath: '/',
         proxy: {
             '/api': {
-                target: 'http://192.168.100.117:8080',
+                target: 'http://127.0.0.1:3001',
                 pathRewrite: { '^/api': '' }
             }
         }

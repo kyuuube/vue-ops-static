@@ -11,26 +11,8 @@
         <div class="container">
             <div id="login">
                 <div class="login-form-warp">
-                    <p>
-                        <span class="fontawesome-user"></span
-                        ><input
-                            type="text"
-                            value="Username"
-                            onBlur="if(this.value == '') this.value = 'Username'"
-                            onFocus="if(this.value == 'Username') this.value = ''"
-                            required
-                        />
-                    </p>
-                    <p>
-                        <span class="fontawesome-lock"></span
-                        ><input
-                            type="password"
-                            value="Password"
-                            onBlur="if(this.value == '') this.value = 'Password'"
-                            onFocus="if(this.value == 'Password') this.value = ''"
-                            required
-                        />
-                    </p>
+                    <p><span class="fontawesome-user"><Icon type="md-person" /></span><input type="text" v-model="account" required /></p>
+                    <p><span class="fontawesome-lock"><Icon type="md-lock" /></span><input type="password" v-model="password" required /></p>
                     <div class="login-button" @click="login">Log in</div>
                 </div>
 
@@ -42,20 +24,35 @@
 </template>
 
 <script>
+// apis
+import * as accountApi from 'src/apis/accountApi';
 // store
 import { mapActions } from 'vuex';
 import * as $account from 'src/store/modules/account/types';
 export default {
     name: 'login',
+    data() {
+        return {
+            account: '',
+            password: ''
+        };
+    },
     methods: {
         ...mapActions($account.namespace, {
             setToken: $account.actions.setToken,
             setUserInfo: $account.actions.setUserInfo
         }),
-        login() {
-            this.setToken('sadfsadfasdfasdfasdfasdfasdfasdf');
-            this.setUserInfo({});
-            this.$router.push('/');
+        async login() {
+            this.$Loading.start();
+            const { code, msg, user, token} = await accountApi.login({email: this.account, password: this.password}).catch(e => e);
+            if (code === 400) {
+                this.$Message.error(msg);
+                this.$Loading.error();
+            }
+            this.$Loading.finish();
+            this.setToken(token);
+            this.setUserInfo(user);
+            await this.$router.push('/');
         }
     }
 };

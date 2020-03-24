@@ -1,10 +1,12 @@
-module.exports =  {
+module.exports = {
     dev: {
-        devtoolType: "cheap-module-eval-source-map",
-        host: "localhost",
-        port: "8888",
+        devtoolType: 'cheap-module-eval-source-map',
+        host: 'localhost',
+        port: '8888',
+        api: '/api',
     },
     build: {
-        devtoolType: "cheap-module-eval-source-map",
+        devtoolType: 'cheap-module-eval-source-map',
+        api: ''
     }
-}
+};
