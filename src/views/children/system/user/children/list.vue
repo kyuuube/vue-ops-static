@@ -12,12 +12,7 @@
         <div slot="search">
             <Form ref="formInline" inline>
                 <FormItem prop="user">
-                    <Input
-                        clearable
-                        type="text"
-                        v-model="keywords"
-                        placeholder="输入关键字"
-                    ></Input>
+                    <Input clearable type="text" v-model="keywords" placeholder="输入关键字"></Input>
                 </FormItem>
                 <FormItem>
                     <Button type="primary" @click="submit">搜 索</Button>
@@ -39,10 +34,6 @@
                     {{ row.name }}
                 </template>
 
-                <template slot-scope="{ row, index }" slot="age">
-                    {{ row.age }}
-                </template>
-
                 <template slot-scope="{ row, index }" slot="gender">
                     {{ row.gender }}
                 </template>
@@ -55,6 +46,7 @@
                     <Button type="text">修 改</Button>
                     <Button type="text">删 除</Button>
                 </template>
+
             </Table>
             <Page :total="100" show-sizer />
         </div>
@@ -62,6 +54,8 @@
 </template>
 
 <script>
+// api
+import * as accountApi from 'src/apis/accountApi';
 export default {
     name: 'user-list',
     data() {
@@ -72,10 +66,6 @@ export default {
                 {
                     title: '姓名',
                     slot: 'name'
-                },
-                {
-                    title: '年龄',
-                    slot: 'age'
                 },
                 {
                     title: '性别',
@@ -90,44 +80,29 @@ export default {
                     slot: 'action'
                 }
             ],
-            data: [
-                {
-                    name: '王小明',
-                    age: 18,
-                    birthday: '919526400000',
-                    address: '北京市朝阳区芍药居'
-                },
-                {
-                    name: '张小刚',
-                    age: 25,
-                    birthday: '696096000000',
-                    address: '北京市海淀区西二旗'
-                },
-                {
-                    name: '李小红',
-                    age: 30,
-                    birthday: '563472000000',
-                    address: '上海市浦东新区世纪大道'
-                },
-                {
-                    name: '周小伟',
-                    age: 26,
-                    birthday: '687024000000',
-                    address: '深圳市南山区深南大道'
-                }
-            ]
+            data: []
         };
     },
     methods: {
         submit() {
             console.info('onsubmit');
+        },
+        // 加载列表数据
+        async loadUserList() {
+            const { data, code, msg } = await accountApi.getUserList().catch(e => e);
+            if (code === 400) {
+                return this.$Message.error(msg);
+            }
+            this.data = data;
         }
+    },
+    mounted() {
+        this.loadUserList();
     }
 };
 </script>
 
 <style lang="less">
 .user-list {
-
 }
 </style>
