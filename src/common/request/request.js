@@ -13,7 +13,7 @@ const request = axios.create({
 request.interceptors.request.use(
     config => {
         config.headers = {
-            "token": localStorage.getItem("token"),
+            "authorization": localStorage.getItem("token"),
             "filename": "utf-8"
         };
         return config;
@@ -33,21 +33,21 @@ request.interceptors.response.use(
             return Promise.reject(response);
         }
         response = response.data;
-        if (response.code === 401) {
-            if (!isReset) {
-                isReset = true;
-                // MessageBox.alert("登录信息过时，请重新登录！", "登录超时", {
-                //     confirmButtonText: "返回登录页",
-                //     callback: () => {
-                //         store.dispatch(`${$account.namespace}/${$account.actions.logout}`);
-                //         // router.replace("/login").catch(e => e);
-                //         // 如果使用vue router 更新 url isReset 变量不会刷新，会出现重复弹窗
-                //         window.location.href = `/#/login?redirect=${window.encodeURIComponent(window.location.hash.substring(1))}`;
-                //     }
-                // });
-            }
-            return Promise.reject();
-        }
+        // if (response.code === 401) {
+        //     if (!isReset) {
+        //         isReset = true;
+        //         MessageBox.alert("登录信息过时，请重新登录！", "登录超时", {
+        //             confirmButtonText: "返回登录页",
+        //             callback: () => {
+        //                 store.dispatch(`${$account.namespace}/${$account.actions.logout}`);
+        //                 // router.replace("/login").catch(e => e);
+        //                 // 如果使用vue router 更新 url isReset 变量不会刷新，会出现重复弹窗
+        //                 window.location.href = `/#/login?redirect=${window.encodeURIComponent(window.location.hash.substring(1))}`;
+        //             }
+        //         });
+        //     }
+        //     return Promise.reject();
+        // }
         if ((response.code === 500 || response.code === 503) && process.env.NODE_ENV === "production") {
             // Message.error('服务器繁忙')
             return Promise.reject();

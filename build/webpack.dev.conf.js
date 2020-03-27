@@ -22,7 +22,7 @@ const devConf = merge(common, {
         publicPath: '/',
         proxy: {
             '/api': {
-                target: 'http://api.kyuuu.be',
+                target: 'http://127.0.0.1:3001',
                 changeOrigin: true,
                 pathRewrite: { '^/api': '' }
             }

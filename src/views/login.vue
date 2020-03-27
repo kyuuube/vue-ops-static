@@ -45,7 +45,7 @@ export default {
         async login() {
             this.$Loading.start();
             const { code, msg, user, token} = await accountApi.login({email: this.account, password: this.password}).catch(e => e);
-            if (code === 400) {
+            if (code !== 200) {
                 this.$Message.error(msg);
                 this.$Loading.error();
             }

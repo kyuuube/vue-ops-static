@@ -12,10 +12,10 @@
         <div slot="search">
             <Form ref="formInline" inline>
                 <FormItem prop="user">
-                    <Input clearable type="text" v-model="keywords" placeholder="输入关键字"></Input>
+                    <Input clearable type="text" v-model="keywords" placeholder="输入关键字" @keypress.enter.native="loadUserList" ></Input>
                 </FormItem>
                 <FormItem>
-                    <Button type="primary" @click="submit">搜 索</Button>
+                    <Button type="primary" @click="loadUserList">搜 索</Button>
                 </FormItem>
             </Form>
         </div>
@@ -46,9 +46,8 @@
                     <Button type="text">修 改</Button>
                     <Button type="text">删 除</Button>
                 </template>
-
             </Table>
-            <Page :total="100" show-sizer />
+            <Page :total="total" :page-size="pageSize" :current.sync="page" show-sizer @on-change="loadUserList" @on-page-size-change="pageSizeChange" />
         </div>
     </base-content>
 </template>
@@ -62,6 +61,9 @@ export default {
         return {
             loading: false,
             keywords: '',
+            total: 0,
+            page: 1,
+            pageSize: 10,
             columns: [
                 {
                     title: '姓名',
@@ -84,16 +86,25 @@ export default {
         };
     },
     methods: {
-        submit() {
-            console.info('onsubmit');
-        },
         // 加载列表数据
         async loadUserList() {
-            const { data, code, msg } = await accountApi.getUserList().catch(e => e);
+            const params = {
+                keywords: this.keywords,
+                page: this.page,
+                pageSize: this.pageSize
+            };
+            this.loading = true;
+            const { data, code, msg, total } = await accountApi.getUserList(params).catch(e => e);
+            this.loading = false;
             if (code === 400) {
                 return this.$Message.error(msg);
             }
             this.data = data;
+            this.total = total;
+        },
+        pageSizeChange(v) {
+            this.pageSize = v
+            this.loadUserList()
         }
     },
     mounted() {
