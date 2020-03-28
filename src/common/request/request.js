@@ -24,7 +24,7 @@ request.interceptors.request.use(
     }
 );
 
-let isReset = false;
+// let isReset = false;
 
 // 响应拦截器
 request.interceptors.response.use(
