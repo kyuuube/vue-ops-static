@@ -17,9 +17,19 @@ yarn run dev
 
 ```
 
-##进度
+## 进度
 
-可以通过trello[查看]（https://trello.com/b/O9Nf9aQG/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%A0%94%E5%8F%91）
+可以通过[trello](https://trello.com/b/O9Nf9aQG/%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%A0%94%E5%8F%91)查看
+
+
+##备注
+
+
+##### 后台基于nestjs的微服务，只是demo.生产可能需要研究下K8S
+
+[Gateway](https://github.com/kyuuube/osy-nestjs-api-gateway)
+
+[Account Service](https://github.com/kyuuube/osy-nestjs-account-microservice)
 
 
 
