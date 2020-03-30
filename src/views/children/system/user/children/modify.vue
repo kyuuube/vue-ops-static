@@ -17,8 +17,8 @@
             </FormItem>
             <FormItem label="性别:">
                 <RadioGroup v-model="user.gender">
-                    <Radio :label="0">男</Radio>
-                    <Radio :label="1">女</Radio>
+                    <Radio label="male">男</Radio>
+                    <Radio label="female">女</Radio>
                 </RadioGroup>
             </FormItem>
             <FormItem required label="密码:">
