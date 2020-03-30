@@ -45,7 +45,7 @@
                 </template>
 
                 <template slot-scope="{ row }" slot="action">
-                    <Button @click="$router.push(`/system/account/edit/${row.id}`)" type="text">修 改</Button>
+                    <Button @click="$router.push(`/system/user/edit/${row.id}`)" type="text">修 改</Button>
                     <Button @click="deleteUser(row.id)" type="text">删 除</Button>
                 </template>
             </Table>

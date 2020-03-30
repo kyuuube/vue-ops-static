@@ -4,9 +4,9 @@
             <Breadcrumb>
                 <BreadcrumbItem>系统管理</BreadcrumbItem>
                 <BreadcrumbItem to="/system/user/list">用户管理</BreadcrumbItem>
-                <BreadcrumbItem>新建用户</BreadcrumbItem>
+                <BreadcrumbItem>{{ edit ? '编辑用户' : '新建用户' }}</BreadcrumbItem>
             </Breadcrumb>
-            <h2>新建用户</h2>
+            <h2>{{ edit ? '编辑用户' : '新建用户' }}</h2>
         </div>
         <Form :model="user" :label-width="120">
             <FormItem required label="邮箱:">
@@ -21,10 +21,10 @@
                     <Radio label="female">女</Radio>
                 </RadioGroup>
             </FormItem>
-            <FormItem required label="密码:">
+            <FormItem v-if="!edit" required label="密码:">
                 <Input v-model="user.password" placeholder="输入密码" type="password"></Input>
             </FormItem>
-            <FormItem required label="确认密码:">
+            <FormItem v-if="!edit" required label="确认密码:">
                 <Input v-model="user.rePassword" placeholder="确认秘密" type="password"></Input>
             </FormItem>
             <FormItem label="头像:">
@@ -61,13 +61,21 @@ export default {
             user: {
                 email: '',
                 name: '',
-                gender: 0,
+                gender: 'male',
                 password: '',
                 rePassword: '',
                 avatar: ''
             },
             defaultList: []
         };
+    },
+    computed: {
+        id() {
+            return this.$route.params.id;
+        },
+        edit() {
+            return !!this.id;
+        }
     },
     methods: {
         async addUser() {
@@ -80,6 +88,18 @@ export default {
             }
             this.$Message.success('保存成功');
             this.$router.back();
+        },
+        async detail() {
+            const { code, data } = await accountApi.userDetail(this.id).catch(e => e);
+            if (code !== 200) {
+                this.$Message.error('获取用户详情失败');
+            }
+            this.user = data;
+        }
+    },
+    mounted() {
+        if (this.edit) {
+            this.detail()
         }
     }
 };
