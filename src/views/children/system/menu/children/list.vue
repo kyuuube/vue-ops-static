@@ -39,12 +39,12 @@
                     </div>
                 </Row>
             </div>
-            <Table row-key="menuId" :columns="columns" :data="data" :loading="loading">
-                <template slot-scope="{ row, index }" slot="icon">
+            <Table row-key="id" :columns="columns" :data="data" :loading="loading">
+                <template slot-scope="{ row }" slot="icon">
                     <Icon :custom="`iconfont ${row.icon}`"/>
                 </template>
 
-                <template slot-scope="{ row, index }" slot="path">
+                <template slot-scope="{ row }" slot="path">
                     {{ row.path }}
                 </template>
 

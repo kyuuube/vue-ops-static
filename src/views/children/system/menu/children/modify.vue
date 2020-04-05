@@ -52,7 +52,7 @@
                     description: "dashboard",
                     url: "/dashboard",
                     icon: "",
-                    parentId: 0,
+                    parentId: null,
                     permissList: []
                 },
                 list: []
