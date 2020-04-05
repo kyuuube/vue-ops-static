@@ -11,8 +11,12 @@
         <div class="container">
             <div id="login">
                 <div class="login-form-warp">
-                    <p><span class="fontawesome-user"><Icon type="md-person" /></span><input type="text" v-model="account" required /></p>
-                    <p><span class="fontawesome-lock"><Icon type="md-lock" /></span><input type="password" v-model="password" required /></p>
+                    <p>
+                        <span class="fontawesome-user"><Icon type="md-person"/></span><input type="text" v-model="account" required />
+                    </p>
+                    <p>
+                        <span class="fontawesome-lock"><Icon type="md-lock"/></span><input type="password" v-model="password" required />
+                    </p>
                     <div class="login-button" @click="login">Log in</div>
                 </div>
 
@@ -44,12 +48,13 @@ export default {
         }),
         async login() {
             this.$Loading.start();
-            const { code, msg, user, token} = await accountApi.login({email: this.account, password: this.password}).catch(e => e);
+            const { code, msg, user, token } = await accountApi.login({ email: this.account, password: this.password }).catch(e => e);
             if (code !== 200) {
                 this.$Message.error(msg);
-                this.$Loading.error();
+                return this.$Loading.error();
             }
             this.$Loading.finish();
+            console.log(token);
             this.setToken(token);
             this.setUserInfo(user);
             await this.$router.push('/');

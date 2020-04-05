@@ -15,11 +15,11 @@ const state = persistedState(
         routerList: [],
         companyList: [],
         superAdmin: false,
-        currentMenuId: 1,
-        currentOpenMenuIds: []
     },
     {
-        selectedRouter: []
+        selectedRouter: [],
+        currentMenuId: sessionStorage.currentMenuId ? JSON.parse(sessionStorage.currentMenuId) : 1,
+        currentOpenMenuIds: sessionStorage.currentOpenMenuIds ? JSON.parse(sessionStorage.currentOpenMenuIds) : []
         // ...other
     }
 );
@@ -39,7 +39,7 @@ const mutations = {
         state.selectedRouter = [];
         state.currentMenuId = 1;
         state.currentOpenMenuIds = [];
-        sessionStorage.removeItem('selectedRouter');
+        sessionStorage.clear()
     },
     [$mutations.user]: (state, data) => {
         state.user = data;
@@ -56,9 +56,11 @@ const mutations = {
     },
     [$mutations.currentMenuId]: (state, data) => {
         state.currentMenuId = data;
+        sessionStorage.currentMenuId = JSON.stringify(data);
     },
     [$mutations.currentOpenMenuIds]: (state, data) => {
         state.currentOpenMenuIds = data;
+        sessionStorage.currentOpenMenuIds = JSON.stringify(data);
     }
 };
 

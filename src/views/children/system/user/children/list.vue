@@ -111,12 +111,22 @@ export default {
         },
         // 删除用户
         async deleteUser(id) {
-            const { code, msg } = await accountApi.delUser(id).catch(e => e);
-            if (code !== 200) {
-                return this.$Message.error(msg);
-            }
-            this.$Message.success('删除成功')
-            this.loadUserList()
+            this.$Modal.confirm({
+                title: '提示',
+                content: '是否删除该用户',
+                onOk: async () => {
+                    const { code, msg } = await accountApi.delUser(id).catch(e => e);
+                    if (code !== 200) {
+                        return this.$Message.error(msg);
+                    }
+                    this.$Message.success('删除成功')
+                    this.loadUserList()
+                },
+                onCancel: () => {
+                    this.$Message.info('Clicked cancel');
+                }
+            });
+
         },
         // 变更页数
         pageSizeChange(v) {

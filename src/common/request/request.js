@@ -14,7 +14,6 @@ request.interceptors.request.use(
     config => {
         config.headers = {
             "authorization": localStorage.getItem("token"),
-            "filename": "utf-8"
         };
         return config;
     },
@@ -33,6 +32,7 @@ request.interceptors.response.use(
             return Promise.reject(response);
         }
         response = response.data;
+        console.log(response)
         // if (response.code === 401) {
         //     if (!isReset) {
         //         isReset = true;

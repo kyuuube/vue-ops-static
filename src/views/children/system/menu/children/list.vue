@@ -20,7 +20,7 @@
                     ></Input>
                 </FormItem>
                 <FormItem>
-                    <Button type="primary" @click="submit">搜 索</Button>
+                    <Button type="primary" @click="loadMenuList">搜 索</Button>
                 </FormItem>
             </Form>
         </div>
@@ -31,7 +31,7 @@
                     <div>查询表格</div>
                     <div>
                         <Button
-                            @click="$router.push('/system/user/add')"
+                            @click="$router.push('/system/menu/add')"
                             type="primary"
                             icon="md-add"
                             >新 建</Button
@@ -58,6 +58,8 @@
 </template>
 
 <script>
+    // apis
+    import * as accountApi from 'src/apis/accountApi'
 export default {
     name: 'menu-list',
     data() {
@@ -83,55 +85,65 @@ export default {
                     slot: 'action'
                 }
             ],
-            data: [
-                {
-                    menuId: 1,
-                    name: "工作台",
-                    path: "/dashboard",
-                    icon: "icon-dashboard",
-                    parentId: 0
-                },
-                {
-                    menuId: 2,
-                    name: "系统管理",
-                    icon: "icon-system",
-                    parentId: 0,
-                    children: [
-                        {
-                            menuId: 3,
-                            name: "用户管理",
-                            path: "/system/user",
-                            icon: "icon-user",
-                            parentId: 2,
-                        },
-                        {
-                            menuId: 4,
-                            name: "角色管理",
-                            path: "/system/role",
-                            icon: "icon-role",
-                            parentId: 2,
-                        },
-                        {
-                            menuId: 5,
-                            name: "菜单管理",
-                            path: "/system/menu",
-                            icon: "icon-menu",
-                            parentId: 2,
-                        },
-                    ]
-                },
-                {
-                    menuId: 6,
-                    name: '内容管理',
-                    path: '/article',
-                    icon: "icon-essay",
-                    parentId: 0
-                }
-            ]
+            // data: [
+            //     {
+            //         menuId: 1,
+            //         name: "工作台",
+            //         path: "/dashboard",
+            //         icon: "icon-dashboard",
+            //         parentId: 0
+            //     },
+            //     {
+            //         menuId: 2,
+            //         name: "系统管理",
+            //         icon: "icon-system",
+            //         parentId: 0,
+            //         children: [
+            //             {
+            //                 menuId: 3,
+            //                 name: "用户管理",
+            //                 path: "/system/user",
+            //                 icon: "icon-user",
+            //                 parentId: 2,
+            //             },
+            //             {
+            //                 menuId: 4,
+            //                 name: "角色管理",
+            //                 path: "/system/role",
+            //                 icon: "icon-role",
+            //                 parentId: 2,
+            //             },
+            //             {
+            //                 menuId: 5,
+            //                 name: "菜单管理",
+            //                 path: "/system/menu",
+            //                 icon: "icon-menu",
+            //                 parentId: 2,
+            //             },
+            //         ]
+            //     },
+            //     {
+            //         menuId: 6,
+            //         name: '内容管理',
+            //         path: '/article',
+            //         icon: "icon-essay",
+            //         parentId: 0
+            //     }
+            // ]
+            data: []
         };
     },
     methods: {
-        submit() {}
+        async loadMenuList() {
+            const { code, msg, data } = await accountApi.getMenuTree().catch(e => e)
+            if (code !== 200) {
+                return this.$Message.error(msg);
+            }
+            this.data = data;
+        },
+    },
+    mounted() {
+        this.loadMenuList()
     }
 };
 </script>

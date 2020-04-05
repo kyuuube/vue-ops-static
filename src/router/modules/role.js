@@ -11,7 +11,12 @@ export default [
                 meta: { requireAuth: true },
             },
             {
-                path: "add/:id",
+                path: "add",
+                component: () => import('../../views/children/system/role/children/modify'),
+                meta: { requireAuth: true },
+            },
+            {
+                path: "edit/:id",
                 component: () => import('../../views/children/system/role/children/modify'),
                 meta: { requireAuth: true },
             }
