@@ -3,7 +3,7 @@
         <div slot="header">
             <Breadcrumb>
                 <BreadcrumbItem>系统管理</BreadcrumbItem>
-                <BreadcrumbItem to="/system/user/list">角色管理</BreadcrumbItem>
+                <BreadcrumbItem to="/system/role/list">角色管理</BreadcrumbItem>
                 <BreadcrumbItem>{{ edit ? '编辑角色' : '新建角色' }}</BreadcrumbItem>
             </Breadcrumb>
             <h2>{{ edit ? '编辑角色' : '新建角色' }}</h2>

@@ -47,11 +47,13 @@ export default {
 
 <style lang="less">
 .home {
+    height: 100vh;
     background: #f5f7f9;
     position: relative;
     border-radius: 4px;
     overflow: hidden;
     .layout {
+        height: 100vh;
         margin-left: 256px;
         transition: all .3s;
     }

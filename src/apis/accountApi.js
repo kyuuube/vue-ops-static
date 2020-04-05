@@ -21,3 +21,5 @@ export const getMenuTree = params => request.get('/menu/tree', { params });
 export const getMenuList = params => request.get('/menu/list', { params });
 
 export const addMenu = data => request.post('/menu/create', data);
+
+export const getMenuLDetail = id => request.get(`/menu/detail/${id}`);

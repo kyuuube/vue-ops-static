@@ -2,7 +2,8 @@
 
 一个基于vue 的 后台 starter 项目
 
-vue vuex view-design(本来想用element ui 但是用多了想换个新的)
+vue vuex view-design (本来想用element ui 但是用多了想换个新的)
+本人开发中的体验 view-design 真心的是坑。后期打算 转回 element ui 或者 vuetify
 
 配套的后端项目用nestjs
 

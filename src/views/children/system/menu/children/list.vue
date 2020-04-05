@@ -44,12 +44,12 @@
                     <Icon :custom="`iconfont ${row.icon}`"/>
                 </template>
 
-                <template slot-scope="{ row }" slot="path">
-                    {{ row.path }}
+                <template slot-scope="{ row }" slot="url">
+                    {{ row.url }}
                 </template>
 
-                <template slot-scope="{ row, index }" slot="action">
-                    <Button type="text">修 改</Button>
+                <template slot-scope="{ row }" slot="action">
+                    <Button type="text" @click="$router.push(`/system/menu/edit/${row.id}`)">修 改</Button>
                     <Button type="text">删 除</Button>
                 </template>
             </Table>
@@ -78,64 +78,19 @@ export default {
                 },
                 {
                     title: 'url',
-                    slot: 'path'
+                    slot: 'url'
                 },
                 {
                     title: '操作',
                     slot: 'action'
                 }
             ],
-            // data: [
-            //     {
-            //         menuId: 1,
-            //         name: "工作台",
-            //         path: "/dashboard",
-            //         icon: "icon-dashboard",
-            //         parentId: 0
-            //     },
-            //     {
-            //         menuId: 2,
-            //         name: "系统管理",
-            //         icon: "icon-system",
-            //         parentId: 0,
-            //         children: [
-            //             {
-            //                 menuId: 3,
-            //                 name: "用户管理",
-            //                 path: "/system/user",
-            //                 icon: "icon-user",
-            //                 parentId: 2,
-            //             },
-            //             {
-            //                 menuId: 4,
-            //                 name: "角色管理",
-            //                 path: "/system/role",
-            //                 icon: "icon-role",
-            //                 parentId: 2,
-            //             },
-            //             {
-            //                 menuId: 5,
-            //                 name: "菜单管理",
-            //                 path: "/system/menu",
-            //                 icon: "icon-menu",
-            //                 parentId: 2,
-            //             },
-            //         ]
-            //     },
-            //     {
-            //         menuId: 6,
-            //         name: '内容管理',
-            //         path: '/article',
-            //         icon: "icon-essay",
-            //         parentId: 0
-            //     }
-            // ]
             data: []
         };
     },
     methods: {
         async loadMenuList() {
-            const { code, msg, data } = await accountApi.getMenuTree().catch(e => e)
+            const { code, msg, data } = await accountApi.getMenuTree({keywords: this.keywords}).catch(e => e)
             if (code !== 200) {
                 return this.$Message.error(msg);
             }
