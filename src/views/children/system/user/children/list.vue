@@ -49,7 +49,14 @@
                     <Button @click="deleteUser(row.id)" type="text">删 除</Button>
                 </template>
             </Table>
-            <Page :total="total" :page-size="pageSize" :current.sync="page" show-sizer @on-change="loadUserList" @on-page-size-change="pageSizeChange" />
+            <Page
+                :total="total"
+                :page-size="pageSize"
+                :current.sync="page"
+                show-sizer
+                @on-change="loadUserList"
+                @on-page-size-change="pageSizeChange"
+            />
         </div>
     </base-content>
 </template>
@@ -119,14 +126,13 @@ export default {
                     if (code !== 200) {
                         return this.$Message.error(msg);
                     }
-                    this.$Message.success('删除成功')
-                    this.loadUserList()
+                    this.$Message.success('删除成功');
+                    this.loadUserList();
                 },
                 onCancel: () => {
                     this.$Message.info('Clicked cancel');
                 }
             });
-
         },
         // 变更页数
         pageSizeChange(v) {

@@ -22,7 +22,12 @@ const routes = [
             ...user,
             ...role,
             ...menu,
-            ...article
+            ...article,
+            {
+                path: '/system/authority',
+                component: () => import('../views/children/system/authority/view'),
+                meta: { requireAuth: true },
+            }
         ]
     }
 ];

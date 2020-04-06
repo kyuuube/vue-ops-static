@@ -51,6 +51,13 @@ export default {
                             icon: "icon-menu",
                             parentId: 2,
                         },
+                        {
+                            menuId: 7,
+                            name: "权限管理",
+                            path: "/system/authority",
+                            icon: "icon-menu",
+                            parentId: 2,
+                        },
                     ]
                 },
                 {
