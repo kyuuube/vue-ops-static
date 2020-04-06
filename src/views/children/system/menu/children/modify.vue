@@ -44,7 +44,7 @@
 <!--                    </template>-->
 <!--                </Table>-->
 <!--            </TabPane>-->
-        </Tabs>
+<!--        </Tabs>-->
     </base-content>
 </template>
 

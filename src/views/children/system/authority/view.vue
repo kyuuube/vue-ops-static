@@ -25,7 +25,7 @@
                 <Row type="flex" justify="space-between">
                     <div>查询表格</div>
                     <div>
-                        <Button @click="$router.push('/system/menu/add')" type="primary" icon="md-add">新 建</Button>
+                        <Button @click="showDialog = true" type="primary" icon="md-add">新 建</Button>
                     </div>
                 </Row>
             </div>
@@ -48,16 +48,23 @@
                 @on-page-size-change="pageSizeChange"
             />
         </div>
+        <modify-dialog v-model="showDialog"></modify-dialog>
     </base-content>
 </template>
 
 <script>
 // apis
 import * as accountApi from 'src/apis/accountApi';
+// components
+import ModifyDialog from './components/ModifyDialog'
 export default {
     name: 'authority-list',
+    components: {
+        ModifyDialog
+    },
     data() {
         return {
+            showDialog: false,
             loading: false,
             keywords: '',
             total: 0,

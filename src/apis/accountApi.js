@@ -25,3 +25,5 @@ export const addMenu = data => request.post('/menu/create', data);
 export const getMenuLDetail = id => request.get(`/menu/detail/${id}`);
 
 export const getAuthorityList = params => request.get('/permission/list', { params });
+
+export const saveAuthority = data => request.post('/permission/create', data);
