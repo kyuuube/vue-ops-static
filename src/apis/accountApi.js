@@ -27,3 +27,5 @@ export const getMenuLDetail = id => request.get(`/menu/detail/${id}`);
 export const getAuthorityList = params => request.get('/permission/list', { params });
 
 export const saveAuthority = data => request.post('/permission/create', data);
+
+export const getAuthorityTree = params => request.get('/menu/authority', { params });

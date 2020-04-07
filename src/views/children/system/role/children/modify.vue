@@ -8,6 +8,7 @@
             </Breadcrumb>
             <h2>{{ edit ? '编辑角色' : '新建角色' }}</h2>
         </div>
+        <h4>基本信息</h4>
         <Form :model="role" :label-width="120" autocomplete="off">
             <FormItem required label="角色名称:">
                 <Input v-model="role.name" autocomplete="off" placeholder="请输入角色名称"></Input>
@@ -26,6 +27,8 @@
                 <Button @click="$router.back()">取 消</Button>
             </FormItem>
         </Form>
+        <h4>权限信息</h4>
+        <Tree :data="tree" show-checkbox></Tree>
     </base-content>
 </template>
 
@@ -36,6 +39,7 @@ export default {
     name: 'role-modify',
     data() {
         return {
+            tree: [],
             role: {
                 name: 'developer',
                 description: 'font end developer',
@@ -69,7 +73,17 @@ export default {
             }
             this.$Message.success('保存成功');
             this.$router.back();
-        }
+        },
+        async getAuthorityTree() {
+            const { code, data } = await accountApi.getAuthorityTree().catch(e => e)
+            if (code !== 200) {
+                return this.$Message.error('加载权限列表失败');
+            }
+            this.tree = data
+        },
+    },
+    mounted() {
+        this.getAuthorityTree()
     }
 };
 </script>
