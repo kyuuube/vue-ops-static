@@ -9,12 +9,9 @@
                 <!--                <Icon type="md-help" :style="{ margin: '0 10px' }" size="18" />-->
                 <!--                <Icon type="md-notifications-outline" :style="{ margin: '0 10px' }" size="18" />-->
                 <!--                <Icon type="md-search" :style="{ margin: '0 10px' }" size="20" />-->
-                <i @click.native="collapsedSider" class="el-icon-s-fold" style="font-size: 24px;"></i>
                 <el-avatar size="24" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
                 <el-dropdown>
-                    <div class="user-info">
-                        <span>evangeline</span>
-                    </div>
+                        <span class="user-info">evangeline</span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item>用户数据</el-dropdown-item>
                         <el-dropdown-item @click.native="logOut">退出登录</el-dropdown-item>
@@ -62,6 +59,9 @@ export default {
     .user-info {
         display: inline-block;
         vertical-align: middle;
+    }
+    .el-dropdown {
+        height: 60px;
     }
     .el-avatar {
         vertical-align: middle;

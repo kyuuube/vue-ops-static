@@ -1,38 +1,38 @@
 <template>
     <base-content search class="role-list">
         <div slot="header">
-            <Breadcrumb>
-                <BreadcrumbItem>系统管理</BreadcrumbItem>
-                <BreadcrumbItem>角色管理</BreadcrumbItem>
-                <BreadcrumbItem>角色列表</BreadcrumbItem>
-            </Breadcrumb>
+            <el-breadcrumb>
+                <el-breadcrumb-item>系统管理</el-breadcrumb-item>
+                <el-breadcrumb-item>角色管理</el-breadcrumb-item>
+                <el-breadcrumb-item>角色列表</el-breadcrumb-item>
+            </el-breadcrumb>
             <h2>角色管理列表</h2>
         </div>
 
         <div slot="search">
-            <Form ref="formInline" inline>
-                <FormItem prop="user">
-                    <Input
+            <el-form ref="formInline" inline>
+                <el-form-item prop="user">
+                    <el-input
                         clearable
                         type="text"
                         v-model="keywords"
                         placeholder="输入关键字"
-                    ></Input>
-                </FormItem>
-                <FormItem>
-                    <Button type="primary" @click="loadRoleList">搜 索</Button>
-                </FormItem>
-            </Form>
+                    ></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="loadRoleList">搜 索</el-button>
+                </el-form-item>
+            </el-form>
         </div>
 
         <div>
             <div class="table-toolbar">
-                <Row type="flex" justify="space-between">
+                <el-row type="flex" justify="space-between">
                     <div>查询表格</div>
                     <div>
-                        <Button @click="$router.push('/system/role/add')" type="primary" icon="md-add">新 建</Button>
+                        <el-button @click="$router.push('/system/role/add')" type="primary" icon="md-add">新 建</el-button>
                     </div>
-                </Row>
+                </el-row>
             </div>
             <Table :columns="columns" :data="data" :loading="loading">
                 <template slot-scope="{ row }" slot="name">

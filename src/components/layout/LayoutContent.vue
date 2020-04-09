@@ -13,5 +13,6 @@
 <style scoped>
 .layout-content {
     background: #f5f7f9;
+    padding: 0;
 }
 </style>
