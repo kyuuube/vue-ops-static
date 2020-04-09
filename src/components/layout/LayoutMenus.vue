@@ -2,15 +2,8 @@
 // store
 import { mapActions, mapGetters } from "vuex";
 import * as $account from 'src/store/modules/account/types'
-import { Menu as menus, Submenu, MenuItem, Icon } from "view-design"
 export default {
     name: "layout-menus",
-    components: {
-        menus,
-        Submenu,
-        MenuItem,
-        Icon
-    },
     props: {
         isCollapsed: Boolean
     },
@@ -95,33 +88,33 @@ export default {
             return itemList.map((item, index) => {
                 if (item.children && item.children.length > 0) {
                     return (
-                        <Submenu name={item.menuId} key={index}>
+                        <el-submenu key={item.menuId} index={item.menuId}>
                             <template slot="title">
-                                <Icon custom={`iconfont ${item.icon}`} />
+                              <i className={`iconfont ${item.icon}`}/>
                                 <span>{item.name}</span>
                             </template>
                             {renderItem(item.children)}
-                        </Submenu>
+                        </el-submenu>
                     );
                 } else {
                     return (
-                        <menu-item name={item.menuId} key={index} nativeOnClick={() => this.menuClick(item)}>
-                            <Icon custom={`iconfont ${item.icon}`} />
+                        <el-menu-item key={item.menuId} index={item.menuId} nativeOnClick={() => this.menuClick(item)}>
+                            <i class={`iconfont ${item.icon}`} />
                             <span>{item.name}</span>
-                        </menu-item>
+                        </el-menu-item>
                     );
                 }
             });
         };
         return (
-            <menus
-                class={['menus', this.menuitemClasses]}
-                active-name={this.currentMenuId}
-                open-names={this.currentOpenMenuIds}
-                theme="dark"
-                width="auto">
+            <el-menu
+                unique-opened
+                text-color="#ffffff"
+                background-color="#001529"
+                default-active={this.currentMenuId}
+                class={['menus', this.menuitemClasses]}>
                 {renderItem(this.list)}
-            </menus>
+            </el-menu>
         )
     }
 };
@@ -129,37 +122,12 @@ export default {
 
 <style lang="less">
 .menus {
+    color: #ffffff;
     margin-top: 40px;
     background-color: #001529;
+    i {
+        color: #ffffff;
+        margin-right: 8px;
+    }
 }
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened {
-    background: #000c17;
-}
-
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu),
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):hover {
-    color: #fff;
-    background-color: #2d8cf0;
-}
-
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item:not(.ivu-menu-item-active):hover {
-    color: #fff;
-    background: #000c17 !important;
-}
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-child-item-active > .ivu-menu-submenu-title {
-    background: #000c17 !important;
-}
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-opened .ivu-menu-submenu-title {
-    color: #fff;
-    background: #000c17 !important;
-}
-
-.ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu) {
-    color: #fff;
-    background-color: #2d8cf0;
-}
-/*.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected{*/
-/*    color: #fff;*/
-/*    background-color: #2d8cf0!important;*/
-/*}*/
 </style>

@@ -1,7 +1,7 @@
 <template>
-    <Content class="layout-content">
+    <el-main class="layout-content">
         <slot></slot>
-    </Content>
+    </el-main>
 </template>
 
 <script>

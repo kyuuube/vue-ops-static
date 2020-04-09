@@ -1,27 +1,28 @@
 <template>
-    <Header class="layout-header-bar">
-        <Row justify="space-between">
-            <Col span="12">
-                <Icon @click.native="collapsedSider" :class="rotateIcon" type="md-menu" size="24"></Icon>
-            </Col>
-            <Col span="12" style="text-align: right; line-height: 64px">
-                <Icon type="md-help" :style="{ margin: '0 10px' }" size="18" />
-                <Icon type="md-notifications-outline" :style="{ margin: '0 10px' }" size="18" />
-                <Icon type="md-search" :style="{ margin: '0 10px' }" size="20" />
-
-                <Dropdown trigger="click">
+    <el-header class="header">
+        <el-row type="flex" justify="space-between">
+            <div>
+                <i @click.native="collapsedSider" class="el-icon-s-fold" style="font-size: 24px;"></i>
+                <!--                <Icon  :class="rotateIcon" type="md-menu" size="24"></Icon>-->
+            </div>
+            <div>
+                <!--                <Icon type="md-help" :style="{ margin: '0 10px' }" size="18" />-->
+                <!--                <Icon type="md-notifications-outline" :style="{ margin: '0 10px' }" size="18" />-->
+                <!--                <Icon type="md-search" :style="{ margin: '0 10px' }" size="20" />-->
+                <i @click.native="collapsedSider" class="el-icon-s-fold" style="font-size: 24px;"></i>
+                <el-avatar size="24" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                <el-dropdown>
                     <div class="user-info">
-                        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" style="width: 24px; height: 24px" />
                         <span>evangeline</span>
                     </div>
-                    <DropdownMenu slot="list">
-                        <DropdownItem>用户数据</DropdownItem>
-                        <DropdownItem @click.native="logOut">退出登录</DropdownItem>
-                    </DropdownMenu>
-                </Dropdown>
-            </Col>
-        </Row>
-    </Header>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item>用户数据</el-dropdown-item>
+                        <el-dropdown-item @click.native="logOut">退出登录</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            </div>
+        </el-row>
+    </el-header>
 </template>
 
 <script>
@@ -53,27 +54,17 @@ export default {
 };
 </script>
 
-<style scoped>
-.layout-header-bar {
-    background: #fff;
-    z-index: 999;
-    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-}
-.menu-icon {
-    cursor: pointer;
-    transition: all 0.3s;
-}
-.rotate-icon {
-    transform: rotate(-90deg);
-}
-.ivu-layout-header {
-    padding: 0 30px;
-}
-.ivu-icon {
-    cursor: pointer;
-}
-.user-info {
-    cursor: pointer;
-    margin-right: 30px;
+<style lang="less">
+.header {
+    height: 60px;
+    line-height: 60px;
+    background-color: #ffffff;
+    .user-info {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .el-avatar {
+        vertical-align: middle;
+    }
 }
 </style>

@@ -1,18 +1,34 @@
 <template>
     <div class="home">
-        <layout-side ref="layoutSide" :collapsed.sync="isCollapsed"></layout-side>
-        <Layout :class="layoutClass">
-            <layout-header :is-collapsed="isCollapsed" @collapsed="collapsedSider"></layout-header>
-            <layout-content>
-                <transition name="fade-transform" mode="out-in">
-                    <router-view></router-view>
-                </transition>
-            </layout-content>
-            <BackTop :height="100" :bottom="100"></BackTop>
-            <div class="footer">
-                <small>&copy; Copyright {{$moment().format('YYYY')}}, benchiu@yandex.com</small>
-            </div>
-        </Layout>
+        <!--        <el-container>-->
+        <!--            <layout-side ref="layoutSide" :collapsed.sync="isCollapsed"></layout-side>-->
+        <!--            <el-container :class="layoutClass">-->
+        <!--                <layout-header :is-collapsed="isCollapsed" @collapsed="collapsedSider"></layout-header>-->
+        <!--                <layout-content>-->
+        <!--                    <transition name="fade-transform" mode="out-in">-->
+        <!--                        <router-view></router-view>-->
+        <!--                    </transition>-->
+        <!--                </layout-content>-->
+        <!--                <el-backtop :visibility-height="100" target=".layout-content"></el-backtop>-->
+        <!--                &lt;!&ndash;            <BackTop :height="100" :bottom="100"></BackTop>&ndash;&gt;-->
+        <!--                <div class="footer">-->
+        <!--                    <small>&copy; Copyright {{$moment().format('YYYY')}}, benchiu@yandex.com</small>-->
+        <!--                </div>-->
+        <!--            </el-container>-->
+        <!--        </el-container>-->
+        <el-container class="layout">
+            <layout-side></layout-side>
+            <el-container>
+                <layout-header></layout-header>
+                <layout-content>
+                    <transition name="fade-transform" mode="out-in">
+                        <router-view></router-view>
+                    </transition>
+                    <el-backtop :visibility-height="100" target=".layout-content"></el-backtop>
+                </layout-content>
+                <el-footer class="footer"><small>&copy; Copyright {{$moment().format('YYYY')}}, benchiu@yandex.com</small></el-footer>
+            </el-container>
+        </el-container>
     </div>
 </template>
 
@@ -33,9 +49,9 @@ export default {
         };
     },
     computed: {
-      layoutClass() {
-          return this.isCollapsed  ? 'layout rotate-flat' : 'layout'
-      }
+        layoutClass() {
+            return this.isCollapsed ? 'layout rotate-flat' : 'layout';
+        }
     },
     methods: {
         collapsedSider() {
@@ -48,21 +64,19 @@ export default {
 <style lang="less">
 .home {
     height: 100vh;
+    width: 100%;
     background: #f5f7f9;
-    position: relative;
-    border-radius: 4px;
+    /*position: relative;*/
+    /*border-radius: 4px;*/
     .layout {
         height: 100vh;
-        margin-left: 256px;
-        transition: all .3s;
     }
-    .rotate-flat{
-        margin-left: 0;
-    }
+    /*.rotate-flat{*/
+    /*    margin-left: 0;*/
+    /*}*/
     .footer {
         padding: 40px;
         text-align: center;
     }
 }
-
 </style>
