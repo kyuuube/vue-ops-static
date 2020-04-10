@@ -33,14 +33,13 @@
                 :data="data"
                 style="width: 100%;margin-bottom: 20px;"
                 row-key="id"
-                border
                 default-expand-all
                 :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
             >
                 <el-table-column prop="name" label="菜单名称" sortable> </el-table-column>
                 <el-table-column label="图标" sortable>
                     <template slot-scope="scope">
-                        <i :class="`iconfont ${row.icon}`"></i>
+                        <i :class="`iconfont ${scope.row.icon}`"></i>
                     </template>
                 </el-table-column>
                 <el-table-column label="操作">

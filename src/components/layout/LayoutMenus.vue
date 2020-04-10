@@ -14,41 +14,41 @@ export default {
                     menuId: 1,
                     name: "工作台",
                     path: "/dashboard",
-                    icon: "icon-dashboard",
+                    icon: "el-icon-s-data",
                     parentId: 0
                 },
                 {
                     menuId: 2,
                     name: "系统管理",
-                    icon: "icon-system",
+                    icon: "el-icon-s-tools",
                     parentId: 0,
                     children: [
                         {
                             menuId: 3,
                             name: "用户管理",
                             path: "/system/user",
-                            icon: "icon-user",
+                            icon: "el-icon-user",
                             parentId: 2,
                         },
                         {
                             menuId: 4,
                             name: "角色管理",
                             path: "/system/role",
-                            icon: "icon-role",
+                            icon: "el-icon-s-custom",
                             parentId: 2,
                         },
                         {
                             menuId: 5,
                             name: "菜单管理",
                             path: "/system/menu",
-                            icon: "icon-menu",
+                            icon: "el-icon-s-order",
                             parentId: 2,
                         },
                         {
                             menuId: 7,
                             name: "权限管理",
                             path: "/system/authority",
-                            icon: "icon-menu",
+                            icon: "el-icon-s-check",
                             parentId: 2,
                         },
                     ]
@@ -57,7 +57,7 @@ export default {
                     menuId: 6,
                     name: '内容管理',
                     path: '/article',
-                    icon: "icon-essay",
+                    icon: "el-icon-document",
                     parentId: 0
                 }
             ]
