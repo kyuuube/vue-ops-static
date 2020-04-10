@@ -1,11 +1,5 @@
 <template>
-    <base-card-chart-warp
-        class="count-sales"
-        name="支付笔数"
-        tooltip="支付笔数"
-        number="6,560"
-        :total="22343"
-    >
+    <base-card-chart-warp class="count-sales" name="支付笔数" tooltip="支付笔数" number="6,560" :total="22343">
         <div :id="id"></div>
     </base-card-chart-warp>
 </template>
@@ -50,7 +44,7 @@ export default {
             });
             chart.source(data, {
                 sales: {
-                    tickCount: 2,
+                    tickCount: 2
                 },
                 month: {
                     tickCount: 1

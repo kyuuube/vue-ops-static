@@ -8,7 +8,8 @@ export const getters = {
     companyList: "companyList",
     selectedRouter: "selectedRouter",
     currentMenuId: "currentMenuId",
-    currentOpenMenuIds: "currentOpenMenuIds"
+    currentOpenMenuIds: "currentOpenMenuIds",
+    isCollapsed: "isCollapsed"
 };
 
 export const actions = {
@@ -24,16 +25,17 @@ export const actions = {
     setSelectedRouter: "setSelectedRouter",
     setCurrentMenuId: "setCurrentMenuId",
     setCurrentOpenMenuIds: "setCurrentOpenMenuIds",
+    setCollapsed: "setCollapsed"
 };
 
 export const mutations = {
     token: "token",
-    iframelogin: "iframelogin",
     logout: "logout",
     user: "user",
     routerList: "routerList",
     companyList: "companyList",
     selectedRouter: "selectedRouter",
     currentMenuId: "currentMenuId",
-    currentOpenMenuIds: "currentOpenMenuIds"
+    currentOpenMenuIds: "currentOpenMenuIds",
+    isCollapsed: "isCollapsed"
 };

@@ -62,17 +62,11 @@ export default {
             line-height: 32px;
         }
     }
-    .ivu-form-item {
-        margin-bottom: 10px;
+    .el-form-item {
+        margin-bottom: 4px !important;
     }
-    .ivu-page {
-        margin-top: 15px;
-    }
-    .ivu-table-wrapper > .ivu-spin-fix {
-        border: none;
-    }
-    .ivu-page {
-        text-align: right;
+    .el-pagination {
+        margin-top: 10px;
     }
 }
 </style>

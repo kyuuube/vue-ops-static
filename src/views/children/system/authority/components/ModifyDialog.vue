@@ -1,38 +1,38 @@
 <template>
-    <Modal title="新增权限" :value="value" width="760">
-        <Form ref="authorityForm" :model="authority" :rules="ruleAuthority" :label-width="120" autocomplete="off">
-            <FormItem prop="name" label="名称:">
-                <Input type="text" v-model="authority.name" placeholder="名称"> </Input>
-            </FormItem>
-            <FormItem prop="menuId" label="菜单:">
-                <Select v-model="authority.menuId">
-                    <Option v-for="item in menuList" :value="item.id" :key="item.id">{{ item.name }}</Option>
-                </Select>
-            </FormItem>
-            <FormItem prop="slug" label="标识:">
-                <Input type="text" v-model="authority.slug" placeholder="标识"> </Input>
-            </FormItem>
-            <FormItem label="描述:">
-                <Input type="text" v-model="authority.description" placeholder="描述"> </Input>
-            </FormItem>
-            <FormItem label="类型:">
-                <RadioGroup v-model="authority.type">
-                    <Radio :label="0">页面权限</Radio>
-                    <Radio :label="1">接口权限</Radio>
-                </RadioGroup>
-            </FormItem>
-            <FormItem label="接口路径:" v-if="authority.type === 1">
-                <Input type="text" v-model="authority.path" placeholder="描述"> </Input>
-            </FormItem>
-            <FormItem label="接口方法:" v-if="authority.type === 1">
-                <Input type="text" v-model="authority.methods" placeholder="描述"> </Input>
-            </FormItem>
-        </Form>
+    <el-dialog title="新增权限" :visible="value" @update:visible="$emit('input', $event)" width="760">
+        <el-form ref="authorityForm" :model="authority" :rules="ruleAuthority" :label-width="120" autocomplete="off">
+            <el-form-item prop="name" label="名称:">
+                <el-input size="small" type="text" v-model="authority.name" placeholder="名称"> </el-input>
+            </el-form-item>
+            <el-form-item prop="menuId" label="菜单:">
+                <el-select size="small" v-model="authority.menuId">
+                    <el-option v-for="item in menuList" :value="item.id" :key="item.id">{{ item.name }}</el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item prop="slug" label="标识:">
+                <el-input size="small" type="text" v-model="authority.slug" placeholder="标识"> </el-input>
+            </el-form-item>
+            <el-form-item label="描述:">
+                <el-input size="small" type="text" v-model="authority.description" placeholder="描述"> </el-input>
+            </el-form-item>
+            <el-form-item label="类型:">
+                <el-radio-group v-model="authority.type">
+                    <el-radio :label="0">页面权限</el-radio>
+                    <el-radio :label="1">接口权限</el-radio>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="接口路径:" v-if="authority.type === 1">
+                <el-input size="small" type="text" v-model="authority.path" placeholder="描述"> </el-input>
+            </el-form-item>
+            <el-form-item label="接口方法:" v-if="authority.type === 1">
+                <el-input size="small" type="text" v-model="authority.methods" placeholder="描述"> </el-input>
+            </el-form-item>
+        </el-form>
         <div slot="footer">
-            <Button type="primary" :loading="btnLoading" @click="save">确 认</Button>
-            <Button type="info" :loading="btnLoading" @click="$emit('input', false)">取 消</Button>
+            <el-button size="small" type="primary" :loading="btnLoading" @click="save">确 认</el-button>
+            <el-button size="small" type="info" :loading="btnLoading" @click="$emit('input', false)">取 消</el-button>
         </div>
-    </Modal>
+    </el-dialog>
 </template>
 
 <script>
@@ -69,7 +69,7 @@ export default {
     methods: {
         save() {
             if (!this.authority.id) {
-                this.add()
+                this.add();
             }
         },
         async add() {
@@ -80,15 +80,15 @@ export default {
             const { code, msg } = await accountApi.saveAuthority(data).catch(e => e);
             this.btnLoading = false;
             if (code !== 200) {
-                return this.$Message.error(msg);
+                return this.$message.error(msg);
             }
-            this.$Message.success('保存成功');
+            this.$message.success('保存成功');
             this.$emit('input', false);
         },
         async loadMenuList() {
             const { code, data } = await accountApi.getMenuList().catch(e => e);
             if (code !== 200) {
-                return this.$Message.error('加载菜单列表');
+                return this.$message.error('加载菜单列表');
             }
             this.menuList = data;
         }

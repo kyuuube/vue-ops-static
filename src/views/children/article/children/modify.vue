@@ -1,17 +1,15 @@
 <template>
     <base-content class="article-modify">
         <div slot="header">
-            <Breadcrumb>
-                <BreadcrumbItem>系统管理</BreadcrumbItem>
-                <BreadcrumbItem>内容管理</BreadcrumbItem>
-                <BreadcrumbItem>新增文章</BreadcrumbItem>
-            </Breadcrumb>
+            <el-breadcrumb>
+                <el-breadcrumb-item>系统管理</el-breadcrumb-item>
+                <el-breadcrumb-item>内容管理</el-breadcrumb-item>
+                <el-breadcrumb-item>新增文章</el-breadcrumb-item>
+            </el-breadcrumb>
             <h2>新增文章</h2>
         </div>
         <div class="editor">
-            <quill-editor v-model="content"
-                          ref="myQuillEditor">
-            </quill-editor>
+            <quill-editor v-model="content" ref="myQuillEditor"> </quill-editor>
         </div>
     </base-content>
 </template>
@@ -21,9 +19,9 @@ export default {
     name: 'article-modify',
     data() {
         return {
-            content: ""
-        }
-    },
+            content: ''
+        };
+    }
 };
 </script>
 

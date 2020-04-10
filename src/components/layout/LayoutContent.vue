@@ -15,4 +15,8 @@
     background: #f5f7f9;
     padding: 0;
 }
+
+.layout-content::-webkit-scrollbar {
+    display: none;
+}
 </style>

@@ -1,15 +1,18 @@
 <template>
     <div class="mini-chart-box">
-        <Row class="header">
+        <el-row class="header">
             <span class="title">{{ title }}</span>
-            <Tooltip :content="description">
-                <Icon type="ios-help-circle-outline" size="18" />
-            </Tooltip>
-        </Row>
-        <Row>
+            <el-tooltip :content="description">
+                <!--                <Icon type="ios-help-circle-outline" size="18" />-->
+            </el-tooltip>
+        </el-row>
+        <el-row>
             <span class="count">{{ count }}</span>
-            <span class="increase">{{ increase }} <Icon color="red" type="md-arrow-dropup" size="20" /> </span>
-        </Row>
+            <span class="increase"
+                >{{ increase }}
+                <!--                <Icon color="red" type="md-arrow-dropup" size="20" /> -->
+            </span>
+        </el-row>
         <div class="chart">
             <slot></slot>
         </div>

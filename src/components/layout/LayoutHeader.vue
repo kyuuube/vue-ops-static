@@ -2,21 +2,42 @@
     <el-header class="header">
         <el-row type="flex" justify="space-between">
             <div>
-                <i @click.native="collapsedSider" class="el-icon-s-fold" style="font-size: 24px;"></i>
-                <!--                <Icon  :class="rotateIcon" type="md-menu" size="24"></Icon>-->
+                <i
+                    @click="collapsedSider"
+                    :class="isCollapsed ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
+                    class="icon-button"
+                    style="font-size: 24px;"
+                ></i>
             </div>
             <div>
-                <!--                <Icon type="md-help" :style="{ margin: '0 10px' }" size="18" />-->
-                <!--                <Icon type="md-notifications-outline" :style="{ margin: '0 10px' }" size="18" />-->
-                <!--                <Icon type="md-search" :style="{ margin: '0 10px' }" size="20" />-->
-                <el-avatar size="24" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-                <el-dropdown>
-                        <span class="user-info">evangeline</span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>用户数据</el-dropdown-item>
-                        <el-dropdown-item @click.native="logOut">退出登录</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
+                <el-row type="flex">
+                    <div>
+                        <transition name="el-fade-in-linear">
+                            <el-input
+                                v-if="search"
+                                @blur="search = false"
+                                size="small"
+                                placeholder="请输入内容"
+                                prefix-icon="el-icon-search"
+                                v-model="keywords"
+                            >
+                            </el-input>
+                        </transition>
+                    </div>
+                    <div>
+                        <i v-if="!search" @click="search = true" class="el-icon-search header-icon icon-button"></i>
+                        <i class="el-icon-question header-icon icon-button"></i>
+                        <i class="el-icon-bell header-icon icon-button"></i>
+                        <el-avatar :size="24" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                        <el-dropdown>
+                            <span class="user-info icon-button">evangeline</span>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item>用户数据</el-dropdown-item>
+                                <el-dropdown-item @click.native="logOut">退出登录</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                    </div>
+                </el-row>
             </div>
         </el-row>
     </el-header>
@@ -31,10 +52,11 @@ export default {
     props: {
         isCollapsed: Boolean
     },
-    computed: {
-        rotateIcon() {
-            return ['menu-icon', this.isCollapsed ? 'rotate-icon' : ''];
-        }
+    data() {
+        return {
+            search: false,
+            keywords: ''
+        };
     },
     methods: {
         ...mapActions($account.namespace, {
@@ -53,9 +75,11 @@ export default {
 
 <style lang="less">
 .header {
+    z-index: 999;
     height: 60px;
     line-height: 60px;
     background-color: #ffffff;
+    box-shadow: 0 5px 5px -1px #eaebee;
     .user-info {
         display: inline-block;
         vertical-align: middle;
@@ -65,6 +89,14 @@ export default {
     }
     .el-avatar {
         vertical-align: middle;
+    }
+    .header-icon {
+        color: #5b6270;
+        font-size: 16px;
+        margin-left: 12px;
+    }
+    .icon-button {
+        cursor: pointer;
     }
 }
 </style>

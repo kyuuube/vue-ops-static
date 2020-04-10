@@ -1,104 +1,82 @@
 <template>
     <base-content search class="menu-list">
         <div slot="header">
-            <Breadcrumb>
-                <BreadcrumbItem>系统管理</BreadcrumbItem>
-                <BreadcrumbItem>菜单管理</BreadcrumbItem>
-                <BreadcrumbItem>菜单列表</BreadcrumbItem>
-            </Breadcrumb>
+            <el-breadcrumb>
+                <el-breadcrumb-item>系统管理</el-breadcrumb-item>
+                <el-breadcrumb-item>菜单管理</el-breadcrumb-item>
+                <el-breadcrumb-item>菜单列表</el-breadcrumb-item>
+            </el-breadcrumb>
             <h2>菜单管理列表</h2>
         </div>
 
         <div slot="search">
-            <Form ref="formInline" inline>
-                <FormItem prop="user">
-                    <Input
-                        clearable
-                        type="text"
-                        v-model="keywords"
-                        placeholder="输入关键字"
-                    ></Input>
-                </FormItem>
-                <FormItem>
-                    <Button type="primary" @click="loadMenuList">搜 索</Button>
-                </FormItem>
-            </Form>
+            <el-form ref="formInline" inline>
+                <el-form-item prop="user">
+                    <el-input size="small" clearable type="text" v-model="keywords" placeholder="输入关键字"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button size="small" type="primary" @click="loadMenuList">搜 索</el-button>
+                </el-form-item>
+            </el-form>
         </div>
 
         <div>
             <div class="table-toolbar">
-                <Row type="flex" justify="space-between">
+                <el-row type="flex" justify="space-between">
                     <div>查询表格</div>
                     <div>
-                        <Button
-                            @click="$router.push('/system/menu/add')"
-                            type="primary"
-                            icon="md-add"
-                            >新 建</Button
-                        >
+                        <el-button size="small" @click="$router.push('/system/menu/add')" type="primary" icon="md-add">新 建</el-button>
                     </div>
-                </Row>
+                </el-row>
             </div>
-            <Table row-key="id" :columns="columns" :data="data" :loading="loading">
-                <template slot-scope="{ row }" slot="icon">
-                    <Icon :custom="`iconfont ${row.icon}`"/>
-                </template>
-
-                <template slot-scope="{ row }" slot="url">
-                    {{ row.url }}
-                </template>
-
-                <template slot-scope="{ row }" slot="action">
-                    <Button type="text" @click="$router.push(`/system/menu/edit/${row.id}`)">修 改</Button>
-                    <Button type="text">删 除</Button>
-                </template>
-            </Table>
+            <el-table
+                :data="data"
+                style="width: 100%;margin-bottom: 20px;"
+                row-key="id"
+                border
+                default-expand-all
+                :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+            >
+                <el-table-column prop="name" label="菜单名称" sortable> </el-table-column>
+                <el-table-column label="图标" sortable>
+                    <template slot-scope="scope">
+                        <i :class="`iconfont ${row.icon}`"></i>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作">
+                    <template slot-scope="scope">
+                        <el-button size="small" type="text" @click="$router.push(`/system/menu/edit/${scope.row.id}`)">修 改</el-button>
+                        <el-button size="small" type="text">删 除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
         </div>
     </base-content>
 </template>
 
 <script>
-    // apis
-    import * as accountApi from 'src/apis/accountApi'
+// apis
+import * as accountApi from 'src/apis/accountApi';
 export default {
     name: 'menu-list',
     data() {
         return {
             loading: false,
             keywords: '',
-            columns: [
-                {
-                    title: '菜单名称',
-                    key: 'name',
-                    tree: true
-                },
-                {
-                    title: '图标',
-                    slot: 'icon'
-                },
-                {
-                    title: 'url',
-                    slot: 'url'
-                },
-                {
-                    title: '操作',
-                    slot: 'action'
-                }
-            ],
             data: []
         };
     },
     methods: {
         async loadMenuList() {
-            const { code, msg, data } = await accountApi.getMenuTree({keywords: this.keywords}).catch(e => e)
+            const { code, msg, data } = await accountApi.getMenuTree({ keywords: this.keywords }).catch(e => e);
             if (code !== 200) {
-                return this.$Message.error(msg);
+                return this.$message.error(msg);
             }
             this.data = data;
-        },
+        }
     },
     mounted() {
-        this.loadMenuList()
+        this.loadMenuList();
     }
 };
 </script>

@@ -1,123 +1,120 @@
 <template>
     <div class="dashboard">
-        <Row :gutter="25">
-            <Col span="6">
+        <el-row :gutter="25">
+            <el-col :span="6">
                 <count-sales></count-sales>
-            </Col>
-            <Col span="6">
+            </el-col>
+            <el-col :span="6">
                 <page-view-chart></page-view-chart>
-            </Col>
-            <Col span="6">
+            </el-col>
+            <el-col :span="6">
                 <page-view-line-chart-small></page-view-line-chart-small>
-            </Col>
-            <Col span="6">
+            </el-col>
+            <el-col :span="6">
                 <mini-progress></mini-progress>
-            </Col>
-        </Row>
+            </el-col>
+        </el-row>
         <div class="dashboard-page-view-line">
             <div class="date-range">
-                <DatePicker
-                    :value="range"
+                <el-date-picker
+                    size="mini"
+                    v-model="range"
                     type="daterange"
-                    confirm
-                    placement="bottom-end"
-                    placeholder="Select date"
-                    style="width: 200px"
-                ></DatePicker>
+                    range-separator="至"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期"
+                >
+                </el-date-picker>
             </div>
-            <Tabs value="name1">
-                <TabPane label="销售额" name="name1">
-                    <Row type="flex">
-                        <Col span="17">
+            <el-tabs v-model="tabType">
+                <el-tab-pane label="销售额" name="name1">
+                    <el-row type="flex">
+                        <el-col :span="17">
                             <div class="page-view-line-chart-warp">
                                 <h4>销售趋势</h4>
                                 <page-view-line-chart></page-view-line-chart>
                             </div>
-                        </Col>
-                        <Col span="7">
+                        </el-col>
+                        <el-col :span="7">
                             <div class="ranking-list-warp">
                                 <h4>门店销售额排名</h4>
                                 <ul class="dashboard-ranking-List">
                                     <li :key="i" v-for="i in 7">
-                                        <span class="ranking-item-order">{{
-                                            i
-                                        }}</span
-                                        ><span class="ranking-item-title"
-                                            >工专路 {{ i }} 号店</span
-                                        ><span>323,234</span>
+                                        <span class="ranking-item-order">{{ i }}</span
+                                        ><span class="ranking-item-title">工专路 {{ i }} 号店</span><span>323,234</span>
                                     </li>
                                 </ul>
                             </div>
-                        </Col>
-                    </Row>
-                </TabPane>
-                <TabPane label="访问量" name="name2"> </TabPane>
-            </Tabs>
+                        </el-col>
+                    </el-row>
+                </el-tab-pane>
+                <el-tab-pane label="访问量" name="name2"> </el-tab-pane>
+            </el-tabs>
         </div>
-        <Row type="flex" class="row-warp" :gutter="25">
-            <Col span="12">
+        <el-row type="flex" class="el-row-warp" :gutter="25">
+            <el-col :span="12">
                 <base-dashboard-card title="线上热门搜索">
-                    <Dropdown slot="extra" placement="bottom-start">
-                        <Icon type="ios-more" />
-                        <DropdownMenu slot="list">
-                            <DropdownItem>操作一</DropdownItem>
-                            <DropdownItem>操作一</DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
-                    <Row>
-                        <Col :span="12">
+                    <el-dropdown slot="extra" placement="bottom-start">
+                        <i class="el-icon-more-outline"></i>
+                        <el-dropdown-menu>
+                            <el-dropdown-item>操作一</el-dropdown-item>
+                            <el-dropdown-item>操作一</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                    <el-row>
+                        <el-col :span="12">
                             <sample-mini-chart-box></sample-mini-chart-box>
-                        </Col>
-                        <Col :span="12">
+                        </el-col>
+                        <el-col :span="12">
                             <sample-mini-chart-box2></sample-mini-chart-box2>
-                        </Col>
-                    </Row>
+                        </el-col>
+                    </el-row>
                     <table-list></table-list>
                 </base-dashboard-card>
-            </Col>
-            <Col span="12">
+            </el-col>
+            <el-col :span="12">
                 <base-dashboard-card title="销售额类别占比">
-                    <Row class="dashboard-card-header"><h4>销售额</h4></Row>
-                    <Row :gutter="15">
-                        <Col span="16"><pic-chart></pic-chart></Col>
-                        <Col span="8">
+                    <el-row class="dashboard-card-header"><h4>销售额</h4></el-row>
+                    <el-row :gutter="15">
+                        <el-col :span="16"><pic-chart></pic-chart></el-col>
+                        <el-col :span="8">
                             <ul class="dashboard-pie-chart-ul">
                                 <li>
-                                    <span class="pie-chart-list-dot" style="background-color: rgb(240, 72, 100);"></span>
+                                    <span class="pie-chart-list-dot" style="background-el-color: rgb(240, 72, 100);"></span>
                                     <span>家用电器</span>
                                     <span>28.56%</span>
                                     <span>¥ 4,544</span>
                                 </li>
                                 <li>
-                                    <span class="pie-chart-list-dot" style="background-color: rgb(24, 144, 255);"></span>
+                                    <span class="pie-chart-list-dot" style="background-el-color: rgb(24, 144, 255);"></span>
                                     <span>家用电器</span>
                                     <span>28.56%</span>
                                     <span>¥ 4,544</span>
                                 </li>
                                 <li>
-                                    <span class="pie-chart-list-dot" style="background-color: rgb(19, 194, 194);"></span>
+                                    <span class="pie-chart-list-dot" style="background-el-color: rgb(19, 194, 194);"></span>
                                     <span>家用电器</span>
                                     <span>28.56%</span>
                                     <span>¥ 4,544</span>
                                 </li>
                                 <li>
-                                    <span class="pie-chart-list-dot" style="background-color: rgb(47, 194, 91);"></span>
+                                    <span class="pie-chart-list-dot" style="background-el-color: rgb(47, 194, 91);"></span>
                                     <span>家用电器</span>
                                     <span>28.56%</span>
                                     <span>¥ 4,544</span>
                                 </li>
                                 <li>
-                                    <span class="pie-chart-list-dot" style="background-color: rgb(250, 204, 20);"></span>
+                                    <span class="pie-chart-list-dot" style="background-el-color: rgb(250, 204, 20);"></span>
                                     <span>家用电器</span>
                                     <span>28.56%</span>
                                     <span>¥ 4,544</span>
                                 </li>
                             </ul>
-                        </Col>
-                    </Row>
+                        </el-col>
+                    </el-row>
                 </base-dashboard-card>
-            </Col>
-        </Row>
+            </el-col>
+        </el-row>
         <bottom-line-chart></bottom-line-chart>
     </div>
 </template>
@@ -152,6 +149,7 @@ export default {
     },
     data() {
         return {
+            tabType: 'name1',
             range: ''
         };
     }
@@ -161,18 +159,24 @@ export default {
 <style lang="less">
 .dashboard {
     padding: 16px;
+    .el-tabs {
+        background-color: #ffffff;
+    }
+    .el-card {
+        border: none;
+    }
+    .el-card__header {
+        padding: 0 14px;
+    }
     .dashboard-page-view-line {
         position: relative;
         margin-top: 25px;
         background-color: #ffffff;
         padding: 0 10px;
-        .ivu-tabs-tab {
-            padding: 16px;
-        }
         .date-range {
             position: absolute;
             right: 10px;
-            top: 10px;
+            top: 5px;
             z-index: 2000;
         }
         .page-view-line-chart-warp {
@@ -220,7 +224,7 @@ export default {
             }
         }
     }
-    .row-warp {
+    .el-row-warp {
         margin-top: 25px;
     }
     .pie-chart-list-dot {

@@ -5,7 +5,7 @@ import * as $account from 'src/store/modules/account/types'
 export default {
     name: "layout-menus",
     props: {
-        isCollapsed: Boolean
+        isCollapse: Boolean
     },
     data() {
         return {
@@ -64,9 +64,6 @@ export default {
         }
     },
     computed: {
-        menuitemClasses() {
-            return ['menu-item', this.isCollapsed ? 'collapsed-menu' : ''];
-        },
         ...mapGetters($account.namespace, {
             currentMenuId: $account.getters.currentMenuId,
             currentOpenMenuIds: $account.getters.currentOpenMenuIds,
@@ -88,9 +85,9 @@ export default {
             return itemList.map((item, index) => {
                 if (item.children && item.children.length > 0) {
                     return (
-                        <el-submenu key={item.menuId} index={item.menuId}>
+                        <el-submenu key={item.menuId.toString()} index={item.menuId.toString()}>
                             <template slot="title">
-                              <i className={`iconfont ${item.icon}`}/>
+                              <i class={`iconfont ${item.icon}`}/>
                                 <span>{item.name}</span>
                             </template>
                             {renderItem(item.children)}
@@ -98,7 +95,7 @@ export default {
                     );
                 } else {
                     return (
-                        <el-menu-item key={item.menuId} index={item.menuId} nativeOnClick={() => this.menuClick(item)}>
+                        <el-menu-item key={item.menuId.toString()} index={item.menuId.toString()} nativeOnClick={() => this.menuClick(item)}>
                             <i class={`iconfont ${item.icon}`} />
                             <span>{item.name}</span>
                         </el-menu-item>
@@ -108,11 +105,12 @@ export default {
         };
         return (
             <el-menu
+                collapse={this.isCollapse}
                 unique-opened
                 text-color="#ffffff"
                 background-color="#001529"
-                default-active={this.currentMenuId}
-                class={['menus', this.menuitemClasses]}>
+                default-active={this.currentMenuId.toString()}
+                class={['menus']}>
                 {renderItem(this.list)}
             </el-menu>
         )

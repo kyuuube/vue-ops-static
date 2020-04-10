@@ -1,39 +1,30 @@
 <template>
-    <el-aside width="256px" class="layout-side">
-        <div class="layout-logo"></div>
-        <layout-menus :collapsed="collapsed"></layout-menus>
+    <el-aside :width="collapsed ? '56px' : '256px'" class="layout-side">
+        <div v-if="!collapsed" class="layout-logo"></div>
+        <layout-menus :isCollapse="collapsed"></layout-menus>
     </el-aside>
-<!--    <Sider-->
-<!--        ref="side"-->
-<!--        width="256"-->
-<!--        hide-trigger-->
-<!--        collapsible-->
-<!--        :collapsed-width="0"-->
-<!--        v-model="isCollapsed"-->
-
-<!--    >-->
-<!--    </Sider>-->
 </template>
 
 <script>
 import LayoutMenus from './LayoutMenus';
+import { mapActions, mapGetters } from 'vuex';
+import * as $account from '../../store/modules/account/types';
 export default {
     name: 'layout-side',
     components: {
         LayoutMenus
     },
-    props: {
-        collapsed: Boolean
-    },
-    data() {
-        return {
-            isCollapsed: false
-        };
+    computed: {
+        ...mapGetters($account.namespace, {
+            collapsed: $account.getters.isCollapsed
+        })
     },
     methods: {
+        ...mapActions($account.namespace, {
+            setCollapsed: $account.actions.setCollapsed,
+        }),
         toggleCollapse() {
-            this.$refs.side.toggleCollapse();
-            this.$emit('update:collapsed', this.isCollapsed);
+            this.setCollapsed(!this.collapsed);
         }
     }
 };
@@ -41,11 +32,11 @@ export default {
 
 <style lang="less">
 .layout-side {
-    /*position: fixed;*/
     height: 100vh;
-    /*left: 0;*/
-    /*overflow: auto;*/
     background: #001529;
+    -webkit-transition-property: all;
+    -webkit-transition-duration: 0.9s;
+    -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
     .layout-logo {
         width: 230px;
         height: 60px;
@@ -56,5 +47,8 @@ export default {
     .el-menu {
         border-right: none !important;
     }
+}
+.layout-side::-webkit-scrollbar {
+    display: none;
 }
 </style>

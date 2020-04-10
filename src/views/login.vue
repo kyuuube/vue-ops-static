@@ -12,12 +12,18 @@
             <div id="login">
                 <div class="login-form-warp">
                     <p>
-                        <span class="fontawesome-user"><Icon type="md-person"/></span><input type="text" v-model="account" required />
+                        <span class="fontawesome-user">
+                            <!--                            <Icon type="md-person" />-->
+                        </span>
+                        <input type="text" v-model="account" required />
                     </p>
                     <p>
-                        <span class="fontawesome-lock"><Icon type="md-lock"/></span><input type="password" v-model="password" required />
+                        <span class="fontawesome-lock">
+                            <!--                            <Icon type="md-lock"/>-->
+                        </span>
+                        <input type="password" v-model="password" required />
                     </p>
-                    <div class="login-button" @click="login">Log in</div>
+                    <div v-loading="loading" class="login-button" @click="login">Log in</div>
                 </div>
 
                 <p>Not a member? <a href="#" class="blue">Sign up now</a></p>
@@ -37,6 +43,7 @@ export default {
     name: 'login',
     data() {
         return {
+            loading: false,
             account: '',
             password: ''
         };
@@ -47,14 +54,12 @@ export default {
             setUserInfo: $account.actions.setUserInfo
         }),
         async login() {
-            this.$Loading.start();
+            this.loading = true;
             const { code, msg, user, token } = await accountApi.login({ email: this.account, password: this.password }).catch(e => e);
+            this.loading = false;
             if (code !== 200) {
-                this.$Message.error(msg);
-                return this.$Loading.error();
+                this.$message.error(msg);
             }
-            this.$Loading.finish();
-            console.log(token);
             this.setToken(token);
             this.setUserInfo(user);
             await this.$router.push('/');

@@ -15,6 +15,7 @@ const state = persistedState(
         routerList: [],
         companyList: [],
         superAdmin: false,
+        isCollapsed: false,
     },
     {
         selectedRouter: [],
@@ -61,24 +62,13 @@ const mutations = {
     [$mutations.currentOpenMenuIds]: (state, data) => {
         state.currentOpenMenuIds = data;
         sessionStorage.currentOpenMenuIds = JSON.stringify(data);
+    },
+    [$mutations.isCollapsed]: (state, data) => {
+        state.isCollapsed = data;
     }
 };
 
 const actions = {
-    // [$actions.getCompanyList]: async ({ commit }) => {
-    //     const { data } = await doorControlApi.getCompanyListById().catch(e => e);
-    //     commit($mutations.companyList, data);
-    // },
-    // [$actions.getCurrentUserInfo]: async ({ commit }) => {
-    //     const { data, code, msg } = await userApi.getCurrentUserInfo().catch(e => e);
-    //         if (code !== 0) {
-    //             $msg.err(msg)
-    //         }
-    //     sessionStorage.setItem("companyId", data.companyId);
-    //     window.localStorage.setItem("permissions", data.permissions);
-    //     window.localStorage.setItem("user", JSON.stringify(data));
-    //     commit($mutations.user, data);
-    // },
     [$actions.setToken]: ({ commit }, token) => {
         commit($mutations.token, token);
     },
@@ -102,6 +92,9 @@ const actions = {
     },
     [$actions.setCurrentOpenMenuIds]: ({ commit }, id) => {
         commit($mutations.currentOpenMenuIds, id);
+    },
+    [$actions.setCollapsed]: ({ commit }, data) => {
+        commit($mutations.isCollapsed, data);
     }
 };
 
@@ -114,7 +107,8 @@ const getters = {
         return state.selectedRouter > 0 ? state.selectedRouter : JSON.parse(sessionStorage.selectedRouter || '[]');
     },
     [$getters.currentMenuId]: state => state.currentMenuId,
-    [$getters.currentOpenMenuIds]: state => state.currentOpenMenuIds
+    [$getters.currentOpenMenuIds]: state => state.currentOpenMenuIds,
+    [$getters.isCollapsed]: state => state.isCollapsed
 };
 
 export default {

@@ -1,54 +1,66 @@
 <template>
     <base-content class="user-modify">
         <div slot="header">
-            <Breadcrumb>
-                <BreadcrumbItem>系统管理</BreadcrumbItem>
-                <BreadcrumbItem to="/system/user/list">用户管理</BreadcrumbItem>
-                <BreadcrumbItem>{{ edit ? '编辑用户' : '新建用户' }}</BreadcrumbItem>
-            </Breadcrumb>
+            <el-breadcrumb>
+                <el-breadcrumb-item>系统管理</el-breadcrumb-item>
+                <el-breadcrumb-item to="/system/user/list">用户管理</el-breadcrumb-item>
+                <el-breadcrumb-item>{{ edit ? '编辑用户' : '新建用户' }}</el-breadcrumb-item>
+            </el-breadcrumb>
             <h2>{{ edit ? '编辑用户' : '新建用户' }}</h2>
         </div>
-        <Form :model="user" :label-width="120" autocomplete="off">
-            <FormItem required label="邮箱:">
-                <Input v-model="user.email" autocomplete="off" placeholder="请输入邮箱" ></Input>
-            </FormItem>
-            <FormItem required label="用户名:">
-                <Input v-model="user.name" autocomplete="off"  placeholder="请输入用户名"></Input>
-            </FormItem>
-            <FormItem label="性别:">
-                <RadioGroup v-model="user.gender">
-                    <Radio label="male">男</Radio>
-                    <Radio label="female">女</Radio>
-                </RadioGroup>
-            </FormItem>
-            <FormItem v-if="!edit" required label="密码:">
-                <Input v-model="user.password" autocomplete="new-password"  placeholder="输入密码" type="password"></Input>
-            </FormItem>
-            <FormItem v-if="!edit" required label="确认密码:">
-                <Input v-model="user.rePassword" autocomplete="new-password" placeholder="确认秘密" type="password"></Input>
-            </FormItem>
-            <FormItem label="头像:">
-                <Upload
-                    ref="upload"
-                    action="https://sm.ms/api/v2/upload"
-                    :show-upload-list="false"
-                    :default-file-list="defaultList"
-                    :format="['jpg', 'jpeg', 'png']"
-                    :max-size="2048"
-                    type="drag"
-                    style="display: inline-block;width:58px;"
-                >
-                    <img v-if="user.avatar" :src="user.avatar" class="avatar">
-                    <div v-else style="width: 58px;height:58px;line-height: 58px;">
-                        <Icon type="ios-camera" size="20"></Icon>
-                    </div>
-                </Upload>
-            </FormItem>
-            <FormItem>
-                <Button @click="save" type="primary">保 存</Button>
-                <Button @click="$router.back()">取 消</Button>
-            </FormItem>
-        </Form>
+        <el-form :model="user" :label-width="120" autocomplete="off">
+            <el-form-item required label="邮箱:">
+                <el-input size="small" v-model="user.email" autocomplete="off" placeholder="请输入邮箱"></el-input>
+            </el-form-item>
+            <el-form-item required label="用户名:">
+                <el-input size="small" v-model="user.name" autocomplete="off" placeholder="请输入用户名"></el-input>
+            </el-form-item>
+            <el-form-item label="性别:">
+                <el-radio-group v-model="user.gender">
+                    <el-radio label="male">男</el-radio>
+                    <el-radio label="female">女</el-radio>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item v-if="!edit" required label="密码:">
+                <el-input
+                    size="small"
+                    v-model="user.password"
+                    autocomplete="new-password"
+                    placeholder="输入密码"
+                    type="password"
+                ></el-input>
+            </el-form-item>
+            <el-form-item v-if="!edit" required label="确认密码:">
+                <el-input
+                    size="small"
+                    v-model="user.rePassword"
+                    autocomplete="new-password"
+                    placeholder="确认秘密"
+                    type="password"
+                ></el-input>
+            </el-form-item>
+            <el-form-item label="头像:">
+                <!--                <Upload-->
+                <!--                    ref="upload"-->
+                <!--                    action="https://sm.ms/api/v2/upload"-->
+                <!--                    :show-upload-list="false"-->
+                <!--                    :default-file-list="defaultList"-->
+                <!--                    :format="['jpg', 'jpeg', 'png']"-->
+                <!--                    :max-size="2048"-->
+                <!--                    type="drag"-->
+                <!--                    style="display: inline-block;width:58px;"-->
+                <!--                >-->
+                <!--                    <img v-if="user.avatar" :src="user.avatar" class="avatar">-->
+                <!--                    <div v-else style="width: 58px;height:58px;line-height: 58px;">-->
+                <!--                        <Icon type="ios-camera" size="20"></Icon>-->
+                <!--                    </div>-->
+                <!--                </Upload>-->
+            </el-form-item>
+            <el-form-item>
+                <el-button size="small" @click="save" type="primary">保 存</el-button>
+                <el-button size="small" @click="$router.back()">取 消</el-button>
+            </el-form-item>
+        </el-form>
     </base-content>
 </template>
 
@@ -80,11 +92,11 @@ export default {
     },
     methods: {
         save() {
-          if (this.edit) {
-              this.editUser()
-          }  else {
-              this.addUser()
-          }
+            if (this.edit) {
+                this.editUser();
+            } else {
+                this.addUser();
+            }
         },
         async addUser() {
             const data = {
@@ -94,7 +106,7 @@ export default {
             if (code !== 200) {
                 return this.$Message.error(msg);
             }
-            this.$Message.success('保存成功');
+            this.$message.success('保存成功');
             this.$router.back();
         },
         async editUser() {
@@ -105,20 +117,20 @@ export default {
             if (code !== 200) {
                 return this.$Message.error(msg);
             }
-            this.$Message.success('保存成功');
+            this.$message.success('保存成功');
             this.$router.back();
         },
         async detail() {
             const { code, data } = await accountApi.userDetail(this.id).catch(e => e);
             if (code !== 200) {
-                this.$Message.error('获取用户详情失败');
+                this.$message.error('获取用户详情失败');
             }
             this.user = data;
-        },
+        }
     },
     mounted() {
         if (this.edit) {
-            this.detail()
+            this.detail();
         }
     }
 };

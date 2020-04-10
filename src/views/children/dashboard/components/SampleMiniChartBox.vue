@@ -1,11 +1,6 @@
 <template>
     <div class="sample-mini-chart-box">
-        <mini-chart-box
-            title="搜索用户数"
-            description="指数说明"
-            :count="1267"
-            :increase="21.1"
-        >
+        <mini-chart-box title="搜索用户数" description="指数说明" :count="1267" :increase="21.1">
             <div :id="id"></div>
         </mini-chart-box>
     </div>
@@ -13,30 +8,30 @@
 
 <script>
 import MiniChartBox from './MiniChartBox';
-import { View } from "@antv/data-set";
-import G2 from "@antv/g2";
+import { View } from '@antv/data-set';
+import G2 from '@antv/g2';
 export default {
     name: 'sample-mini-chart-box',
     components: { MiniChartBox },
     data() {
         return {
-            id: ""
-        }
+            id: ''
+        };
     },
     created() {
-        this.id = Date.now()
+        this.id = Date.now();
     },
     mounted() {
         this.$nextTick(() => {
             const data = [
-                { year: '1986', ACME: 162},
-                { year: '1987', ACME: 134},
-                { year: '1988', ACME: 116},
-                { year: '1989', ACME: 122},
-                { year: '1990', ACME: 178},
-                { year: '1991', ACME: 144},
-                { year: '1992', ACME: 125},
-                { year: '1993', ACME: 176},
+                { year: '1986', ACME: 162 },
+                { year: '1987', ACME: 134 },
+                { year: '1988', ACME: 116 },
+                { year: '1989', ACME: 122 },
+                { year: '1990', ACME: 178 },
+                { year: '1991', ACME: 144 },
+                { year: '1992', ACME: 125 },
+                { year: '1993', ACME: 176 },
                 { year: '1994', ACME: 156 },
                 { year: '1995', ACME: 195 },
                 { year: '1996', ACME: 215 },
@@ -53,35 +48,37 @@ export default {
             const dv = new View().source(data);
             dv.transform({
                 type: 'fold',
-                fields: [ 'ACME' ],
+                fields: ['ACME'],
                 key: 'type',
                 value: 'value'
             });
             const chart = new G2.Chart({
-                container: this.id + "",
+                container: this.id + '',
                 forceFit: true,
                 height: 40,
-                padding: [0, 0, 0, 0],
+                padding: [0, 0, 0, 0]
             });
             chart.source(dv, {
                 value: {
-                    tickCount: 2,
+                    tickCount: 2
                 },
                 year: {
                     tickCount: 1
                 }
             });
-            chart.area()
+            chart
+                .area()
                 .position('year*value')
-                .color('type',['#5aace4'])
+                .color('type', ['#5aace4'])
                 .shape('smooth');
-            chart.line()
+            chart
+                .line()
                 .position('year*value')
-                .color('type' ,['#2378e4'])
+                .color('type', ['#2378e4'])
                 .size(2)
                 .shape('smooth');
             chart.render();
-        })
+        });
     }
 };
 </script>

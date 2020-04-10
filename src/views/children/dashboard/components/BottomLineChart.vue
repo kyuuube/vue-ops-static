@@ -80,18 +80,9 @@ export default {
                         const color = item.color;
                         const name = alias[item.name];
                         const value = item.value;
-                        const domHead =
-                            '<div class="custom-tooltip-item" style="border-left-color:' +
-                            color +
-                            '">';
-                        const domName =
-                            '<div class="custom-tooltip-item-name">' +
-                            name +
-                            '</div>';
-                        const domValue =
-                            '<div class="custom-tooltip-item-value">' +
-                            value +
-                            '</div>';
+                        const domHead = '<div class="custom-tooltip-item" style="border-left-color:' + color + '">';
+                        const domName = '<div class="custom-tooltip-item-name">' + name + '</div>';
+                        const domValue = '<div class="custom-tooltip-item-value">' + value + '</div>';
                         const domTail = '</div>';
                         html += domHead + domName + domValue + domTail;
                     }
