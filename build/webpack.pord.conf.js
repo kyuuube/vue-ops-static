@@ -41,8 +41,6 @@ const prodConf = merge(common, {
         path: path.join(__dirname, '..', 'dist'),
         filename: 'static/js/[name].[chunkhash].js',
         chunkFilename: 'static/js/[id].[chunkhash].asyncChunk.js'
-
-        // filename: '[name].[hash:5].js' // 输出文件的名称
     },
     optimization: {
         sideEffects: true,
@@ -144,8 +142,8 @@ const prodConf = merge(common, {
         new CopyWebpackPlugin([
             {
                 from: path.resolve(__dirname, '../static'),
-                to: './static', // 打包后静态文件放置位置
-                ignore: ['.*'] // 忽略规则。（这种写法表示将该文件夹下的所有文件都复制）
+                to: './public', // 打包后静态文件放置位置
+                ignore: ['.*']
             }
         ])
     ]

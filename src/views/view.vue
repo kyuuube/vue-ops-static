@@ -40,6 +40,12 @@ export default {
         collapsedSide() {
             this.$refs.layoutSide.toggleCollapse();
         }
+    },
+    mounted() {
+        window.setTimeout(() => {
+            const loading = document.querySelector('.mask')
+            loading.style.display="none"
+        }, 1000)
     }
 };
 </script>

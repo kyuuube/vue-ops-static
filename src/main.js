@@ -5,16 +5,16 @@ import store from './store';
 import VueProgressBar from 'vue-progressbar'
 
 const options = {
-    color: '#bffaf3',
-    failedColor: '#874b4b',
-    thickness: '5px',
+    color: '#0577ad',
+    failedColor: '#cd7979',
+    thickness: '4px',
     transition: {
-        speed: '0.2s',
+        speed: '0.4s',
         opacity: '0.6s',
         termination: 300
     },
     autoRevert: true,
-    location: 'left',
+    location: 'top',
     inverse: false
 }
 
@@ -35,20 +35,14 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
 Vue.use(VueQuillEditor, /* { default global options } */)
-// Vue.use(ViewUI);
 Vue.component("baseContent", baseContent);
 
 Vue.prototype.$moment = moment
 
-// router.beforeEach((to, from, next) => {
-//     VueProgressBar.start()
-//     next();
-// });
-//
-// router.afterEach((to, from, next) => {
-//     VueProgressBar.finish();
-//     window.scrollTo(0, 0);
-// });
+window.setTimeout(() => {
+    const loading = document.querySelector('.mask')
+    loading.style.display="none"
+}, 3000)
 
 new Vue({
     el: '#app',

@@ -8,7 +8,7 @@
             </el-breadcrumb>
             <h2>{{ edit ? '编辑用户' : '新建用户' }}</h2>
         </div>
-        <el-form :model="user" :label-width="120" autocomplete="off">
+        <el-form :model="user" label-width="120" autocomplete="off">
             <el-form-item required label="邮箱:">
                 <el-input size="small" v-model="user.email" autocomplete="off" placeholder="请输入邮箱"></el-input>
             </el-form-item>
@@ -67,8 +67,10 @@
 <script>
 // apis
 import * as accountApi from 'src/apis/accountApi';
+const md5 = require('md5');
 export default {
     name: 'user-modify',
+    props: ['id'],
     data() {
         return {
             user: {
@@ -83,9 +85,6 @@ export default {
         };
     },
     computed: {
-        id() {
-            return this.$route.params.id;
-        },
         edit() {
             return !!this.id;
         }
@@ -100,22 +99,26 @@ export default {
         },
         async addUser() {
             const data = {
-                ...this.user
+                ...this.user,
+                password: md5(this.user.password)
             };
+            this.user.rePassword = null
             const { code, msg } = await accountApi.addUser(data).catch(e => e);
             if (code !== 200) {
-                return this.$Message.error(msg);
+                return this.$message.error(msg);
             }
             this.$message.success('保存成功');
             this.$router.back();
         },
         async editUser() {
             const data = {
-                ...this.user
+                ...this.user,
+                password: md5(this.user.password)
             };
+            this.user.rePassword = null
             const { code, msg } = await accountApi.editUser(data).catch(e => e);
             if (code !== 200) {
-                return this.$Message.error(msg);
+                return this.$message.error(msg);
             }
             this.$message.success('保存成功');
             this.$router.back();

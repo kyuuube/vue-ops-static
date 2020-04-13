@@ -1,41 +1,53 @@
 <template>
-    <div class="login-warp">
-        <div id="clouds">
-            <div class="cloud x1"></div>
-            <!-- Time for multiple clouds to dance around -->
-            <div class="cloud x2"></div>
-            <div class="cloud x3"></div>
-            <div class="cloud x4"></div>
-            <div class="cloud x5"></div>
-        </div>
-        <div class="container">
-            <div id="login">
-                <div class="login-form-warp">
-                    <p>
-                        <span class="fontawesome-user">
-                            <!--                            <Icon type="md-person" />-->
-                        </span>
-                        <input type="text" v-model="account" required />
-                    </p>
-                    <p>
-                        <span class="fontawesome-lock">
-                            <!--                            <Icon type="md-lock"/>-->
-                        </span>
-                        <input type="password" v-model="password" required />
-                    </p>
-                    <div v-loading="loading" class="login-button" @click="login">Log in</div>
-                </div>
-
-                <p>Not a member? <a href="#" class="blue">Sign up now</a></p>
+    <transition name="el-fade-in-linear">
+        <div class="login-warp">
+            <div id="clouds">
+                <div class="cloud x1"></div>
+                <!-- Time for multiple clouds to dance around -->
+                <div class="cloud x2"></div>
+                <div class="cloud x3"></div>
+                <div class="cloud x4"></div>
+                <div class="cloud x5"></div>
             </div>
-            <!-- end login -->
+            <div class="container">
+                <div id="login">
+                    <div class="login-form-warp">
+                        <p>
+                        <span class="fontawesome-user">
+                            <i class="el-icon-user"></i>
+                        </span>
+                            <input type="text" v-model="account" required />
+                        </p>
+                        <p>
+                        <span class="fontawesome-lock">
+                            <i class="el-icon-lock"></i>
+                        </span>
+                            <input type="password" v-model="password" required />
+                        </p>
+                        <div
+                            @keypress.enter="login"
+                            v-loading="loading"
+                            element-loading-spinner="el-icon-loading"
+                            element-loading-background="rgba(0, 0, 0, 0.3)"
+                            class="login-button"
+                            @click="login"
+                        >
+                            Log in
+                        </div>
+                    </div>
+
+                    <p>Not a member? <a href="#" class="blue">Sign up now</a></p>
+                </div>
+                <!-- end login -->
+            </div>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
 // apis
 import * as accountApi from 'src/apis/accountApi';
+const md5 = require('md5');
 // store
 import { mapActions } from 'vuex';
 import * as $account from 'src/store/modules/account/types';
@@ -55,7 +67,9 @@ export default {
         }),
         async login() {
             this.loading = true;
-            const { code, msg, user, token } = await accountApi.login({ email: this.account, password: this.password }).catch(e => e);
+            const loading = document.querySelector('.mask')
+            loading.style.display="block"
+            const { code, msg, user, token } = await accountApi.login({ email: this.account, password: md5(this.password)}).catch(e => e);
             this.loading = false;
             if (code !== 200) {
                 this.$message.error(msg);
@@ -189,7 +203,6 @@ input[type='password'] {
     line-height: 40px;
     cursor: pointer;
     user-select: none;
-    font-family: 'Open Sans', Arial, sans-serif;
 }
 
 #login .login-form-warp .login-button:hover {

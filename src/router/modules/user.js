@@ -24,6 +24,7 @@ export default [
                 path: "edit/:id",
                 component: () => import('../../views/children/system/user/children/modify'),
                 meta: { requireAuth: true },
+                props: true
             },
         ]
     },
