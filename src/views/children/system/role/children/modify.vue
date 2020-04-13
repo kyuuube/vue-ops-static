@@ -9,7 +9,7 @@
             <h2>{{ edit ? '编辑角色' : '新建角色' }}</h2>
         </div>
         <h4>基本信息</h4>
-        <el-form :model="role" :label-width="120" autocomplete="off">
+        <el-form :model="role" label-width="120" autocomplete="off">
             <el-form-item required label="角色名称:">
                 <el-input size="small" v-model="role.name" autocomplete="off" placeholder="请输入角色名称"></el-input>
             </el-form-item>
@@ -28,7 +28,21 @@
             </el-form-item>
         </el-form>
         <h4>权限信息</h4>
-        <el-tree :data="tree" show-checkbox></el-tree>
+<!--        <el-tree :data="tree" show-checkbox :props="props"></el-tree>-->
+        <el-table
+            :data="tree"
+            style="width: 100%;margin-bottom: 20px;"
+            row-key="id"
+            default-expand-all
+            :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+        >
+            <el-table-column prop="name" label="菜单名称" sortable> </el-table-column>
+            <el-table-column label="权限" sortable>
+                <template slot-scope="scope">
+                    <el-checkbox :key="index" :label="auth.id" v-for="(auth, index) in scope.row.authority" v-model="auth.check">{{auth.name}}</el-checkbox>
+                </template>
+            </el-table-column>
+        </el-table>
     </base-content>
 </template>
 
@@ -39,6 +53,9 @@ export default {
     name: 'role-modify',
     data() {
         return {
+            props: {
+                label: 'name'
+            },
             tree: [],
             role: {
                 name: 'developer',
