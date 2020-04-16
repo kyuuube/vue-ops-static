@@ -28,7 +28,6 @@
             </el-form-item>
         </el-form>
         <h4>权限信息</h4>
-<!--        <el-tree :data="tree" show-checkbox :props="props"></el-tree>-->
         <el-table
             :data="tree"
             style="width: 100%;margin-bottom: 20px;"
@@ -36,8 +35,12 @@
             default-expand-all
             :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
         >
-            <el-table-column prop="name" label="菜单名称" sortable> </el-table-column>
-            <el-table-column label="权限" sortable>
+            <el-table-column
+                type="selection"
+                width="55">
+            </el-table-column>
+            <el-table-column prop="name" label="菜单名称"> </el-table-column>
+            <el-table-column label="权限">
                 <template slot-scope="scope">
                     <el-checkbox :key="index" :label="auth.id" v-for="(auth, index) in scope.row.authority" v-model="auth.check">{{auth.name}}</el-checkbox>
                 </template>

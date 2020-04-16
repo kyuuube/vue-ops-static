@@ -31,8 +31,11 @@ export default {
 
 <style lang="less">
 .layout-base-content {
+    display: flex;
+    flex-direction: column;
     background-color: #f5f7f9;
     .content-header {
+        flex-shrink: 0;
         padding: 8px 18px;
         background-color: #ffffff;
         h2 {
@@ -51,6 +54,10 @@ export default {
         padding: 10px;
     }
     .content {
+        display: block;
+        flex: 1;
+        flex-basis: auto;
+        overflow: auto;
         /*position: relative;*/
         background-color: #ffffff;
         margin: 20px 18px;
