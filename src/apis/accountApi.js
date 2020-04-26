@@ -16,6 +16,8 @@ export const getRoleList = params => request.get('/role/list', { params });
 
 export const addRole = data => request.post('/role/create', data);
 
+export const roleDetail = id => request.get(`/role/detail/${id}`);
+
 export const getMenuTree = params => request.get('/menu/tree', { params });
 
 export const getMenuList = params => request.get('/menu/list', { params });

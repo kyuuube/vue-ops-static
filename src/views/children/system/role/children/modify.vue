@@ -22,30 +22,35 @@
                     <el-radio label="disable">禁用</el-radio>
                 </el-radio-group>
             </el-form-item>
-            <el-form-item>
-                <el-button size="small" @click="save" type="primary">保 存</el-button>
-                <el-button size="small" @click="$router.back()">取 消</el-button>
-            </el-form-item>
         </el-form>
         <h4>权限信息</h4>
         <el-table
+            ref="multipleTable"
             :data="tree"
             style="width: 100%;margin-bottom: 20px;"
             row-key="id"
             default-expand-all
             :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+            @selection-change="handleSelectionChange"
         >
-            <el-table-column
-                type="selection"
-                width="55">
-            </el-table-column>
+            <el-table-column type="selection" width="55"> </el-table-column>
             <el-table-column prop="name" label="菜单名称"> </el-table-column>
             <el-table-column label="权限">
                 <template slot-scope="scope">
-                    <el-checkbox :key="index" :label="auth.id" v-for="(auth, index) in scope.row.authority" v-model="auth.check">{{auth.name}}</el-checkbox>
+                    {{scope.row.authority}}
+                    <el-checkbox
+                        @change="authorityChange($event, auth)"
+                        :key="auth.id"
+                        :label="auth.id"
+                        v-for="auth in scope.row.authority"
+                        v-model="auth.check"
+                        >{{ auth.name }}</el-checkbox
+                    >
                 </template>
             </el-table-column>
         </el-table>
+        <el-button size="small" @click="save" type="primary">保 存</el-button>
+        <el-button size="small" @click="$router.back()">取 消</el-button>
     </base-content>
 </template>
 
@@ -61,12 +66,13 @@ export default {
             },
             tree: [],
             role: {
-                name: 'developer',
-                description: 'font end developer',
-                status: 'disable'
-                // permissionIdList: [1, 2],
-                // menuIdList: [1, 2]
-            }
+                name: '',
+                description: '',
+                status: '',
+                permissionIdList: [],
+                menuIdList: []
+            },
+            multipleSelection: []
         };
     },
     computed: {
@@ -91,7 +97,7 @@ export default {
             if (code !== 200) {
                 return this.$message.error(msg);
             }
-            this.$Message.success('保存成功');
+            this.$message.success('保存成功');
             this.$router.back();
         },
         async getAuthorityTree() {
@@ -100,10 +106,85 @@ export default {
                 return this.$message.error('加载权限列表失败');
             }
             this.tree = data;
+        },
+        async getRoleDetail() {
+            const { code, data } = await accountApi.roleDetail(this.id).catch(e => e);
+            if (code !== 200) {
+                return this.$message.error('加载角色详情失败');
+            }
+            this.role = data;
+            this.role.permissionIdList = this.role.permissions.map(i => i.id);
+            this.role.menuIdList = this.role.menus.map(i => i.id);
+            this.eachChildren(this.tree);
+            this.$forceUpdate()
+        },
+        authorityChange(checked, auth) {
+            const node = this.getNode(auth.id, this.tree, 'id')
+            console.log(node)
+            // node.check = checked
+            if (checked) {
+                this.role.permissionIdList.push(auth.id);
+            } else {
+                this.role.permissionIdList.filter(i => i !== auth.id);
+            }
+        },
+        handleSelectionChange(v) {
+            this.multipleSelection = v.map(i => i.id);
+        },
+        // 遍历```
+        eachChildren(list) {
+            if (!Array.isArray(list)) {
+                return;
+            }
+            list.forEach(i => {
+                if (this.role.menuIdList.find(item => item === i.id)) {
+                    this.$refs.multipleTable.toggleRowSelection(i);
+                }
+                if (i.authority && i.authority.length > 0) {
+                    i.authority.forEach(auth => {
+                        if (this.role.permissionIdList.find(item => auth.id === item)) {
+                            auth.check = true;
+                        } else {
+                            auth.check = false;
+                        }
+                        this.$forceUpdate()
+                    });
+                }
+                if (i.children && i.children.length > 0) {
+                    this.eachChildren(i.children);
+                }
+            });
+        },
+        getNode(id, nodes, customId) {
+            for(const node of nodes) {
+                if (id === node[customId]) {
+                    return node
+                }
+                if (node.children && node.children.length > 0) {
+                    const result = this.getNode(id, node.children, customId);
+                    if (result === null) {
+                        continue;
+                    } else {
+                        return result;
+                    }
+                }
+                if (node.authority && node.authority.length > 0) {
+                    const result = this.getNode(id, node.authority, customId);
+                    if (result === null) {
+                        continue;
+                    } else {
+                        return result;
+                    }
+                }
+            }
+            return null;
         }
     },
-    mounted() {
-        this.getAuthorityTree();
+    async mounted() {
+        await this.getAuthorityTree();
+        if (this.edit) {
+            this.getRoleDetail();
+        }
     }
 };
 </script>

@@ -105,6 +105,7 @@ export default {
         };
         return (
             <el-menu
+                collapse-transition={false}
                 collapse={this.isCollapse}
                 unique-opened
                 text-color="#ffffff"
