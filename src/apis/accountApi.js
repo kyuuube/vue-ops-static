@@ -35,3 +35,5 @@ export const getAuthorityList = params => request.get('/permission/list', { para
 export const saveAuthority = data => request.post('/permission/create', data);
 
 export const getAuthorityTree = params => request.get('/menu/authority', { params });
+
+export const getCurrentTree = () => request.get('/menu/user/tree');

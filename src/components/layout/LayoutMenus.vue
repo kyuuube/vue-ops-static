@@ -1,7 +1,10 @@
 <script type="text/jsx">
+// apis
+import * as accountApi from "src/apis/accountApi"
 // store
 import { mapActions, mapGetters } from "vuex";
 import * as $account from 'src/store/modules/account/types'
+const mem = require('mem');
 export default {
     name: "layout-menus",
     props: {
@@ -11,52 +14,52 @@ export default {
         return {
             list: [
                 {
-                    menuId: 1,
+                    id: 1,
                     name: "工作台",
-                    path: "/dashboard",
+                    url: "/dashboard",
                     icon: "el-icon-s-data",
                     parentId: 0
                 },
                 {
-                    menuId: 2,
+                    id: 2,
                     name: "系统管理",
                     icon: "el-icon-s-tools",
                     parentId: 0,
                     children: [
                         {
-                            menuId: 3,
+                            id: 3,
                             name: "用户管理",
-                            path: "/system/user",
+                            url: "/system/user",
                             icon: "el-icon-user",
                             parentId: 2,
                         },
                         {
-                            menuId: 4,
+                            id: 4,
                             name: "角色管理",
-                            path: "/system/role",
+                            url: "/system/role",
                             icon: "el-icon-s-custom",
                             parentId: 2,
                         },
                         {
-                            menuId: 5,
+                            id: 5,
                             name: "菜单管理",
-                            path: "/system/menu",
+                            url: "/system/menu",
                             icon: "el-icon-s-order",
                             parentId: 2,
                         },
                         {
-                            menuId: 7,
+                            id: 7,
                             name: "权限管理",
-                            path: "/system/authority",
+                            url: "/system/authority",
                             icon: "el-icon-s-check",
                             parentId: 2,
                         },
                     ]
                 },
                 {
-                    menuId: 6,
+                    id: 6,
                     name: '内容管理',
-                    path: '/article',
+                    url: '/article',
                     icon: "el-icon-document",
                     parentId: 0
                 }
@@ -75,17 +78,36 @@ export default {
             setCurrentOpenMenuIds: $account.actions.setCurrentOpenMenuIds,
         }),
         menuClick(item) {
-            this.setCurrentMenuId(item.menuId);
+            this.setCurrentMenuId(item.id);
             this.setCurrentOpenMenuIds([item.parentId]);
-            this.$router.push(item.path)
+            this.$router.push(item.url)
+            // const mem = require('mem');
+
+            // const memoized = mem(this.loadCurrentMenus());
+            // memoized()
         },
+        async loadCurrentMenus() {
+            const { code, data } = await accountApi.getCurrentTree().catch(e => e)
+            if (code !== 200) {
+                return this.$message.error('加载菜单失败');
+            }
+            this.list = data
+        },
+        // loadCurrentMenusCaching() {
+        //     return
+        // }
+    },
+    mounted() {
+        this.loadCurrentMenus()
+        // this.loadCurrentMenusCaching()
+        // mem(this.loadCurrentMenus(), {maxAge: 80001})
     },
     render() {
         const renderItem = (itemList) => {
             return itemList.map((item, index) => {
                 if (item.children && item.children.length > 0) {
                     return (
-                        <el-submenu key={item.menuId.toString()} index={item.menuId.toString()}>
+                        <el-submenu key={item.id.toString()} index={item.id.toString()}>
                             <template slot="title">
                               <i class={`iconfont ${item.icon}`}/>
                                 <span>{item.name}</span>
@@ -95,7 +117,7 @@ export default {
                     );
                 } else {
                     return (
-                        <el-menu-item key={item.menuId.toString()} index={item.menuId.toString()} nativeOnClick={() => this.menuClick(item)}>
+                        <el-menu-item key={item.id.toString()} index={item.id.toString()} nativeOnClick={() => this.menuClick(item)}>
                             <i class={`iconfont ${item.icon}`} />
                             <span>{item.name}</span>
                         </el-menu-item>

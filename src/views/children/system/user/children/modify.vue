@@ -136,7 +136,7 @@ export default {
         async detail() {
             const { code, data } = await accountApi.userDetail(this.id).catch(e => e);
             if (code !== 200) {
-                this.$message.error('获取用户详情失败');
+                return this.$message.error('获取用户详情失败');
             }
             this.user = data;
         },
