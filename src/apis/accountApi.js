@@ -14,7 +14,11 @@ export const userDetail = id => request.get(`/account/detail/${id}`);
 
 export const getRoleList = params => request.get('/role/list', { params });
 
+export const getRoleOptions = () => request.get('/role/options');
+
 export const addRole = data => request.post('/role/create', data);
+
+export const editRole = data => request.put('/role/edit', data);
 
 export const roleDetail = id => request.get(`/role/detail/${id}`);
 

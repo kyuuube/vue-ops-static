@@ -56,6 +56,16 @@
                 <!--                    </div>-->
                 <!--                </Upload>-->
             </el-form-item>
+            <el-form-item label="角色:" >
+                <el-select v-model="user.roleIds" size="small" multiple placeholder="请选择">
+                    <el-option
+                        v-for="item in roleOptions"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id">
+                    </el-option>
+                </el-select>
+            </el-form-item>
             <el-form-item>
                 <el-button size="small" @click="save" type="primary">保 存</el-button>
                 <el-button size="small" @click="$router.back()">取 消</el-button>
@@ -79,9 +89,11 @@ export default {
                 gender: 'male',
                 password: '',
                 rePassword: '',
-                avatar: 'https://i.loli.net/2020/04/05/xUmnIHdZMv8epXo.jpg'
+                avatar: 'https://i.loli.net/2020/04/05/xUmnIHdZMv8epXo.jpg',
+                roleIds: []
             },
-            defaultList: []
+            defaultList: [],
+            roleOptions: []
         };
     },
     computed: {
@@ -102,7 +114,7 @@ export default {
                 ...this.user,
                 password: md5(this.user.password)
             };
-            this.user.rePassword = null
+            data.rePassword = null
             const { code, msg } = await accountApi.addUser(data).catch(e => e);
             if (code !== 200) {
                 return this.$message.error(msg);
@@ -113,9 +125,7 @@ export default {
         async editUser() {
             const data = {
                 ...this.user,
-                password: md5(this.user.password)
             };
-            this.user.rePassword = null
             const { code, msg } = await accountApi.editUser(data).catch(e => e);
             if (code !== 200) {
                 return this.$message.error(msg);
@@ -129,12 +139,20 @@ export default {
                 this.$message.error('获取用户详情失败');
             }
             this.user = data;
-        }
+        },
+        async loadRoleList() {
+            const { data, msg, code } = await accountApi.getRoleOptions().catch(e => e);
+            if (code !== 200) {
+                return this.$message.error(msg);
+            }
+            this.roleOptions = data;
+        },
     },
     mounted() {
         if (this.edit) {
             this.detail();
         }
+        this.loadRoleList()
     }
 };
 </script>

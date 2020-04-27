@@ -1,5 +1,5 @@
 <template>
-    <base-content class="role-modify">
+    <base-content class="role-modify" v-loading="loading">
         <div slot="header">
             <el-breadcrumb>
                 <el-breadcrumb-item>系统管理</el-breadcrumb-item>
@@ -37,11 +37,9 @@
             <el-table-column prop="name" label="菜单名称"> </el-table-column>
             <el-table-column label="权限">
                 <template slot-scope="scope">
-                    {{scope.row.authority}}
                     <el-checkbox
                         @change="authorityChange($event, auth)"
                         :key="auth.id"
-                        :label="auth.id"
                         v-for="auth in scope.row.authority"
                         v-model="auth.check"
                         >{{ auth.name }}</el-checkbox
@@ -49,7 +47,8 @@
                 </template>
             </el-table-column>
         </el-table>
-        <el-button size="small" @click="save" type="primary">保 存</el-button>
+        <div></div>
+        <el-button :loading="btnLoading" size="small" @click="save" type="primary">保 存</el-button>
         <el-button size="small" @click="$router.back()">取 消</el-button>
     </base-content>
 </template>
@@ -72,7 +71,9 @@ export default {
                 permissionIdList: [],
                 menuIdList: []
             },
-            multipleSelection: []
+            multipleSelection: [],
+            loading: false,
+            btnLoading: false
         };
     },
     computed: {
@@ -87,13 +88,30 @@ export default {
         save() {
             if (!this.edit) {
                 this.addRole();
+            } else {
+                this.editRole();
             }
         },
         async addRole() {
             const data = {
                 ...this.role
             };
+            this.btnLoading = true;
             const { code, msg } = await accountApi.addRole(data).catch(e => e);
+            this.btnLoading = false;
+            if (code !== 200) {
+                return this.$message.error(msg);
+            }
+            this.$message.success('保存成功');
+            this.$router.back();
+        },
+        async editRole() {
+            const data = {
+                ...this.role
+            };
+            this.btnLoading = true;
+            const { code, msg } = await accountApi.editRole(data).catch(e => e);
+            this.btnLoading = false;
             if (code !== 200) {
                 return this.$message.error(msg);
             }
@@ -108,7 +126,9 @@ export default {
             this.tree = data;
         },
         async getRoleDetail() {
+            this.loading = true;
             const { code, data } = await accountApi.roleDetail(this.id).catch(e => e);
+            this.loading = false;
             if (code !== 200) {
                 return this.$message.error('加载角色详情失败');
             }
@@ -116,16 +136,15 @@ export default {
             this.role.permissionIdList = this.role.permissions.map(i => i.id);
             this.role.menuIdList = this.role.menus.map(i => i.id);
             this.eachChildren(this.tree);
-            this.$forceUpdate()
+            this.$forceUpdate();
         },
         authorityChange(checked, auth) {
-            const node = this.getNode(auth.id, this.tree, 'id')
-            console.log(node)
-            // node.check = checked
             if (checked) {
                 this.role.permissionIdList.push(auth.id);
             } else {
-                this.role.permissionIdList.filter(i => i !== auth.id);
+                console.log(auth.id);
+                console.log(this.role.permissionIdList);
+                this.role.permissionIdList = this.role.permissionIdList.filter(i => i !== auth.id);
             }
         },
         handleSelectionChange(v) {
@@ -142,12 +161,8 @@ export default {
                 }
                 if (i.authority && i.authority.length > 0) {
                     i.authority.forEach(auth => {
-                        if (this.role.permissionIdList.find(item => auth.id === item)) {
-                            auth.check = true;
-                        } else {
-                            auth.check = false;
-                        }
-                        this.$forceUpdate()
+                        const isChecked = !!this.role.permissionIdList.find(item => auth.id === item);
+                        this.$set(auth, 'check', isChecked);
                     });
                 }
                 if (i.children && i.children.length > 0) {
@@ -156,9 +171,9 @@ export default {
             });
         },
         getNode(id, nodes, customId) {
-            for(const node of nodes) {
+            for (const node of nodes) {
                 if (id === node[customId]) {
-                    return node
+                    return node;
                 }
                 if (node.children && node.children.length > 0) {
                     const result = this.getNode(id, node.children, customId);
