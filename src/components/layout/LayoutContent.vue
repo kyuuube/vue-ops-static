@@ -5,9 +5,9 @@
 </template>
 
 <script>
-    export default {
-        name: 'layout-content'
-    };
+export default {
+    name: 'layout-content'
+};
 </script>
 
 <style scoped>

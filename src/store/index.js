@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import { Store, install } from 'vuex'
+import { Store, install } from 'vuex';
 // plugins
-import plugins from './plugins'
+import plugins from './plugins';
 // modules
-import modules from './modules'
+import modules from './modules';
 
 install(Vue);
 
@@ -21,16 +21,14 @@ const store = new Store({
 
 if (module.hot) {
     // 使 modules 成为可热重载模块
-    module.hot.accept([
-        './modules',
-    ], () => {
+    module.hot.accept(['./modules'], () => {
         // 获取更新后的模块
         // 因为 babel 6 的模块编译格式问题，这里需要加上 .default
         // 加载新模块
         store.hotUpdate({
             modules: require('./modules').default
-        })
-    })
+        });
+    });
 }
 
 export default store;

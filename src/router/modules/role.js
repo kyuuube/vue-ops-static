@@ -4,22 +4,22 @@ export default [
         component: () => import('../../views/children/system/role/view'),
         meta: { requireAuth: true },
         children: [
-            { path: "", redirect: "list" },
+            { path: '', redirect: 'list' },
             {
-                path: "list",
+                path: 'list',
                 component: () => import('../../views/children/system/role/children/list'),
-                meta: { requireAuth: true },
+                meta: { requireAuth: true }
             },
             {
-                path: "add",
+                path: 'add',
                 component: () => import('../../views/children/system/role/children/modify'),
-                meta: { requireAuth: true },
+                meta: { requireAuth: true }
             },
             {
-                path: "edit/:id",
+                path: 'edit/:id',
                 component: () => import('../../views/children/system/role/children/modify'),
-                meta: { requireAuth: true },
+                meta: { requireAuth: true }
             }
         ]
     }
-]
+];

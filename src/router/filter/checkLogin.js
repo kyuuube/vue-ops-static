@@ -1,7 +1,7 @@
-import store from "../../store";
-import * as $account from "../../store/modules/account/types";
+import store from '../../store';
+import * as $account from '../../store/modules/account/types';
 
-export default (router) => {
+export default router => {
     router.beforeEach(async (to, from, next) => {
         if (to.meta && !to.meta.requireAuth) {
             // 不需要登录,直接跳过
@@ -17,12 +17,14 @@ export default (router) => {
             return next();
         }
     });
-}
+};
 
 function notLogin(router, to) {
     // 未登录
-    router.replace({
-        path: "/login",
-        query: to.fullPath === "/" ? {} : { redirect: to.fullPath }
-    }).catch(e => e);
+    router
+        .replace({
+            path: '/login',
+            query: to.fullPath === '/' ? {} : { redirect: to.fullPath }
+        })
+        .catch(e => e);
 }

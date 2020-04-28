@@ -1,19 +1,18 @@
-import axios from "axios";
-import * as config from "../../../config/index";
-import store from "src/store";
-import * as $account from "src/store/modules/account/types";
-
+import axios from 'axios';
+import * as config from '../../../config/index';
+import store from 'src/store';
+import * as $account from 'src/store/modules/account/types';
 
 const request = axios.create({
-    baseURL: process.env.NODE_ENV !== "development" ? config.build.api : config.dev.api ,
-    timeout: 50000,
-})
+    baseURL: process.env.NODE_ENV !== 'development' ? config.build.api : config.dev.api,
+    timeout: 50000
+});
 
 // 请求拦截器
 request.interceptors.request.use(
     config => {
         config.headers = {
-            "authorization": localStorage.getItem("token"),
+            authorization: localStorage.getItem('token')
         };
         return config;
     },
@@ -32,7 +31,7 @@ request.interceptors.response.use(
             return Promise.reject(response);
         }
         response = response.data;
-        console.log(response)
+        console.log(response);
         // if (response.code === 401) {
         //     if (!isReset) {
         //         isReset = true;
@@ -48,12 +47,13 @@ request.interceptors.response.use(
         //     }
         //     return Promise.reject();
         // }
-        if ((response.code === 500 || response.code === 503) && process.env.NODE_ENV === "production") {
+        if ((response.code === 500 || response.code === 503) && process.env.NODE_ENV === 'production') {
             // Message.error('服务器繁忙')
             return Promise.reject();
         }
         return response;
-    }, error => {
+    },
+    error => {
         // if (axios.isCancel(error)) {
         //     return Promise.reject({
         //         cancel: true
@@ -69,8 +69,9 @@ request.interceptors.response.use(
         //         duration: 0
         //     })
         // }
-        console.log(error)
+        console.log(error);
         return Promise.reject();
-    });
+    }
+);
 
 export default request;

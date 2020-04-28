@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         ...mapActions($account.namespace, {
-            setCollapsed: $account.actions.setCollapsed,
+            setCollapsed: $account.actions.setCollapsed
         }),
         toggleCollapse() {
             this.setCollapsed(!this.collapsed);

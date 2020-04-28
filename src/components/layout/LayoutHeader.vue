@@ -28,9 +28,9 @@
                         <i v-if="!search" @click="search = true" class="el-icon-search header-icon icon-button"></i>
                         <i class="el-icon-question header-icon icon-button"></i>
                         <i class="el-icon-bell header-icon icon-button"></i>
-                        <el-avatar :size="24" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                        <el-avatar v-if="user" :size="24" :src="user.avatar"></el-avatar>
                         <el-dropdown>
-                            <span class="user-info icon-button">evangeline</span>
+                            <span class="user-info icon-button">{{ user.name }}</span>
                             <el-dropdown-menu slot="dropdown">
                                 <el-dropdown-item>用户数据</el-dropdown-item>
                                 <el-dropdown-item @click.native="logOut">退出登录</el-dropdown-item>
@@ -45,7 +45,7 @@
 
 <script>
 // store
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import * as $account from 'src/store/modules/account/types';
 export default {
     name: 'layout-header',
@@ -57,6 +57,11 @@ export default {
             search: false,
             keywords: ''
         };
+    },
+    computed: {
+        ...mapGetters($account.namespace, {
+            user: $account.getters.user
+        })
     },
     methods: {
         ...mapActions($account.namespace, {

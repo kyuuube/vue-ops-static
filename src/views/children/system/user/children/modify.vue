@@ -56,14 +56,9 @@
                 <!--                    </div>-->
                 <!--                </Upload>-->
             </el-form-item>
-            <el-form-item label="角色:" >
+            <el-form-item label="角色:">
                 <el-select v-model="user.roleIds" size="small" multiple placeholder="请选择">
-                    <el-option
-                        v-for="item in roleOptions"
-                        :key="item.id"
-                        :label="item.name"
-                        :value="item.id">
-                    </el-option>
+                    <el-option v-for="item in roleOptions" :key="item.id" :label="item.name" :value="item.id"> </el-option>
                 </el-select>
             </el-form-item>
             <el-form-item>
@@ -114,7 +109,7 @@ export default {
                 ...this.user,
                 password: md5(this.user.password)
             };
-            data.rePassword = null
+            data.rePassword = null;
             const { code, msg } = await accountApi.addUser(data).catch(e => e);
             if (code !== 200) {
                 return this.$message.error(msg);
@@ -124,7 +119,7 @@ export default {
         },
         async editUser() {
             const data = {
-                ...this.user,
+                ...this.user
             };
             const { code, msg } = await accountApi.editUser(data).catch(e => e);
             if (code !== 200) {
@@ -146,13 +141,13 @@ export default {
                 return this.$message.error(msg);
             }
             this.roleOptions = data;
-        },
+        }
     },
     mounted() {
         if (this.edit) {
             this.detail();
         }
-        this.loadRoleList()
+        this.loadRoleList();
     }
 };
 </script>

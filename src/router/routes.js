@@ -1,7 +1,7 @@
-import user from './modules/user'
-import role from './modules/role'
-import menu from './modules/menu'
-import article from './modules/article'
+import user from './modules/user';
+import role from './modules/role';
+import menu from './modules/menu';
+import article from './modules/article';
 const routes = [
     {
         path: '/login',
@@ -13,11 +13,11 @@ const routes = [
         component: () => import('../views/view.vue'),
         meta: { requireAuth: true },
         children: [
-            { path: "", redirect: "/dashboard" },
+            { path: '', redirect: '/dashboard' },
             {
                 path: '/dashboard',
                 component: () => import('../views/children/dashboard/view'),
-                meta: { requireAuth: true },
+                meta: { requireAuth: true }
             },
             ...user,
             ...role,
@@ -26,9 +26,19 @@ const routes = [
             {
                 path: '/system/authority',
                 component: () => import('../views/children/system/authority/view'),
-                meta: { requireAuth: true },
+                meta: { requireAuth: true }
+            },
+            {
+                path: '/notAuthority',
+                component: () => import('../views/children/noAuthority'),
+                meta: { requireAuth: false }
             }
         ]
+    },
+    {
+        path: '*',
+        component: () => import('../views/404.vue'),
+        meta: { requireAuth: false }
     }
 ];
 

@@ -1,23 +1,23 @@
-import isPlainObject from 'lodash/isPlainObject'
+import isPlainObject from 'lodash/isPlainObject';
 
 export default function createProxy(obj, config = {}) {
-    const proxy = Object.assign({}, obj)
+    const proxy = Object.assign({}, obj);
 
     Object.keys(proxy).forEach(key => {
         Object.defineProperty(proxy, key, {
-            get () {
-                return config.get ? config.get(obj, key) : obj[key]
+            get() {
+                return config.get ? config.get(obj, key) : obj[key];
             },
-            set (value) {
-                config.set ? config.set(obj, key, value) : obj[key] = value
+            set(value) {
+                config.set ? config.set(obj, key, value) : (obj[key] = value);
             }
-        })
+        });
 
-        const value = obj[key]
+        const value = obj[key];
         if (config.deep && isPlainObject(value)) {
-            obj[key] = createProxy(value, config)
+            obj[key] = createProxy(value, config);
         }
-    })
+    });
 
-    return proxy
+    return proxy;
 }

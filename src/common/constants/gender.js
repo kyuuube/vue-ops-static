@@ -11,4 +11,4 @@ export default {
         label: '未知',
         value: 'other'
     }
-}
+};

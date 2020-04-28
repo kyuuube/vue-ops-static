@@ -43,9 +43,9 @@ export default {
     },
     mounted() {
         window.setTimeout(() => {
-            const loading = document.querySelector('.mask')
-            loading.style.display="none"
-        }, 1000)
+            const loading = document.querySelector('.mask');
+            loading.style.display = 'none';
+        }, 1000);
     }
 };
 </script>

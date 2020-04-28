@@ -16,6 +16,7 @@ const state = persistedState(
         companyList: [],
         superAdmin: false,
         isCollapsed: false,
+        menu: []
     },
     {
         selectedRouter: [],
@@ -40,7 +41,7 @@ const mutations = {
         state.selectedRouter = [];
         state.currentMenuId = 1;
         state.currentOpenMenuIds = [];
-        sessionStorage.clear()
+        sessionStorage.clear();
     },
     [$mutations.user]: (state, data) => {
         state.user = data;
@@ -65,6 +66,9 @@ const mutations = {
     },
     [$mutations.isCollapsed]: (state, data) => {
         state.isCollapsed = data;
+    },
+    [$mutations.menu]: (state, data) => {
+        state.menu = data;
     }
 };
 
@@ -74,9 +78,6 @@ const actions = {
     },
     [$actions.logout]: ({ commit }) => {
         commit($mutations.logout);
-    },
-    [$actions.iframelogin]: ({ commit }) => {
-        commit($mutations.iframelogin);
     },
     [$actions.setUserInfo]: ({ commit }, user) => {
         commit($mutations.user, user);
@@ -95,6 +96,9 @@ const actions = {
     },
     [$actions.setCollapsed]: ({ commit }, data) => {
         commit($mutations.isCollapsed, data);
+    },
+    [$actions.setMenu]: ({ commit }, data) => {
+        commit($mutations.menu, data);
     }
 };
 
@@ -108,7 +112,8 @@ const getters = {
     },
     [$getters.currentMenuId]: state => state.currentMenuId,
     [$getters.currentOpenMenuIds]: state => state.currentOpenMenuIds,
-    [$getters.isCollapsed]: state => state.isCollapsed
+    [$getters.isCollapsed]: state => state.isCollapsed,
+    [$getters.menu]: state => state.menu
 };
 
 export default {

@@ -96,6 +96,7 @@ export default {
             const data = {
                 ...this.role
             };
+            data.menuIdList = this.multipleSelection;
             this.btnLoading = true;
             const { code, msg } = await accountApi.addRole(data).catch(e => e);
             this.btnLoading = false;
@@ -109,6 +110,7 @@ export default {
             const data = {
                 ...this.role
             };
+            data.menuIdList = this.multipleSelection;
             this.btnLoading = true;
             const { code, msg } = await accountApi.editRole(data).catch(e => e);
             this.btnLoading = false;
@@ -169,30 +171,6 @@ export default {
                     this.eachChildren(i.children);
                 }
             });
-        },
-        getNode(id, nodes, customId) {
-            for (const node of nodes) {
-                if (id === node[customId]) {
-                    return node;
-                }
-                if (node.children && node.children.length > 0) {
-                    const result = this.getNode(id, node.children, customId);
-                    if (result === null) {
-                        continue;
-                    } else {
-                        return result;
-                    }
-                }
-                if (node.authority && node.authority.length > 0) {
-                    const result = this.getNode(id, node.authority, customId);
-                    if (result === null) {
-                        continue;
-                    } else {
-                        return result;
-                    }
-                }
-            }
-            return null;
         }
     },
     async mounted() {

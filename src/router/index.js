@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
 import checkLogin from './filter/checkLogin';
+import checkPermission from './filter/checkPermission';
 
 // 如果使用 CommonJS 模块规范, 需要显式的使用 Vue.use() 安装路由模块
 Vue.use(VueRouter);
@@ -14,5 +15,6 @@ const router = new VueRouter({
 });
 
 checkLogin(router);
+checkPermission(router);
 
 export default router;

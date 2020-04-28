@@ -13,15 +13,15 @@
                 <div id="login">
                     <div class="login-form-warp">
                         <p>
-                        <span class="fontawesome-user">
-                            <i class="el-icon-user"></i>
-                        </span>
+                            <span class="fontawesome-user">
+                                <i class="el-icon-user"></i>
+                            </span>
                             <input type="text" v-model="account" required />
                         </p>
                         <p>
-                        <span class="fontawesome-lock">
-                            <i class="el-icon-lock"></i>
-                        </span>
+                            <span class="fontawesome-lock">
+                                <i class="el-icon-lock"></i>
+                            </span>
                             <input type="password" v-model="password" required />
                         </p>
                         <div
@@ -67,9 +67,9 @@ export default {
         }),
         async login() {
             this.loading = true;
-            const loading = document.querySelector('.mask')
-            loading.style.display="block"
-            const { code, msg, user, token } = await accountApi.login({ email: this.account, password: md5(this.password)}).catch(e => e);
+            const loading = document.querySelector('.mask');
+            loading.style.display = 'block';
+            const { code, msg, user, token } = await accountApi.login({ email: this.account, password: md5(this.password) }).catch(e => e);
             this.loading = false;
             if (code !== 200) {
                 this.$message.error(msg);

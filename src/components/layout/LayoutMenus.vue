@@ -76,15 +76,12 @@ export default {
         ...mapActions($account.namespace, {
             setCurrentMenuId: $account.actions.setCurrentMenuId,
             setCurrentOpenMenuIds: $account.actions.setCurrentOpenMenuIds,
+            setMenu: $account.actions.setMenu,
         }),
         menuClick(item) {
             this.setCurrentMenuId(item.id);
             this.setCurrentOpenMenuIds([item.parentId]);
             this.$router.push(item.url)
-            // const mem = require('mem');
-
-            // const memoized = mem(this.loadCurrentMenus());
-            // memoized()
         },
         async loadCurrentMenus() {
             const { code, data } = await accountApi.getCurrentTree().catch(e => e)
@@ -92,15 +89,11 @@ export default {
                 return this.$message.error('加载菜单失败');
             }
             this.list = data
+            this.setMenu(data)
         },
-        // loadCurrentMenusCaching() {
-        //     return
-        // }
     },
     mounted() {
         this.loadCurrentMenus()
-        // this.loadCurrentMenusCaching()
-        // mem(this.loadCurrentMenus(), {maxAge: 80001})
     },
     render() {
         const renderItem = (itemList) => {
