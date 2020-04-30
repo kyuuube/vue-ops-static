@@ -75,5 +75,16 @@ export default {
     .el-pagination {
         margin-top: 10px;
     }
+
+    .el-table table th {
+        background-color: rgba(248, 248, 248, 1);
+        color: #000;
+        font-weight: 300;
+        padding: 8px;
+    }
+
+    .el-table {
+        margin-top: 10px;
+    }
 }
 </style>
