@@ -33,7 +33,6 @@
                 :data="data"
                 style="width: 100%;margin-bottom: 20px;"
                 row-key="id"
-                border
                 default-expand-all
                 :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
             >

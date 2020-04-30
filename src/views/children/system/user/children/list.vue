@@ -32,7 +32,7 @@
                 <el-row type="flex" justify="space-between">
                     <div>查询表格</div>
                     <div>
-                        <el-button @click="$router.push('/system/user/add')" type="primary" icon="md-add">新 建</el-button>
+                        <el-button @click="$router.push('/system/user/add')" type="primary" size="small" icon="md-add">新 建</el-button>
                     </div>
                 </el-row>
             </div>

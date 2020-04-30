@@ -33,10 +33,10 @@ export default {
 .layout-base-content {
     display: flex;
     flex-direction: column;
-    background-color: #f5f7f9;
+    background-color: #f0f2f5;
     .content-header {
         flex-shrink: 0;
-        padding: 8px 18px;
+        padding: 12px 18px 8px 18px;
         background-color: #ffffff;
         h2 {
             display: block;
@@ -50,7 +50,7 @@ export default {
     }
     .search {
         background-color: #ffffff;
-        margin: 20px 18px;
+        margin: 20px 20px;
         padding: 10px;
     }
     .content {
@@ -60,7 +60,7 @@ export default {
         overflow: auto;
         /*position: relative;*/
         background-color: #ffffff;
-        margin: 20px 18px;
+        margin: 0 20px 20px 20px;
         padding: 15px;
         .table-toolbar {
             color: #000c17;

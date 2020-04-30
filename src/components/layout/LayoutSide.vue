@@ -1,5 +1,5 @@
 <template>
-    <el-aside :width="collapsed ? '56px' : '256px'" class="layout-side">
+    <el-aside :width="collapsed ? '80px' : '256px'" class="layout-side">
         <div v-if="!collapsed" class="layout-logo"></div>
         <layout-menus :isCollapse="collapsed"></layout-menus>
     </el-aside>
@@ -34,6 +34,8 @@ export default {
 .layout-side {
     height: 100vh;
     background: #001529;
+    z-index: 9;
+    box-shadow: 2px 0 6px rgba(0,21,41,.35);
     -webkit-transition-property: all;
     -webkit-transition-duration: 0.9s;
     -webkit-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);

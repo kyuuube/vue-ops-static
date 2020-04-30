@@ -12,7 +12,7 @@ export default {
 
 <style scoped>
 .layout-content {
-    background: #f5f7f9;
+    background: #f0f2f5;
     padding: 0;
     height: calc(100vh - 60px);
 }

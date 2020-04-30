@@ -1,7 +1,7 @@
 <template>
     <el-header class="header">
         <el-row type="flex" justify="space-between">
-            <div>
+            <div class="header-search">
                 <i
                     @click="collapsedSider"
                     :class="isCollapsed ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
@@ -24,11 +24,11 @@
                             </el-input>
                         </transition>
                     </div>
-                    <div>
-                        <i v-if="!search" @click="search = true" class="el-icon-search header-icon icon-button"></i>
-                        <i class="el-icon-question header-icon icon-button"></i>
-                        <i class="el-icon-bell header-icon icon-button"></i>
-                        <el-avatar v-if="user" :size="24" :src="user.avatar"></el-avatar>
+                    <div class="header-search">
+                        <i v-if="!search" @click="search = true" class="header-search-item el-icon-search header-icon icon-button"></i>
+                        <i class="header-search-item el-icon-question header-icon icon-button"></i>
+                        <i class="header-search-item el-icon-bell header-icon icon-button"></i>
+                        <el-avatar class="header-search-item" v-if="user" :size="24" :src="user.avatar"></el-avatar>
                         <el-dropdown>
                             <span class="user-info icon-button">{{ user.name }}</span>
                             <el-dropdown-menu slot="dropdown">
@@ -85,6 +85,15 @@ export default {
     line-height: 60px;
     background-color: #ffffff;
     box-shadow: 0 5px 5px -1px #eaebee;
+    .header-search {
+        display: flex;
+        line-height: 60px;
+        align-items: center;     /* 垂直居中 */
+        .header-search-item {
+            display: flex;
+            margin: 0 10px;
+        }
+    }
     .user-info {
         display: inline-block;
         vertical-align: middle;

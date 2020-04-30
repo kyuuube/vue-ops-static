@@ -123,7 +123,7 @@ export default {
                 collapse-transition={false}
                 collapse={this.isCollapse}
                 unique-opened
-                text-color="#ffffff"
+                text-color="#7c8791"
                 background-color="#001529"
                 default-active={this.currentMenuId.toString()}
                 class={['menus']}>
@@ -139,9 +139,41 @@ export default {
     color: #ffffff;
     margin-top: 40px;
     background-color: #001529;
+    color: hsla(0,0%,100%,.65);
+    font-size: 14px;
+    .el-menu-item {
+        margin-top: 4px;
+        margin-bottom: 8px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+    }
     i {
-        color: #ffffff;
+        color: #7c8791;
         margin-right: 8px;
+    }
+    .el-menu-item.is-active {
+        background-color: #1E9FFF !important;
+        color: #FFFFFF !important;
+}
+}
+.el-menu.el-menu--popup.el-menu--popup-right-start {
+    i {
+        color: #7c8791;
+        margin-right: 8px;
+    }
+    .el-menu-item.is-active {
+        background-color: #1E9FFF !important;
+        color: #FFFFFF !important;
+        i {
+            color: #FFFFFF !important;
+        }
+    }
+}
+.el-menu--collapse {
+    width: 80px;
+    li {
+        text-align: center;
     }
 }
 </style>

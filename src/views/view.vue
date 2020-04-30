@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <el-container class="layout">
-            <layout-side ref="layoutSide" :collapsed.sync="isCollapsed"></layout-side>
+            <layout-side :class="showSide ? '' : 'not-show-side'" ref="layoutSide" :collapsed.sync="isCollapsed"></layout-side>
             <el-container direction="vertical">
                 <layout-header @collapsed="collapsedSide" :is-collapsed="isCollapsed"></layout-header>
                 <layout-content>
@@ -22,7 +22,7 @@
 import LayoutHeader from 'src/components/layout/LayoutHeader';
 import LayoutSide from 'src/components/layout/LayoutSide';
 import LayoutContent from 'src/components/layout/LayoutContent';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import * as $account from '../store/modules/account/types';
 export default {
     name: 'home',
@@ -31,12 +31,20 @@ export default {
         LayoutSide,
         LayoutContent
     },
+    data() {
+        return {
+            showSide: true
+        };
+    },
     computed: {
         ...mapGetters($account.namespace, {
             isCollapsed: $account.getters.isCollapsed
         })
     },
     methods: {
+        ...mapActions($account.namespace, {
+            setCollapsed: $account.actions.setCollapsed
+        }),
         collapsedSide() {
             this.$refs.layoutSide.toggleCollapse();
         }
@@ -45,6 +53,26 @@ export default {
         window.setTimeout(() => {
             const loading = document.querySelector('.mask');
             loading.style.display = 'none';
+            const mql = window.matchMedia('(max-width: 1000px)');
+            const mql2 = window.matchMedia('(max-width: 800px)');
+            mql.addListener(e => {
+                if (e.matches) {
+                    console.log('matches!!!!');
+                    this.setCollapsed(true);
+                } else {
+                    console.log('not matches!!!!');
+                    this.setCollapsed(false);
+                }
+            });
+            mql2.addListener(e => {
+                if (e.matches) {
+                    console.log('matches!!!!');
+                    this.showSide = false;
+                } else {
+                    console.log('not matches!!!!');
+                    this.showSide = true;
+                }
+            });
         }, 1000);
     }
 };
@@ -61,6 +89,9 @@ export default {
     .footer {
         padding: 40px;
         text-align: center;
+    }
+    .not-show-side {
+        width: 0 !important;
     }
 }
 </style>
