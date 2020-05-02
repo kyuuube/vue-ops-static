@@ -30,7 +30,7 @@
                         <i class="header-search-item el-icon-bell header-icon icon-button"></i>
                         <el-avatar class="header-search-item" v-if="user" :size="24" :src="user.avatar"></el-avatar>
                         <el-dropdown>
-                            <span class="user-info icon-button">{{ user.name }}</span>
+                            <span class="user-info icon-button">{{ user && user.name }}</span>
                             <el-dropdown-menu slot="dropdown">
                                 <el-dropdown-item>用户数据</el-dropdown-item>
                                 <el-dropdown-item @click.native="logOut">退出登录</el-dropdown-item>

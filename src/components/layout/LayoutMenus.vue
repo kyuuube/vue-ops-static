@@ -110,7 +110,7 @@ export default {
                     );
                 } else {
                     return (
-                        <el-menu-item key={item.id.toString()} index={item.id.toString()} nativeOnClick={() => this.menuClick(item)}>
+                        <el-menu-item key={item.id.toString()} index={item.id.toString()} onClick={() => this.menuClick(item)}>
                             <i class={`iconfont ${item.icon}`} />
                             <span>{item.name}</span>
                         </el-menu-item>
@@ -137,7 +137,7 @@ export default {
 <style lang="less">
 .menus {
     color: #ffffff;
-    margin-top: 40px;
+    margin-top: 20px;
     background-color: #001529;
     color: hsla(0,0%,100%,.65);
     font-size: 14px;

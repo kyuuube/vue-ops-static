@@ -17,7 +17,7 @@ const routes = [
             {
                 path: '/dashboard',
                 component: () => import('../views/children/dashboard/view'),
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, menuCode: 'dashboard' }
             },
             ...user,
             ...role,
@@ -26,7 +26,7 @@ const routes = [
             {
                 path: '/system/authority',
                 component: () => import('../views/children/system/authority/view'),
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, menuCode: 'authority' }
             },
             {
                 path: '/notAuthority',

@@ -8,17 +8,17 @@ export default [
             {
                 path: 'list',
                 component: () => import('../../views/children/system/menu/children/list'),
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, menuCode: 'menu' }
             },
             {
                 path: 'add',
                 component: () => import('../../views/children/system/menu/children/modify'),
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, menuCode: 'menu' }
             },
             {
                 path: 'edit/:id',
                 component: () => import('../../views/children/system/menu/children/modify'),
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, menuCode: 'menu' }
             }
         ]
     }

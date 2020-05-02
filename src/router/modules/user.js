@@ -8,22 +8,22 @@ export default [
             {
                 path: 'list',
                 component: () => import('../../views/children/system/user/children/list'),
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, menuCode: 'user' }
             },
             {
                 path: 'detail/:id',
                 component: () => import('../../views/children/system/user/children/detail'),
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, menuCode: 'user' }
             },
             {
                 path: 'add',
                 component: () => import('../../views/children/system/user/children/modify'),
-                meta: { requireAuth: true }
+                meta: { requireAuth: true, menuCode: 'user' }
             },
             {
                 path: 'edit/:id',
                 component: () => import('../../views/children/system/user/children/modify'),
-                meta: { requireAuth: true },
+                meta: { requireAuth: true, menuCode: 'user' },
                 props: true
             }
         ]
