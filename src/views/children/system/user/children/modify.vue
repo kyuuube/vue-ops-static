@@ -40,21 +40,7 @@
                 ></el-input>
             </el-form-item>
             <el-form-item label="头像:">
-                <!--                <Upload-->
-                <!--                    ref="upload"-->
-                <!--                    action="https://sm.ms/api/v2/upload"-->
-                <!--                    :show-upload-list="false"-->
-                <!--                    :default-file-list="defaultList"-->
-                <!--                    :format="['jpg', 'jpeg', 'png']"-->
-                <!--                    :max-size="2048"-->
-                <!--                    type="drag"-->
-                <!--                    style="display: inline-block;width:58px;"-->
-                <!--                >-->
-                <!--                    <img v-if="user.avatar" :src="user.avatar" class="avatar">-->
-                <!--                    <div v-else style="width: 58px;height:58px;line-height: 58px;">-->
-                <!--                        <Icon type="ios-camera" size="20"></Icon>-->
-                <!--                    </div>-->
-                <!--                </Upload>-->
+                <rd-avatar-upload v-model="user.avatar"></rd-avatar-upload>
             </el-form-item>
             <el-form-item label="角色:">
                 <el-select v-model="user.roleIds" size="small" multiple placeholder="请选择">
@@ -72,9 +58,14 @@
 <script>
 // apis
 import * as accountApi from 'src/apis/accountApi';
+// components
+import RdAvatarUpload from 'src/components/upload/RdAvatarUpload';
 const md5 = require('md5');
 export default {
     name: 'user-modify',
+    components: {
+        RdAvatarUpload
+    },
     props: ['id'],
     data() {
         return {
@@ -154,9 +145,5 @@ export default {
 
 <style lang="less">
 .user-modify {
-    .avatar {
-        height: 48px;
-        width: 48px;
-    }
 }
 </style>

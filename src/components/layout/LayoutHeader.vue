@@ -88,7 +88,7 @@ export default {
     .header-search {
         display: flex;
         line-height: 60px;
-        align-items: center;     /* 垂直居中 */
+        align-items: center; /* 垂直居中 */
         .header-search-item {
             display: flex;
             margin: 0 10px;

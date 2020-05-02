@@ -1,6 +1,6 @@
 <template>
     <el-aside :width="collapsed ? '80px' : '256px'" class="layout-side">
-        <div  class="layout-logo">
+        <div class="layout-logo">
             <img :src="logoSrc" alt="" />
             <span v-if="!collapsed">RIDIDKULUS</span>
         </div>

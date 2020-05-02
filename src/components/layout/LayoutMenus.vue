@@ -139,7 +139,7 @@ export default {
     color: #ffffff;
     margin-top: 20px;
     background-color: #001529;
-    color: hsla(0,0%,100%,.65);
+    color: hsla(0, 0%, 100%, 0.65);
     font-size: 14px;
     .el-menu-item {
         margin-top: 4px;
@@ -153,9 +153,9 @@ export default {
         margin-right: 8px;
     }
     .el-menu-item.is-active {
-        background-color: #1E9FFF !important;
-        color: #FFFFFF !important;
-}
+        background-color: #1e9fff !important;
+        color: #ffffff !important;
+    }
 }
 .el-menu.el-menu--popup.el-menu--popup-right-start {
     i {
@@ -163,10 +163,10 @@ export default {
         margin-right: 8px;
     }
     .el-menu-item.is-active {
-        background-color: #1E9FFF !important;
-        color: #FFFFFF !important;
+        background-color: #1e9fff !important;
+        color: #ffffff !important;
         i {
-            color: #FFFFFF !important;
+            color: #ffffff !important;
         }
     }
 }

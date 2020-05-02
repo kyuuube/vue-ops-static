@@ -50,7 +50,7 @@ export default {
     }
     .search {
         background-color: #ffffff;
-        margin: 20px 20px;
+        margin: 20px 20px 0 20px;
         padding: 10px;
     }
     .content {
@@ -60,7 +60,7 @@ export default {
         overflow: auto;
         /*position: relative;*/
         background-color: #ffffff;
-        margin: 0 20px 20px 20px;
+        margin: 20px;
         padding: 15px;
         .table-toolbar {
             color: #000c17;

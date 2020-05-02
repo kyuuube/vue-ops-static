@@ -13,7 +13,7 @@ export default router => {
                 return next();
             }
         } else {
-            next()
+            next();
         }
     });
 };
@@ -21,7 +21,7 @@ export default router => {
 function notAuthority(router) {
     router
         .push({
-            path: '/notAuthority',
+            path: '/notAuthority'
         })
         .catch(e => e);
 }
