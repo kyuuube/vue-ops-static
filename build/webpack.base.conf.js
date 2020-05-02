@@ -1,4 +1,6 @@
 const path = require('path');
+const config = require('../config');
+const { name } = require('../package.json');
 const WebpackBar = require('webpackbar');
 const { VueLoaderPlugin } = require('vue-loader');
 
@@ -11,6 +13,13 @@ module.exports = {
     // 入口文件
     entry: {
         app: './src/main.js'
+    },
+    output: {
+        publicPath: `http://${config.dev.host}:${config.dev.port}/`,
+        filename: `js/${name}-[name].js`,
+        library: `${name}-[name]`,
+        libraryTarget: 'umd',
+        jsonpFunction: `webpackJsonp_${name}`,
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],

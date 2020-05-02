@@ -9,6 +9,9 @@ const devConf = merge(common, {
     mode: 'development',
     devtool: config.dev.devtoolType,
     devServer: {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+        },
         quiet: true,
         compress: true,
         clientLogLevel: 'warning',

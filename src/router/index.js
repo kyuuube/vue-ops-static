@@ -10,7 +10,8 @@ Vue.use(VueRouter);
 // 创建一个路由器实例
 // 创建实例时可以传入配置参数进行定制
 const router = new VueRouter({
-    mode: 'hash',
+    base: window.__POWERED_BY_QIANKUN__ ? '/purehtml' : '/',
+    mode: 'history',
     routes // 路由
 });
 
