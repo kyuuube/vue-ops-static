@@ -7,7 +7,7 @@
     "scripts": {
         "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
         "build": "webpack --inline --progress --config build/webpack.pord.conf.js",
-        "eslint": "eslint --ext js,jsx,vue src",
+        "eslint": "eslint --ext js,jsx,ts,tsx src",
         "stylelint": "stylelint 'src/**/*.less' --syntax less",
         "fix": "prettier --write 'src/**/*.{tsx,jsx,js,ts,less}'"
     },

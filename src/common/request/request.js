@@ -1,7 +1,5 @@
 import axios from 'axios';
 import * as config from '../../../config/index';
-import store from 'src/store';
-import * as $account from 'src/store/modules/account/types';
 
 const request = axios.create({
     baseURL: process.env.NODE_ENV !== 'development' ? config.build.api : config.dev.api,
