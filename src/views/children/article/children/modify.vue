@@ -14,7 +14,8 @@
                     <el-input v-model="title" placeholder="标题"></el-input>
                 </el-form-item>
                 <el-form-item label="内容">
-                    <quill-editor v-model="content" ref="myQuillEditor"> </quill-editor>
+                    <quill-editor v-model="content" ref="myQuillEditor" :options="editorOptions"> </quill-editor>
+                    <input type="file" id="getImage" style="display: none;" @change="uploadImage">
                 </el-form-item>
                 <el-form-item label="文章狀態">
                       <el-radio-group v-model="status">
@@ -33,15 +34,19 @@
 <script>
 // apis
 import * as contentApi from 'src/apis/contentApi'
+import * as commonApi from 'src/apis/commonApi'
 // contants
 import articleStatus from 'src/common/constants/articleStatus'
+// utils
+import editorOptions from 'src/common/utils/editorOptions'
 export default {
     name: 'article-modify',
     data() {
         return {
             title: '',
             content: '',
-            status: '2'
+            status: '2',
+            editorOptions
         };
     },
     computed: {
@@ -62,7 +67,22 @@ export default {
             }
             this.$message.success('保存成功');
             this.$router.push('/article/list')
-        }
+        },
+        async uploadImage(e) {
+            let file = e.target.files[0]
+            const formData = new FormData();
+            formData.append('file', file)
+            const { code, url } = await commonApi.upload(formData).catch(e => e)
+            if (code !== 200) {
+                return this.$message('失败')
+            }
+            this.insertImageIntoDOM(url)
+        },
+            insertImageIntoDOM (url) {
+      let img = document.createElement('img')
+      img.src = url
+      document.getElementsByClassName('ql-editor')[0].appendChild(img)
+    }
     }
 };
 </script>
