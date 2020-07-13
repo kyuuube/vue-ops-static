@@ -2,6 +2,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.base.conf.js');
 const path = require('path');
 const config = require('../config');
+let webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -26,7 +27,8 @@ const prodConf = merge(common, {
             'moment',
             'vuex',
             'element-ui',
-            'lodash'
+            'lodash',
+            '@antv/g2'
         ]
     },
     devtool: config.build.devtoolType,
@@ -105,6 +107,7 @@ const prodConf = merge(common, {
             verbose: true,
             dry: false
         }),
+        new webpack.IgnorePlugin(/\.\/locale/, /moment/),
         new MiniCssExtractPlugin(['dist'], {
             filename: 'static/css/[name].[chunkhash].css',
             // chunkFilename: utils.assetsPath('css/[id].[chunkhash].css')
@@ -145,7 +148,8 @@ const prodConf = merge(common, {
                 to: './public', // 打包后静态文件放置位置
                 ignore: ['.*']
             }
-        ])
+        ]),
+        new BundleAnalyzerPlugin()
     ]
 });
 module.exports = prodConf;

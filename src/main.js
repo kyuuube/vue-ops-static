@@ -22,6 +22,10 @@ Vue.use(VueProgressBar, options);
 
 import baseContent from 'src/components/layout/LayoutBaseContent';
 import moment from 'moment';
+// 引入中文
+import 'moment/locale/zh-cn';
+// 设置中文
+moment.locale('zh-cn');
 import VueQuillEditor from 'vue-quill-editor';
 
 import ElementUI from 'element-ui';
