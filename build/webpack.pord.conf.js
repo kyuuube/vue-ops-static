@@ -148,7 +148,7 @@ const prodConf = merge(common, {
                 ignore: ['.*']
             },
         ]),
-        // new BundleAnalyzerPlugin()
+        new BundleAnalyzerPlugin()
     ]
 });
 module.exports = prodConf;

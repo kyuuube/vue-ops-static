@@ -6,7 +6,7 @@ module.exports = {
         api: '/api',
     },
     build: {
-        devtoolType: 'cheap-module-eval-source-map',
+        devtoolType: '(none)',
         api: ''
     }
 };
