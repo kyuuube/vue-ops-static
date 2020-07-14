@@ -1,6 +1,7 @@
 const path = require('path');
 const WebpackBar = require('webpackbar');
 const { VueLoaderPlugin } = require('vue-loader');
+let webpack = require('webpack');
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir);
@@ -83,6 +84,9 @@ module.exports = {
     },
     plugins: [
         new VueLoaderPlugin(),
+        new webpack.DllReferencePlugin({
+            manifest: path.resolve(__dirname, '../public/dll', 'mainfist.json')
+        }),
         new WebpackBar({
             name: '📦 Vue ops static',
             color: 'green',

@@ -14,7 +14,6 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
     .BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
-
 const prodConf = merge(common, {
     mode: 'production',
     // 入口文件
@@ -144,12 +143,12 @@ const prodConf = merge(common, {
         }),
         new CopyWebpackPlugin([
             {
-                from: path.resolve(__dirname, '../static'),
-                to: './public', // 打包后静态文件放置位置
+                from: path.resolve(__dirname, '../public'),
+                to: './', // 打包后静态文件放置位置
                 ignore: ['.*']
-            }
+            },
         ]),
-        new BundleAnalyzerPlugin()
+        // new BundleAnalyzerPlugin()
     ]
 });
 module.exports = prodConf;
