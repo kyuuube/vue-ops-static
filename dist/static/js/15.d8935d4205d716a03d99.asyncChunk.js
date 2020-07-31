@@ -1,13 +1,13 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[16],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[15],{
 
-/***/ 125:
+/***/ 120:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _list_vue_vue_type_template_id_c7373330___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(378);
-/* harmony import */ var _list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(226);
-/* harmony import */ var _list_vue_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(379);
+/* harmony import */ var _list_vue_vue_type_template_id_19800c58___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(361);
+/* harmony import */ var _list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(207);
+/* harmony import */ var _list_vue_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(364);
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(8);
 
 
@@ -19,8 +19,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(
   _list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"],
-  _list_vue_vue_type_template_id_c7373330___WEBPACK_IMPORTED_MODULE_0__[/* render */ "a"],
-  _list_vue_vue_type_template_id_c7373330___WEBPACK_IMPORTED_MODULE_0__[/* staticRenderFns */ "b"],
+  _list_vue_vue_type_template_id_19800c58___WEBPACK_IMPORTED_MODULE_0__[/* render */ "a"],
+  _list_vue_vue_type_template_id_19800c58___WEBPACK_IMPORTED_MODULE_0__[/* staticRenderFns */ "b"],
   false,
   null,
   null,
@@ -30,7 +30,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "src/views/children/system/menu/children/list.vue"
+component.options.__file = "src/views/children/system/user/children/list.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
@@ -124,7 +124,7 @@ module.exports = {
     },
     build: {
         devtoolType: '(none)',
-        api: ''
+        api: 'http://apiv2.kyuuu.be'
     }
 };
 
@@ -190,20 +190,21 @@ const getCurrentTree = () => _common_request_request__WEBPACK_IMPORTED_MODULE_0_
 
 /***/ }),
 
-/***/ 226:
+/***/ 207:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_2_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(227);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_2_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(208);
  /* harmony default export */ __webpack_exports__["a"] = (_node_modules_babel_loader_lib_index_js_ref_2_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]); 
 
 /***/ }),
 
-/***/ 227:
+/***/ 208:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var src_apis_accountApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(131);
+/* harmony import */ var src_common_filters_genderFilter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(362);
 //
 //
 //
@@ -259,64 +260,129 @@ const getCurrentTree = () => _common_request_request__WEBPACK_IMPORTED_MODULE_0_
 //
 //
 //
-// apis
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// api
+ // filters
+
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  name: 'menu-list',
+  name: 'user-list',
 
   data() {
     return {
       loading: false,
       keywords: '',
+      total: 0,
+      page: 1,
+      pageSize: 10,
       data: []
     };
   },
 
+  filters: {
+    genderFilter: src_common_filters_genderFilter__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]
+  },
   methods: {
-    async loadMenuList() {
+    // 加载列表数据
+    async loadUserList() {
+      const params = {
+        keywords: this.keywords,
+        page: this.page,
+        pageSize: this.pageSize
+      };
+      this.loading = true;
       const {
+        data,
         code,
         msg,
-        data
-      } = await src_apis_accountApi__WEBPACK_IMPORTED_MODULE_0__[/* getMenuTree */ "k"]({
-        keywords: this.keywords
-      }).catch(e => e);
+        total
+      } = await src_apis_accountApi__WEBPACK_IMPORTED_MODULE_0__[/* getUserList */ "n"](params).catch(e => e);
+      this.loading = false;
 
       if (code !== 200) {
         return this.$message.error(msg);
       }
 
       this.data = data;
+      this.total = total;
+    },
+
+    // 删除用户
+    async deleteUser(id) {
+      const confirm = await this.$confirm(`是否删除该用户 ?`, '提示', {
+        cancelButtonText: '取消',
+        confirmButtonText: '确定',
+        type: 'warning'
+      }).then(() => true).catch(() => false);
+
+      if (!confirm) {
+        return;
+      }
+
+      const {
+        code,
+        msg
+      } = await src_apis_accountApi__WEBPACK_IMPORTED_MODULE_0__[/* delUser */ "d"](id).catch(e => e);
+
+      if (code !== 200) {
+        return this.$Message.error(msg);
+      }
+
+      this.$message.success('删除成功');
+      this.loadUserList();
+    },
+
+    // 变更页数
+    pageSizeChange(v) {
+      this.pageSize = v;
+      this.loadUserList();
+    },
+
+    currentChange(v) {
+      this.page = v;
+      this.loadRoleList();
     }
 
   },
 
   mounted() {
-    this.loadMenuList();
+    this.loadUserList();
   }
 
 });
 
 /***/ }),
 
-/***/ 228:
+/***/ 209:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(380);
+var content = __webpack_require__(365);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(23).default
-var update = add("8d3ee5ae", content, false, {});
+var update = add("103c2095", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
 /***/ }),
 
-/***/ 272:
+/***/ 264:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -328,7 +394,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "base-content",
-    { staticClass: "menu-list", attrs: { search: "" } },
+    { staticClass: "user-list", attrs: { search: "" } },
     [
       _c(
         "div",
@@ -339,14 +405,14 @@ var render = function() {
             [
               _c("el-breadcrumb-item", [_vm._v("系统管理")]),
               _vm._v(" "),
-              _c("el-breadcrumb-item", [_vm._v("菜单管理")]),
+              _c("el-breadcrumb-item", [_vm._v("用户管理")]),
               _vm._v(" "),
-              _c("el-breadcrumb-item", [_vm._v("菜单列表")])
+              _c("el-breadcrumb-item", [_vm._v("用户列表")])
             ],
             1
           ),
           _vm._v(" "),
-          _c("h2", [_vm._v("菜单管理列表")])
+          _c("h2", [_vm._v("用户管理列表")])
         ],
         1
       ),
@@ -370,6 +436,23 @@ var render = function() {
                       type: "text",
                       placeholder: "输入关键字"
                     },
+                    nativeOn: {
+                      keypress: function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.loadUserList($event)
+                      }
+                    },
                     model: {
                       value: _vm.keywords,
                       callback: function($$v) {
@@ -389,7 +472,7 @@ var render = function() {
                     "el-button",
                     {
                       attrs: { size: "small", type: "primary" },
-                      on: { click: _vm.loadMenuList }
+                      on: { click: _vm.loadUserList }
                     },
                     [_vm._v("搜 索")]
                   )
@@ -423,13 +506,13 @@ var render = function() {
                         "el-button",
                         {
                           attrs: {
-                            size: "small",
                             type: "primary",
+                            size: "small",
                             icon: "md-add"
                           },
                           on: {
                             click: function($event) {
-                              return _vm.$router.push("/system/menu/add")
+                              return _vm.$router.push("/system/user/add")
                             }
                           }
                         },
@@ -446,30 +529,28 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-table",
-            {
-              staticStyle: { width: "100%", "margin-bottom": "20px" },
-              attrs: {
-                data: _vm.data,
-                "row-key": "id",
-                "default-expand-all": "",
-                "tree-props": {
-                  children: "children",
-                  hasChildren: "hasChildren"
-                }
-              }
-            },
+            { staticStyle: { width: "100%" }, attrs: { data: _vm.data } },
             [
+              _c("el-table-column", { attrs: { prop: "name", label: "姓名" } }),
+              _vm._v(" "),
               _c("el-table-column", {
-                attrs: { prop: "name", label: "菜单名称", sortable: "" }
+                attrs: { prop: "gender", label: "性别" }
               }),
               _vm._v(" "),
               _c("el-table-column", {
-                attrs: { label: "图标", sortable: "" },
+                attrs: { prop: "avatar", label: "头像" },
                 scopedSlots: _vm._u([
                   {
                     key: "default",
                     fn: function(scope) {
-                      return [_c("i", { class: "iconfont " + scope.row.icon })]
+                      return [
+                        _c("div", { staticClass: "img-warp" }, [
+                          _c("img", {
+                            staticClass: "avatar-img",
+                            attrs: { src: scope.row.avatar, alt: "" }
+                          })
+                        ])
+                      ]
                     }
                   }
                 ])
@@ -489,7 +570,7 @@ var render = function() {
                             on: {
                               click: function($event) {
                                 return _vm.$router.push(
-                                  "/system/menu/edit/" + scope.row.id
+                                  "/system/user/edit/" + scope.row.id
                                 )
                               }
                             }
@@ -499,7 +580,14 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "el-button",
-                          { attrs: { size: "small", type: "text" } },
+                          {
+                            attrs: { size: "small", type: "text" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteUser(scope.row.id)
+                              }
+                            }
+                          },
                           [_vm._v("删 除")]
                         )
                       ]
@@ -509,7 +597,20 @@ var render = function() {
               })
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("el-pagination", {
+            attrs: {
+              "current-page": _vm.page,
+              "page-size": _vm.pageSize,
+              layout: "total, sizes, prev, pager, next, jumper",
+              total: _vm.total
+            },
+            on: {
+              "size-change": _vm.pageSizeChange,
+              "current-change": _vm.currentChange
+            }
+          })
         ],
         1
       )
@@ -523,38 +624,69 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ 378:
+/***/ 361:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_template_id_c7373330___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(272);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_template_id_c7373330___WEBPACK_IMPORTED_MODULE_0__["a"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_template_id_19800c58___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(264);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_template_id_19800c58___WEBPACK_IMPORTED_MODULE_0__["a"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "b", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_template_id_c7373330___WEBPACK_IMPORTED_MODULE_0__["b"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "b", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_template_id_19800c58___WEBPACK_IMPORTED_MODULE_0__["b"]; });
 
 
 
 /***/ }),
 
-/***/ 379:
+/***/ 362:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_less_loader_dist_cjs_js_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(228);
+/* harmony import */ var _constants_gender_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(363);
+
+/* harmony default export */ __webpack_exports__["a"] = (value => (Object.keys(_constants_gender_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]).map(key => _constants_gender_js__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"][key]).find(item => item.value === value) || {}).label);
+
+/***/ }),
+
+/***/ 363:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+  Man: {
+    label: '男',
+    value: 'male'
+  },
+  Women: {
+    label: '女',
+    value: 'female'
+  },
+  Unknown: {
+    label: '未知',
+    value: 'other'
+  }
+});
+
+/***/ }),
+
+/***/ 364:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_less_loader_dist_cjs_js_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(209);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_less_loader_dist_cjs_js_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_less_loader_dist_cjs_js_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_less_loader_dist_cjs_js_node_modules_vue_loader_lib_index_js_vue_loader_options_list_vue_vue_type_style_index_0_lang_less___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ 380:
+/***/ 365:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(4);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".user-list .img-warp {\n  width: 56px;\n  height: 56px;\n}\n.user-list .img-warp .avatar-img {\n  margin: 4px auto;\n  width: 48px;\n  height: 48px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 

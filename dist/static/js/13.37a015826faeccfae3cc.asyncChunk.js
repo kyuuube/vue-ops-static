@@ -124,7 +124,7 @@ module.exports = {
     },
     build: {
         devtoolType: '(none)',
-        api: ''
+        api: 'http://apiv2.kyuuu.be'
     }
 };
 
