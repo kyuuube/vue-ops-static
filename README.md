@@ -9,6 +9,8 @@ vue vuex element ui
 
 配套的后端项目用nestjs
 
+live demo : https://a.kyuuu.be/
+
 ## 使用
 
 
