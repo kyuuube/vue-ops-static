@@ -43,6 +43,12 @@ Vue.component('baseContent', baseContent);
 
 Vue.prototype.$moment = moment;
 
+if (process.env.NODE_ENV === 'development') {
+    Vue.config.devtools = true;
+} else {
+    Vue.config.devtools = false;
+}
+
 window.setTimeout(() => {
     const loading = document.querySelector('.mask');
     loading.style.display = 'none';
