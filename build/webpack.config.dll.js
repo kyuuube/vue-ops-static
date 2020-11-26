@@ -4,6 +4,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 //只需要使用yarn run dll一次就行
 module.exports = {
     mode: 'production',
+    // 修复table不渲染问题
+    // @see https://github.com/ElemeFE/element/issues/18394
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {
