@@ -4,6 +4,12 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 //只需要使用yarn run dll一次就行
 module.exports = {
     mode: 'production',
+    resolve: {
+        extensions: ['.js', '.vue', '.json'],
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js',
+        }
+    },
     entry: {
         vendor: ['element-ui']
     },
