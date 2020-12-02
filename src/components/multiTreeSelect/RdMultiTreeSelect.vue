@@ -1,7 +1,7 @@
 <template>
     <div class="project-select">
-        <el-select v-model="selectdCommunity" placeholder="请选择" multiple popper-class="project" collapse-tags>
-            <el-option value="1" disabled>
+        <el-select :size="size" v-model="selectedCommunity" placeholder="请选择" multiple popper-class="project" collapse-tags>
+            <el-option value="1">
                 <el-tree
                     ref="treeRef"
                     :data="communityTreeList"
@@ -12,79 +12,83 @@
                     :default-checked-keys="defaultSelectdOpyions"
                 ></el-tree>
             </el-option>
-            <el-option v-for="(item, index) in selectdCommunity" :key="index" :value="item">{{ item }}</el-option>
+            <el-option v-for="(item, index) in selectedCommunity" :key="index" :value="item">{{ item }}</el-option>
         </el-select>
     </div>
 </template>
 
 <script>
 import * as contractApi from 'src/apis/contract/contractApi';
-// import * as baseDataApi from 'src/apis/baseDataApi';
-// stroe
-import { mapGetters } from 'vuex';
-import * as $account from 'src/store/modules/account/types';
+import select from 'element-ui/packages/select/src/select';
+const MixinProp = {
+    props: {
+        ...select.props
+    }
+};
 export default {
-    props: ['value'],
+    mixins: [MixinProp],
+    props: {
+        value: null,
+        companyId: null,
+    },
     data() {
         return {
             communityTreeList: [], // 项目列表
-            selectdCommunity: [], // 已选择的项目
+            selectedCommunity: [], // 已选择的项目
             defaultSelectdOpyions: []
         };
     },
     watch: {
         value: {
-            handler(value) {
-                let that = this;
+            handler: function(value) {
                 if (value && value.length > 0) {
-                    that.defaultSelectdOpyions = [];
-                    that.selectdCommunity = [];
+                    this.defaultSelectdOpyions = [];
+                    this.selectedCommunity = [];
                     value.forEach(item => {
-                        that.selectdCommunity.push(item.projectName);
-                        that.defaultSelectdOpyions.push(item.projectId);
+                        this.selectedCommunity.push(item.communityName);
+                        this.defaultSelectdOpyions.push(item.communityId);
                     });
                 } else {
-                    value = [];
-                    that.defaultSelectdOpyions = [];
-                    that.selectdCommunity = [];
+                    this.defaultSelectdOpyions = [];
+                    this.selectedCommunity = [];
                     this.$nextTick(() => {
-                        that.$refs.treeRef.setCheckedKeys([]);
+                        this.$refs.treeRef.setCheckedKeys([]);
                     });
                 }
-            }
+            },
+            deep: true,
+            immediate: true
+        },
+        companyId: {
+            handler: function() {
+                this.getTreeList();
+            },
+            deep: true
         }
-    },
-    computed: {
-        ...mapGetters($account.namespace, {
-            user: $account.getters.user
-        })
     },
     methods: {
         // 获取项目树
         async getTreeList() {
-            // console.log(this.user.companyId);
-            const { code, data, msg } = await contractApi.getTreeList(this.user.parentCompanyId).catch(e => e);
+            const { code, data, msg } = await contractApi.getTreeList(this.companyId).catch(e => e);
             if (code !== 0) {
                 return this.$msg.err(msg);
             }
             this.communityTreeList = data;
         },
         handleCheckChange(val, val1) {
-            // console.log('项目树变化', val1);
-            this.selectdCommunity = [];
+            this.selectedCommunity = [];
             let selectdList = [];
-            // this.selectdCommunity = val1.checkedNodes;
+            // this.selectedCommunity = val1.checkedNodes;
             for (let i = 0; i < val1.checkedNodes.length; i++) {
                 if (!val1.checkedNodes[i].children) {
-                    this.selectdCommunity.push(val1.checkedNodes[i].label);
+                    this.selectedCommunity.push(val1.checkedNodes[i].label);
                     selectdList.push({
-                        projectName: val1.checkedNodes[i].label,
-                        projectId: val1.checkedNodes[i].id
+                        communityName: val1.checkedNodes[i].label,
+                        communityId: val1.checkedNodes[i].id
                     });
                 }
             }
             this.$emit('input', selectdList);
-            // console.log('this.selectdCommunity', this.selectdCommunity);
         }
     },
     mounted() {
