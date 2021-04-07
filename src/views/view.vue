@@ -4,10 +4,17 @@
             <layout-side :class="showSide ? '' : 'not-show-side'" ref="layoutSide" :collapsed.sync="isCollapsed"></layout-side>
             <el-container direction="vertical">
                 <layout-header @collapsed="collapsedSide" :is-collapsed="isCollapsed"></layout-header>
+                <layout-tabs />
                 <layout-content>
-                    <transition name="fade-transform" mode="out-in">
-                        <router-view></router-view>
-                    </transition>
+                    <!-- @Todo 当使用两个transition时会产生视觉上的两个routerview-->
+                    <!--                    <transition name="fade-transform" mode="out-in">-->
+                    <keep-alive>
+                        <router-view :key="$route.fullPath" v-if="$route.meta.keepAlive"></router-view>
+                    </keep-alive>
+                    <!--                    </transition>-->
+                    <!--                    <transition name="fade-transform" mode="out-in">-->
+                    <router-view :key="$route.fullPath" v-if="!$route.meta.keepAlive"></router-view>
+                    <!--                    </transition>-->
                     <el-backtop :visibility-height="100" target=".layout-content"></el-backtop>
                     <div class="footer">
                         <small>&copy; Copyright {{ $moment().format('YYYY') }}, benchiu@yandex.com</small>
@@ -22,6 +29,7 @@
 import LayoutHeader from 'src/components/layout/LayoutHeader';
 import LayoutSide from 'src/components/layout/LayoutSide';
 import LayoutContent from 'src/components/layout/LayoutContent';
+import LayoutTabs from 'src/components/layout/LayoutTabs';
 import { mapGetters, mapActions } from 'vuex';
 import * as $account from '../store/modules/account/types';
 export default {
@@ -29,7 +37,8 @@ export default {
     components: {
         LayoutHeader,
         LayoutSide,
-        LayoutContent
+        LayoutContent,
+        LayoutTabs
     },
     data() {
         return {

@@ -1,7 +1,7 @@
 /* eslint-disable */
 const WebSocket = require('websocket').w3cwebsocket;
 // util
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from 'uuid';
 const config = require('../../config/index');
 export const websockets = {
     data() {

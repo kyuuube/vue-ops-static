@@ -40,6 +40,7 @@
 <script>
 export default {
     name: 'article-list',
+    refresh: 'loadData',
     data() {
         return {
             loading: false,
@@ -54,7 +55,10 @@ export default {
         };
     },
     methods: {
-        submit() {}
+        submit() {},
+        loadData() {
+            console.log('load');
+        }
     }
 };
 </script>

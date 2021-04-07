@@ -1,12 +1,13 @@
 <script type="text/jsx">
 // apis
-import * as accountApi from "src/apis/accountApi"
+import * as accountApi from 'src/apis/accountApi';
 // store
-import { mapActions, mapGetters } from "vuex";
-import * as $account from 'src/store/modules/account/types'
-const mem = require('mem');
+import { mapActions, mapGetters } from 'vuex';
+import * as $account from 'src/store/modules/account/types';
+import * as $tabs from 'src/store/modules/tabs/types';
+// const mem = require('mem');
 export default {
-    name: "layout-menus",
+    name: 'layout-menus',
     props: {
         isCollapse: Boolean
     },
@@ -15,43 +16,43 @@ export default {
             list: [
                 {
                     id: 1,
-                    name: "工作台",
-                    url: "/dashboard",
-                    icon: "el-icon-s-data",
+                    name: '工作台',
+                    url: '/dashboard',
+                    icon: 'el-icon-s-data',
                     parentId: 0
                 },
                 {
                     id: 2,
-                    name: "系统管理",
-                    icon: "el-icon-s-tools",
+                    name: '系统管理',
+                    icon: 'el-icon-s-tools',
                     parentId: 0,
                     children: [
                         {
                             id: 3,
-                            name: "用户管理",
-                            url: "/system/user",
-                            icon: "el-icon-user",
+                            name: '用户管理',
+                            url: '/system/user',
+                            icon: 'el-icon-user',
                             parentId: 2,
                         },
                         {
                             id: 4,
-                            name: "角色管理",
-                            url: "/system/role",
-                            icon: "el-icon-s-custom",
+                            name: '角色管理',
+                            url: '/system/role',
+                            icon: 'el-icon-s-custom',
                             parentId: 2,
                         },
                         {
                             id: 5,
-                            name: "菜单管理",
-                            url: "/system/menu",
-                            icon: "el-icon-s-order",
+                            name: '菜单管理',
+                            url: '/system/menu',
+                            icon: 'el-icon-s-order',
                             parentId: 2,
                         },
                         {
                             id: 7,
-                            name: "权限管理",
-                            url: "/system/authority",
-                            icon: "el-icon-s-check",
+                            name: '权限管理',
+                            url: '/system/authority',
+                            icon: 'el-icon-s-check',
                             parentId: 2,
                         },
                     ]
@@ -60,19 +61,26 @@ export default {
                     id: 6,
                     name: '内容管理',
                     url: '/article',
-                    icon: "el-icon-document",
+                    icon: 'el-icon-document',
+                    menuCode: 'article',
                     parentId: 0
                 }
             ]
-        }
+        };
     },
     computed: {
+        ...mapGetters($tabs.namespace, {
+            tabList: $tabs.getters.tabList,
+        }),
         ...mapGetters($account.namespace, {
             currentMenuId: $account.getters.currentMenuId,
             currentOpenMenuIds: $account.getters.currentOpenMenuIds,
         })
     },
     methods: {
+        ...mapActions($tabs.namespace, {
+            setTabList: $tabs.actions.setTabList,
+        }),
         ...mapActions($account.namespace, {
             setCurrentMenuId: $account.actions.setCurrentMenuId,
             setCurrentOpenMenuIds: $account.actions.setCurrentOpenMenuIds,
@@ -81,22 +89,26 @@ export default {
         menuClick(item) {
             this.setCurrentMenuId(item.id);
             this.setCurrentOpenMenuIds([item.parentId]);
-            this.$router.push(item.url)
+            if (!this.tabList.find(i => i.id === item.id)) {
+                this.setTabList([item, ...this.tabList]);
+            }
+            this.$router.push(item.url);
         },
         async loadCurrentMenus() {
-            const { code, data } = await accountApi.getCurrentTree().catch(e => e)
+            const { code, data } = await accountApi.getCurrentTree().catch(e => e);
             if (code !== 200) {
                 return this.$message.error('加载菜单失败');
             }
-            this.list = data
-            this.setMenu(data)
+            this.list = data;
+            this.setMenu(data);
         },
     },
     mounted() {
-        this.loadCurrentMenus()
+        this.loadCurrentMenus();
     },
     render() {
         const renderItem = (itemList) => {
+            // eslint-disable-next-line no-unused-vars
             return itemList.map((item, index) => {
                 if (item.children && item.children.length > 0) {
                     return (
@@ -129,7 +141,7 @@ export default {
                 class={['menus']}>
                 {renderItem(this.list)}
             </el-menu>
-        )
+        );
     }
 };
 </script>

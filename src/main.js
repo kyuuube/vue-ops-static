@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import globalActivated, { clearCache } from './mixin/globalLifecycle';
 import VueProgressBar from 'vue-progressbar';
 
 const options = {
@@ -40,8 +41,9 @@ import 'quill/dist/quill.bubble.css';
 
 Vue.use(VueQuillEditor /* { default global options } */);
 Vue.component('baseContent', baseContent);
-
+Vue.mixin(globalActivated);
 Vue.prototype.$moment = moment;
+Vue.prototype.$clearCache = clearCache;
 
 if (process.env.NODE_ENV === 'development') {
     Vue.config.devtools = true;
@@ -52,7 +54,7 @@ if (process.env.NODE_ENV === 'development') {
 window.setTimeout(() => {
     const loading = document.querySelector('.mask');
     loading.style.display = 'none';
-}, 3000);
+}, 1000);
 
 new Vue({
     el: '#app',

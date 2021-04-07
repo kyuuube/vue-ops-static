@@ -3,7 +3,7 @@
         <div slot="header">
             <el-breadcrumb>
                 <el-breadcrumb-item>系统管理</el-breadcrumb-item>
-                <el-breadcrumb-item to="/system/user/list">用户管理</el-breadcrumb-item>
+                <el-breadcrumb-item to="/article/list">用户管理</el-breadcrumb-item>
                 <el-breadcrumb-item>{{ edit ? '编辑用户' : '新建用户' }}</el-breadcrumb-item>
             </el-breadcrumb>
             <h2>{{ edit ? '编辑用户' : '新建用户' }}</h2>

@@ -28,7 +28,8 @@ export default {
             next();
         });
         //  hook the progress bar to finish after we've finished moving router-view
-        this.$router.afterEach((to, from) => {
+        // eslint-disable-next-line no-unused-vars
+        this.$router.afterEach(() => {
             //  finish the progress bar
             this.$Progress.finish();
         });

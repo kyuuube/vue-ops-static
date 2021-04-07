@@ -29,7 +29,7 @@ export default {
     mixins: [MixinProp],
     props: {
         value: null,
-        companyId: null,
+        companyId: null
     },
     data() {
         return {

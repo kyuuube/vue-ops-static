@@ -1,4 +1,4 @@
-export const downFile=(blob, fileName)=> {
+export const downFile = (blob, fileName) => {
     // 非IE下载
     if ('download' in document.createElement('a')) {
         let link = document.createElement('a');
@@ -13,4 +13,4 @@ export const downFile=(blob, fileName)=> {
         // IE10+下载
         window.navigator.msSaveBlob(blob, fileName);
     }
-}
+};
