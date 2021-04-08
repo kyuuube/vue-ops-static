@@ -4,7 +4,7 @@ import router from './router';
 import store from './store';
 import globalActivated, { clearCache } from './mixin/globalLifecycle';
 import VueProgressBar from 'vue-progressbar';
-
+import './assets/css/theme/dark/index.css';
 const options = {
     color: '#0577ad',
     failedColor: '#cd7979',

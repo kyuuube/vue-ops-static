@@ -10,7 +10,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less">
 .layout-content {
     background: #f0f2f5;
     padding: 0;

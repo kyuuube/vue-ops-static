@@ -88,6 +88,7 @@ export default {
 </script>
 
 <style lang="less">
+@import url(../../src/style/dark/index);
 .home {
     height: 100vh;
     width: 100%;

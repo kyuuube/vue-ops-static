@@ -12,6 +12,10 @@
             <div>
                 <el-row type="flex">
                     <div>
+                        <el-switch v-model="mode" @change="changeMode" active-value="dark" inactive-value="light"> </el-switch>
+                        <span>{{ mode === 'light' ? '🌞' : '🌜' }}</span>
+                    </div>
+                    <div>
                         <transition name="el-fade-in-linear">
                             <el-input
                                 v-if="search"
@@ -55,6 +59,7 @@ export default {
     data() {
         return {
             search: false,
+            mode: 'light',
             keywords: ''
         };
     },
@@ -73,6 +78,10 @@ export default {
         logOut() {
             this.logout();
             this.$router.push('/login');
+        },
+        changeMode(mode) {
+            const app = document.querySelector('.app');
+            app.className = `app ${mode}`;
         }
     }
 };
