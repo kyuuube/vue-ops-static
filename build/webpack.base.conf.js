@@ -47,7 +47,7 @@ module.exports = {
                 exclude: file => (
                     /node_modules/.test(file) &&
                     !/\.vue\.js/.test(file) &&
-                    !/node_modules\/view-design\/src/.test(file)
+                    !/node_modules\/element-ui\/src/.test(file)
                 ),
                 options: {
                     babelrc: false, // 不采用.babelrc的配置

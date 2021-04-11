@@ -51,6 +51,7 @@ const md5 = require('md5');
 // store
 import { mapActions } from 'vuex';
 import * as $account from 'src/store/modules/account/types';
+// import { Message } from 'element-ui';
 export default {
     name: 'login',
     data() {
@@ -67,15 +68,13 @@ export default {
         }),
         async login() {
             this.loading = true;
-            const loading = document.querySelector('.mask');
-            loading.style.display = 'block';
-            const { code, msg, user, token } = await accountApi.login({ email: this.account, password: md5(this.password) }).catch(e => e);
+            const { code, data } = await accountApi.login({ username: this.account, password: md5(this.password) }).catch(e => e);
             this.loading = false;
             if (code !== 200) {
-                this.$message.error(msg);
+                return this.$message.error('msg');
             }
-            this.setToken(token);
-            this.setUserInfo(user);
+            this.setToken(data.accessToken);
+            this.setUserInfo(data);
             await this.$router.push('/');
         }
     }

@@ -13,7 +13,7 @@ module.exports = {
         }
     },
     entry: {
-        vendor: ['element-ui']
+        vendor: ['vue/dist/vue.esm.js', 'element-ui']
     },
     output: {
         filename: '_dll_[name].js',

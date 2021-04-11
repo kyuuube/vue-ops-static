@@ -9,10 +9,22 @@
         <link rel="stylesheet" href="./base.css" />
     </head>
     <body>
-        <div class="mask">
+        <div class="initializing">
             <span class="loader"><span class="loader-inner"></span></span>
         </div>
         <div id="app"></div>
         <script src="dll/_dll_vendor.js"></script>
+        <script type="text/javascript">
+            // 初始页面
+            window.initSuccess = (function() {
+                var $initializing = document.getElementsByClassName('initializing')[0];
+                return function() {
+                    $initializing.setAttribute('success', true);
+                    setTimeout(function() {
+                        $initializing.parentNode && $initializing.parentNode.removeChild($initializing);
+                    }, 500);
+                };
+            })();
+        </script>
     </body>
 </html>

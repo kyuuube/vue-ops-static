@@ -28,9 +28,8 @@ import 'moment/locale/zh-cn';
 // 设置中文
 moment.locale('zh-cn');
 import VueQuillEditor from 'vue-quill-editor';
-
-import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui';
 
 Vue.use(ElementUI);
 
@@ -51,10 +50,12 @@ if (process.env.NODE_ENV === 'development') {
     Vue.config.devtools = false;
 }
 
-window.setTimeout(() => {
-    const loading = document.querySelector('.mask');
-    loading.style.display = 'none';
-}, 1000);
+router.beforeResolve((to, from, next) => {
+    setTimeout(() => {
+        window.initSuccess && window.initSuccess();
+    }, 300);
+    next();
+});
 
 new Vue({
     el: '#app',

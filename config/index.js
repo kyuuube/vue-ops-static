@@ -7,6 +7,6 @@ module.exports = {
     },
     build: {
         devtoolType: 'cheap-module-eval-source-map',
-        api: ''
+        api: 'http://api.rosetta-latte.art'
     }
 };
