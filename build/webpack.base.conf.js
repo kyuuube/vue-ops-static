@@ -92,5 +92,9 @@ module.exports = {
             color: 'green',
             profile: true
         })
-    ]
+    ],
+    externals: {
+        '@antv/g2': 'G2',
+        '@antv/data-set': 'DataSet',
+    }
 };
