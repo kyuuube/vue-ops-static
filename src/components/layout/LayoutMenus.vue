@@ -103,8 +103,12 @@ export default {
             this.setMenu(data);
         },
     },
-    mounted() {
-        this.loadCurrentMenus();
+    async mounted() {
+        await this.loadCurrentMenus();
+        if (this.$route.path === '/dashboard') {
+            this.setCurrentMenuId(this.list[0].id);
+            this.setTabList([this.list[0]]);
+        }
     },
     render() {
         const renderItem = (itemList) => {

@@ -60,8 +60,8 @@ export default {
     },
     mounted() {
         window.setTimeout(() => {
-            const loading = document.querySelector('.mask');
-            loading.style.display = 'none';
+            // const loading = document.querySelector('.mask');
+            // loading.style.display = 'none';
             const mql = window.matchMedia('(max-width: 1000px)');
             const mql2 = window.matchMedia('(max-width: 800px)');
             mql.addListener(e => {

@@ -33,10 +33,11 @@ export default {
     },
     watch: {
         currentMenuId: {
-            handler: () => {
+            handler: function() {
                 this.currentTab = this.currentMenuId;
             },
-            deep: true
+            deep: true,
+            immediate: true
         }
     },
     methods: {

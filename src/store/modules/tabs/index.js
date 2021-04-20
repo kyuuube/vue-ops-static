@@ -7,7 +7,8 @@ import { namespace, getters as $getters, actions as $actions, mutations as $muta
 const state = persistedState(
     namespace,
     {
-        tabList: [{ id: 1, name: '工作台', url: '/dashboard', icon: 'el-icon-s-data', parentId: 0 }]
+        // tabList: [{ id: 1, name: '工作台', url: '/dashboard', icon: 'el-icon-s-data', parentId: 0 }]
+        tabList: []
     },
     {
         tabMap: new Map()
