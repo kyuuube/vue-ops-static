@@ -8,50 +8,52 @@
             </el-breadcrumb>
             <h2>{{ edit ? '编辑用户' : '新建用户' }}</h2>
         </div>
-        <el-form :model="user" label-width="120" autocomplete="off">
-            <el-form-item required label="邮箱:">
-                <el-input size="small" v-model="user.email" autocomplete="off" placeholder="请输入邮箱"></el-input>
-            </el-form-item>
-            <el-form-item required label="用户名:">
-                <el-input size="small" v-model="user.name" autocomplete="off" placeholder="请输入用户名"></el-input>
-            </el-form-item>
-            <el-form-item label="性别:">
-                <el-radio-group v-model="user.gender">
-                    <el-radio label="male">男</el-radio>
-                    <el-radio label="female">女</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item v-if="!edit" required label="密码:">
-                <el-input
-                    size="small"
-                    v-model="user.password"
-                    autocomplete="new-password"
-                    placeholder="输入密码"
-                    type="password"
-                ></el-input>
-            </el-form-item>
-            <el-form-item v-if="!edit" required label="确认密码:">
-                <el-input
-                    size="small"
-                    v-model="user.rePassword"
-                    autocomplete="new-password"
-                    placeholder="确认秘密"
-                    type="password"
-                ></el-input>
-            </el-form-item>
-            <el-form-item label="头像:">
-                <rd-avatar-upload v-model="user.avatar"></rd-avatar-upload>
-            </el-form-item>
-            <el-form-item label="角色:">
-                <el-select v-model="user.roleIds" size="small" multiple placeholder="请选择">
-                    <el-option v-for="item in roleOptions" :key="item.id" :label="item.name" :value="item.id"> </el-option>
-                </el-select>
-            </el-form-item>
-            <el-form-item>
-                <el-button size="small" @click="save" type="primary">保 存</el-button>
-                <el-button size="small" @click="$router.back()">取 消</el-button>
-            </el-form-item>
-        </el-form>
+        <div class="main">
+            <el-form :model="user" label-width="140px">
+                <el-form-item required label="邮箱:">
+                    <el-input size="small" v-model="user.email" autocomplete="off" placeholder="请输入邮箱"></el-input>
+                </el-form-item>
+                <el-form-item required label="用户名:">
+                    <el-input size="small" v-model="user.name" autocomplete="off" placeholder="请输入用户名"></el-input>
+                </el-form-item>
+                <el-form-item label="性别:">
+                    <el-radio-group v-model="user.gender">
+                        <el-radio label="male">男</el-radio>
+                        <el-radio label="female">女</el-radio>
+                    </el-radio-group>
+                </el-form-item>
+                <el-form-item v-if="!edit" required label="密码:">
+                    <el-input
+                        size="small"
+                        v-model="user.password"
+                        autocomplete="new-password"
+                        placeholder="输入密码"
+                        type="password"
+                    ></el-input>
+                </el-form-item>
+                <el-form-item v-if="!edit" required label="确认密码:">
+                    <el-input
+                        size="small"
+                        v-model="user.rePassword"
+                        autocomplete="new-password"
+                        placeholder="确认秘密"
+                        type="password"
+                    ></el-input>
+                </el-form-item>
+                <el-form-item label="头像:">
+                    <rd-avatar-upload v-model="user.avatar"></rd-avatar-upload>
+                </el-form-item>
+                <el-form-item label="角色:">
+                    <el-select v-model="user.roleIds" size="small" multiple placeholder="请选择">
+                        <el-option v-for="item in roleOptions" :key="item.id" :label="item.name" :value="item.id"> </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item>
+                    <el-button size="small" @click="save" type="primary">保 存</el-button>
+                    <el-button size="small" @click="$router.back()">取 消</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
     </base-content>
 </template>
 
@@ -112,9 +114,9 @@ export default {
             const data = {
                 ...this.user
             };
-            const { code, msg } = await accountApi.editUser(data).catch(e => e);
+            const { code, message } = await accountApi.editUser(data).catch(e => e);
             if (code !== 200) {
-                return this.$message.error(msg);
+                return this.$message.error(message);
             }
             this.$message.success('保存成功');
             this.$router.back();
@@ -145,5 +147,9 @@ export default {
 
 <style lang="less">
 .user-modify {
+    .main {
+        //margin: 0 auto;
+        //width: 70%;
+    }
 }
 </style>
