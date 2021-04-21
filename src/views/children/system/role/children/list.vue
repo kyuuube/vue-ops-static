@@ -78,12 +78,12 @@ export default {
                 page: this.page,
                 pageSize: this.pageSize
             };
-            const { data, total, msg, code } = await accountApi.getRoleList(params).catch(e => e);
+            const { data, msg, code } = await accountApi.getRoleList(params).catch(e => e);
             if (code !== 200) {
                 return this.$message.error(msg);
             }
-            this.data = data;
-            this.total = total;
+            this.data = data.list;
+            this.total = data.totalNum;
         },
         // 变更页数
         pageSizeChange(v) {

@@ -79,13 +79,13 @@ export default {
                 pageSize: this.pageSize
             };
             this.loading = true;
-            const { code, data, total, msg } = await accountApi.getAuthorityList(params).catch(e => e);
+            const { code, data, msg } = await accountApi.getAuthorityList(params).catch(e => e);
             this.loading = false;
             if (code !== 200) {
                 return this.$message.error(msg);
             }
-            this.data = data;
-            this.total = total;
+            this.data = data.list;
+            this.total = data.totalNum;
         },
         // 变更页数
         pageSizeChange(v) {

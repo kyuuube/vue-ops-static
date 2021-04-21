@@ -2,15 +2,15 @@ import request from '../common/request/request';
 
 export const login = data => request.post('/login', data);
 
-export const getUserList = params => request.get('/account/list', { params });
+export const getUserList = params => request.get('/user/list', { params });
 
-export const addUser = data => request.post('/account/user', data);
+export const addUser = data => request.post('/user/create/user/v2', data);
 
-export const editUser = data => request.put('/account/user', data);
+export const editUser = data => request.put('/user', data);
 
-export const delUser = id => request.delete(`/account/user/${id}`);
+export const delUser = id => request.delete(`/user/${id}`);
 
-export const userDetail = id => request.get(`/account/detail/${id}`);
+export const userDetail = id => request.get(`/user/${id}`);
 
 export const getRoleList = params => request.get('/role/list', { params });
 
