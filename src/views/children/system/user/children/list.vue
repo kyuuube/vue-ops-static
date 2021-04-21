@@ -95,17 +95,17 @@ export default {
                 pageSize: this.pageSize
             };
             this.loading = true;
-            const { data, code, msg, total } = await accountApi.getUserList(params).catch(e => e);
+            const { data, code, msg } = await accountApi.getUserList(params).catch(e => e);
             this.loading = false;
             if (code !== 200) {
                 return this.$message.error(msg);
             }
-            this.data = data;
-            this.total = total;
+            this.data = data.list;
+            this.total = data.totalNum;
         },
         // 删除用户
         async deleteUser(id) {
-            const confirm = await this.$confirm(`是否删除该用户 ?`, '提示', {
+            const confirm = await this.$confirm('是否删除该用户 ?', '提示', {
                 cancelButtonText: '取消',
                 confirmButtonText: '确定',
                 type: 'warning'
