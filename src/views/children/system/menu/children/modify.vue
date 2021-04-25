@@ -8,7 +8,7 @@
             </el-breadcrumb>
             <h2>{{ edit ? '编辑菜单' : '新建菜单' }}</h2>
         </div>
-        <el-form :model="menu" :label-width="120" autocomplete="off">
+        <el-form :model="menu" label-width="120px" autocomplete="off">
             <el-form-item required label="菜单名称:">
                 <el-input size="small" v-model="menu.name" autocomplete="off" placeholder="请输入角色名称"></el-input>
             </el-form-item>
@@ -16,15 +16,15 @@
                 <el-input size="small" v-model="menu.description" autocomplete="off" placeholder="请输入角色描述"></el-input>
             </el-form-item>
             <el-form-item required label="上级菜单:">
-                <el-select v-model="menu.parentId" clearable>
-                    <el-option v-for="item in list" :value="item.id" :key="item.id">{{ item.name }}</el-option>
+                <el-select v-model="menu.parentId" size="small" clearable>
+                    <el-option v-for="item in list" :value="item.id" :key="item.id" :label="item.name">{{ item.name }}</el-option>
                 </el-select>
             </el-form-item>
             <el-form-item required label="图标:">
                 <el-input size="small" v-model="menu.icon" autocomplete="off" placeholder="请输入图标"></el-input>
             </el-form-item>
             <el-form-item required label="url:">
-                <el-input v-model="menu.url" autocomplete="off" placeholder="请输入url"></el-input>
+                <el-input v-model="menu.url" size="small" autocomplete="off" placeholder="请输入url"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button size="small" @click="save" type="primary">保 存</el-button>
@@ -86,7 +86,7 @@ export default {
             if (code !== 200) {
                 return this.$message.error(msg);
             }
-            this.list = data;
+            this.list = data.list;
         }
     },
     mounted() {

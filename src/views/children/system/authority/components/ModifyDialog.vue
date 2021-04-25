@@ -1,12 +1,12 @@
 <template>
     <el-dialog title="新增权限" :visible="value" @update:visible="$emit('input', $event)" width="760">
-        <el-form ref="authorityForm" :model="authority" :rules="ruleAuthority" :label-width="120" autocomplete="off">
+        <el-form ref="authorityForm" :model="authority" :rules="ruleAuthority" label-width="55px" autocomplete="off">
             <el-form-item prop="name" label="名称:">
                 <el-input size="small" type="text" v-model="authority.name" placeholder="名称"> </el-input>
             </el-form-item>
             <el-form-item prop="menuId" label="菜单:">
                 <el-select size="small" v-model="authority.menuId">
-                    <el-option v-for="item in menuList" :value="item.id" :key="item.id">{{ item.name }}</el-option>
+                    <el-option v-for="item in menuList" :value="item.id" :key="item.id" :label="item.name">{{ item.name }}</el-option>
                 </el-select>
             </el-form-item>
             <el-form-item prop="slug" label="标识:">
@@ -90,7 +90,7 @@ export default {
             if (code !== 200) {
                 return this.$message.error('加载菜单列表');
             }
-            this.menuList = data;
+            this.menuList = data.list;
         }
     },
     mounted() {

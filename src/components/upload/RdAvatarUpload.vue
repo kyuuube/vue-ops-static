@@ -27,6 +27,14 @@ export default {
             return process.env.NODE_ENV !== 'development';
         }
     },
+    watch: {
+        value: {
+            handler: function() {
+                this.imageUrl = this.value;
+            },
+            immediate: true
+        }
+    },
     methods: {
         handleAvatarSuccess(res, file) {
             console.log(res);

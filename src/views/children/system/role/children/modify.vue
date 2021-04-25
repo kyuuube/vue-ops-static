@@ -9,7 +9,7 @@
             <h2>{{ edit ? '编辑角色' : '新建角色' }}</h2>
         </div>
         <h4>基本信息</h4>
-        <el-form :model="role" label-width="120" autocomplete="off">
+        <el-form :model="role" label-width="120px" autocomplete="off">
             <el-form-item required label="角色名称:">
                 <el-input size="small" v-model="role.name" autocomplete="off" placeholder="请输入角色名称"></el-input>
             </el-form-item>
