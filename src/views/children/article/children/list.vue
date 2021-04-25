@@ -29,15 +29,26 @@
                     </div>
                 </el-row>
             </div>
-            <el-table :data="data" style="width: 100%">
+            <el-table :data="list" style="width: 100%">
                 <el-table-column prop="name" label="文章标题"> </el-table-column>
                 <el-table-column prop="address" label="地址"> </el-table-column>
             </el-table>
+            <el-pagination
+                @size-change="pageSizeChange"
+                @current-change="currentChange"
+                :current-page="page"
+                :page-size="pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="total"
+            >
+            </el-pagination>
         </div>
     </base-content>
 </template>
 
 <script>
+// apis
+import * as contentApi from 'src/apis/contentApi';
 export default {
     name: 'article-list',
     refresh: 'loadData',
@@ -45,19 +56,37 @@ export default {
         return {
             loading: false,
             keywords: '',
-            data: [
-                {
-                    name: '超级管理员',
-                    status: 0,
-                    description: '拥有全站权限'
-                }
-            ]
+            total: 0,
+            page: 1,
+            pageSize: 10,
+            list: []
         };
     },
     methods: {
         submit() {},
-        loadData() {
-            console.log('load');
+        async loadData() {
+            const payload = {
+                keywords: this.keywords,
+                page: this.page,
+                pageSize: this.pageSize
+            };
+            this.loading = true;
+            const { data, code, message } = await contentApi.getArticleList(payload).catch(e => e);
+            this.loading = false;
+            if (code !== 200) {
+                return this.$message.error(message);
+            }
+            this.list = data.list;
+            this.total = data.totalNum;
+        },
+        // 变更页数
+        pageSizeChange(v) {
+            this.pageSize = v;
+            this.loadData();
+        },
+        currentChange(v) {
+            this.page = v;
+            this.loadData();
         }
     }
 };
