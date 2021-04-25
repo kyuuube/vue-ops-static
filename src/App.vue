@@ -12,8 +12,7 @@ export default {
     methods: {
         async getCookies() {
             const { data } = await commonApi.XSRFConfig();
-            // document.cookie = `XSRF-TOKEN=${data}`;
-            console.log(data);
+            document.cookie = `XSRF-TOKEN=${data}`;
         }
     },
     mounted() {
