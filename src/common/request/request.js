@@ -14,7 +14,7 @@ request.interceptors.request.use(
     config => {
         config.headers = {
             Authorization: `bearer ${localStorage.getItem('token')}`,
-            CSRFToken: document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*=\s*([^;]*).*$)|^.*$/, '$1')
+            'CSRF-Token': document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*=\s*([^;]*).*$)|^.*$/, '$1')
         };
         return config;
     },
