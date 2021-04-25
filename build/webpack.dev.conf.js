@@ -22,7 +22,7 @@ const devConf = merge(common, {
         publicPath: '/',
         proxy: {
             '/api': {
-                target: 'http://api.rosetta-latte.art',
+                target: config.dev.target,
                 changeOrigin: true,
                 pathRewrite: { '^/api': '' }
             }

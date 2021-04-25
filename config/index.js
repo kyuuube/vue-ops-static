@@ -4,6 +4,7 @@ module.exports = {
         host: 'localhost',
         port: '2887',
         api: '/api',
+        target: 'http://localhost:3000'
     },
     build: {
         devtoolType: 'cheap-module-eval-source-map',
