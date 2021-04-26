@@ -15,7 +15,7 @@
                     <el-input size="small" clearable type="text" v-model="keywords" placeholder="输入关键字"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button size="small" type="primary" @click="submit">搜 索</el-button>
+                    <el-button size="small" type="primary" @click="loadData">搜 索</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -30,8 +30,16 @@
                 </el-row>
             </div>
             <el-table :data="list" style="width: 100%">
-                <el-table-column prop="name" label="文章标题"> </el-table-column>
-                <el-table-column prop="address" label="地址"> </el-table-column>
+                <el-table-column label="文章标题">
+                    <template slot-scope="{ row }">
+                        <span class="-link" @click="$router.push(`/article/edit/${row.id}`)">{{ row.title }}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="状态">
+                    <template slot-scope="{ row }">
+                        {{ row.status | articleStatusFilter }}
+                    </template>
+                </el-table-column>
             </el-table>
             <el-pagination
                 @size-change="pageSizeChange"
@@ -49,6 +57,8 @@
 <script>
 // apis
 import * as contentApi from 'src/apis/contentApi';
+// filters
+import articleStatusFilter from 'src/common/filters/articleStatusFilter';
 export default {
     name: 'article-list',
     refresh: 'loadData',
@@ -61,6 +71,9 @@ export default {
             pageSize: 10,
             list: []
         };
+    },
+    filters: {
+        articleStatusFilter: articleStatusFilter
     },
     methods: {
         submit() {},
@@ -88,11 +101,18 @@ export default {
             this.page = v;
             this.loadData();
         }
+    },
+    mounted() {
+        this.loadData();
     }
 };
 </script>
 
 <style lang="less">
 .article-list {
+    .-link {
+        color: #1e9fff;
+        cursor: pointer;
+    }
 }
 </style>
