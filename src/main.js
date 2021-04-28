@@ -59,6 +59,9 @@ router.beforeResolve((to, from, next) => {
     next();
 });
 
+loadScript('https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.9.6/dist/data-set.min.js');
+loadScript('https://gw.alipayobjects.com/os/lib/antv/g2/3.5.12/dist/g2.min.js');
+
 new Vue({
     el: '#app',
     router,
