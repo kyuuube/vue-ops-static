@@ -5,6 +5,7 @@ import * as $account from '../../store/modules/account/types';
 import { Message, MessageBox } from 'element-ui';
 
 const request = axios.create({
+    withCredentials: true,
     baseURL: process.env.NODE_ENV !== 'development' ? config.build.api : config.dev.api,
     timeout: 50000
 });
@@ -14,7 +15,7 @@ request.interceptors.request.use(
     config => {
         config.headers = {
             Authorization: `bearer ${localStorage.getItem('token')}`,
-            CSRFToken: document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*=\s*([^;]*).*$)|^.*$/, '$1')
+            'CSRF-Token': document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*=\s*([^;]*).*$)|^.*$/, '$1')
         };
         return config;
     },
