@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import globalActivated, { clearCache } from './mixin/globalLifecycle';
+import { loadScript } from './common/index';
 import VueProgressBar from 'vue-progressbar';
 import './assets/css/theme/dark/index.css';
 const options = {
@@ -42,6 +43,7 @@ Vue.use(ElementUI);
 Vue.component('baseContent', baseContent);
 Vue.mixin(globalActivated);
 Vue.prototype.$moment = moment;
+Vue.prototype.$loadScript = loadScript;
 Vue.prototype.$clearCache = clearCache;
 
 if (process.env.NODE_ENV === 'development') {

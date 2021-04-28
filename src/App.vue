@@ -25,6 +25,8 @@ export default {
         this.$Progress.start();
         //  hook the progress bar to start before we move router-view
         this.$router.beforeEach((to, from, next) => {
+            this.$loadScript('https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.9.6/dist/data-set.min.js');
+            this.$loadScript('https://gw.alipayobjects.com/os/lib/antv/g2/3.5.12/dist/g2.min.js');
             //  does the page we want to go to have a meta.progress object
             if (to.meta.progress !== undefined) {
                 let meta = to.meta.progress;

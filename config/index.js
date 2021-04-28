@@ -4,7 +4,7 @@ module.exports = {
         host: 'localhost',
         port: '2887',
         api: '/api',
-        target: 'http://localhost:3000'
+        target: 'http://api.rosetta-latte.art'
     },
     build: {
         devtoolType: 'cheap-module-eval-source-map',

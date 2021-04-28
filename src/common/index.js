@@ -14,3 +14,10 @@ export const downFile = (blob, fileName) => {
         window.navigator.msSaveBlob(blob, fileName);
     }
 };
+
+export const loadScript = src => {
+    let script = document.createElement('script');
+    script.src = src;
+    script.async = false;
+    document.body.append(script);
+};
