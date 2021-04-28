@@ -1,4 +1,4 @@
-import isPlainObject from 'lodash/isPlainObject';
+import { isPlainObject } from 'lodash';
 
 export default function createProxy(obj, config = {}) {
     const proxy = Object.assign({}, obj);
@@ -14,7 +14,6 @@ export default function createProxy(obj, config = {}) {
         });
 
         const value = obj[key];
-        console.log(isPlainObject);
         if (config.deep && isPlainObject(value)) {
             obj[key] = createProxy(value, config);
         }

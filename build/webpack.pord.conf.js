@@ -10,8 +10,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-//     .BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+    .BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
 // const { VueLoaderPlugin } = require('vue-loader');
 const prodConf = merge(common, {
@@ -145,7 +145,7 @@ const prodConf = merge(common, {
                 ignore: ['.*']
             },
         ]),
-        // new BundleAnalyzerPlugin()
+        new BundleAnalyzerPlugin()
     ]
 });
 module.exports = prodConf;
