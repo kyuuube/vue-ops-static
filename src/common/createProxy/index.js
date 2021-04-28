@@ -14,6 +14,7 @@ export default function createProxy(obj, config = {}) {
         });
 
         const value = obj[key];
+        console.log(isPlainObject);
         if (config.deep && isPlainObject(value)) {
             obj[key] = createProxy(value, config);
         }

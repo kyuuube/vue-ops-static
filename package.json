@@ -91,9 +91,6 @@
     },
     "devDependencies": {
         "deepmerge": "^4.2.2",
-        "fibers": "^4.0.2",
-        "less": "^3.11.1",
-        "sass": "^1.25.0",
-        "sass-loader": "^8.0.2"
+        "less": "^3.11.1"
     }
 }
