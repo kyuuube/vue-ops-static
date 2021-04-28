@@ -23,7 +23,6 @@ const prodConf = merge(common, {
             'vue',
             'axios',
             'vue-router',
-            'moment',
             'vuex'
         ]
     },

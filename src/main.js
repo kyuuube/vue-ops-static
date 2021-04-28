@@ -23,23 +23,16 @@ const options = {
 Vue.use(VueProgressBar, options);
 
 import baseContent from 'src/components/layout/LayoutBaseContent';
-import moment from 'moment';
-// 引入中文
-import 'moment/locale/zh-cn';
-// 设置中文
-moment.locale('zh-cn');
-// import VueQuillEditor from 'vue-quill-editor';
+import moment from 'dayjs';
+// // 引入中文
+// import 'moment/locale/zh-cn';
+// // 设置中文
+// moment.locale('zh-cn');
 import 'element-ui/lib/theme-chalk/index.css';
 import ElementUI from 'element-ui';
 
 Vue.use(ElementUI);
 
-// require styles
-// import 'quill/dist/quill.core.css';
-// import 'quill/dist/quill.snow.css';
-// import 'quill/dist/quill.bubble.css';
-
-// Vue.use(VueQuillEditor /* { default global options } */);
 Vue.component('baseContent', baseContent);
 Vue.mixin(globalActivated);
 Vue.prototype.$moment = moment;
