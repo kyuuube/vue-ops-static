@@ -16,19 +16,18 @@
                             <span class="fontawesome-user">
                                 <i class="el-icon-user"></i>
                             </span>
-                            <input type="text" v-model="account" required />
+                            <input type="text" v-model="account" aria-labelledby="login account" required />
                         </p>
                         <p>
                             <span class="fontawesome-lock">
                                 <i class="el-icon-lock"></i>
                             </span>
-                            <input type="password" v-model="password" required />
+                            <input type="password" v-model="password" aria-labelledby="login password" required />
                         </p>
                         <div
                             @keypress.enter="login"
                             v-loading="loading"
                             element-loading-spinner="el-icon-loading"
-                            element-loading-background="rgba(0, 0, 0, 0.3)"
                             class="login-button"
                             @click="login"
                         >
@@ -81,7 +80,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less">
 .login-warp {
     position: absolute;
     top: 0;
@@ -165,7 +164,7 @@ p {
 #login .login-form-warp span {
     background-color: #363b41;
     border-radius: 3px 0px 0px 3px;
-    color: #606468;
+    color: #eff0f1;
     display: block;
     float: left;
     height: 50px;
@@ -182,7 +181,7 @@ p {
 input[type='password'] {
     background-color: #3b4148;
     border-radius: 0px 3px 3px 0px;
-    color: #606468;
+    color: #eff0f1;
     margin-bottom: 1em;
     padding: 0 16px;
     width: 230px;

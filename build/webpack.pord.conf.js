@@ -10,8 +10,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-//     .BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+    .BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
 // const { VueLoaderPlugin } = require('vue-loader');
 const prodConf = merge(common, {
@@ -47,7 +47,7 @@ const prodConf = merge(common, {
             minSize: 30000,
             minChunks: 1,
             maxAsyncRequests: 5,
-            maxInitialRequests: 4,
+            maxInitialRequests: 3,
             name: true,
             cacheGroups: {
                 default: {
@@ -127,7 +127,8 @@ const prodConf = merge(common, {
                 removeAttributeQuotes: true,
                 minifyCSS: true,
                 minifyJS: true
-            }
+            },
+            scriptLoading: 'defer'
         }),
         new CompressionPlugin({
             test: /\.(js|vue)$/,
@@ -144,7 +145,7 @@ const prodConf = merge(common, {
                 ignore: ['.*']
             },
         ]),
-        // new BundleAnalyzerPlugin()
+        new BundleAnalyzerPlugin()
     ]
 });
 module.exports = prodConf;

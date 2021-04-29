@@ -5,7 +5,7 @@ import store from './store';
 import globalActivated, { clearCache } from './mixin/globalLifecycle';
 import { loadScript } from './common/index';
 import VueProgressBar from 'vue-progressbar';
-import './assets/css/theme/dark/index.css';
+// import './assets/css/theme/dark/index.css';
 const options = {
     color: '#0577ad',
     failedColor: '#cd7979',
