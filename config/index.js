@@ -4,10 +4,10 @@ module.exports = {
         host: 'localhost',
         port: '2887',
         api: '/api',
-        target: 'http://api.rosetta-latte.art'
+        target: 'http://api.kyube.cloud'
     },
     build: {
         devtoolType: 'cheap-module-eval-source-map',
-        api: 'http://api.rosetta-latte.art'
+        api: 'http://api.kyube.cloud'
     }
 };
