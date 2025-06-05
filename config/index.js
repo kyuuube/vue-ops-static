@@ -4,10 +4,10 @@ module.exports = {
         host: 'localhost',
         port: '2887',
         api: '/api',
-        target: 'http://api.kyube.cloud'
+        target: 'https://api.kyube.cloud'
     },
     build: {
         devtoolType: 'cheap-module-eval-source-map',
-        api: 'http://api.kyube.cloud'
+        api: 'https://api.kyube.cloud'
     }
 };
